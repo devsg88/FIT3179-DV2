@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="A visual story about nutrition, healthy eating and dietary inequality in Australia."
+  >
+
+  <title>Australia on a Plate | Nutrition and Healthy Eating</title>
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <script src="visualisation.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to the story</a>
+
+  <header class="site-header">
+    <div class="page header-inner">
+      <a class="site-title" href="#top">Australia on a Plate</a>
+      <a class="header-link" href="#sources">Sources</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero page" id="top">
+      <p class="eyebrow">Nutrition and healthy eating in Australia</p>
+      <h1>What Australians eat—and what shapes it</h1>
+      <p class="introduction">
+        Twelve visualisations trace the national diet from nutrients and age to
+        food access, geography and diet-related health.
+      </p>
+      <p class="hero-guide">
+        Read from top to bottom for the story. Each chart is followed by one finding;
+        hover over marks for exact values.
+      </p>
+      <ul class="project-facts" aria-label="Project summary">
+        <li><strong>12</strong> visualisations</li>
+        <li><strong>4</strong> story chapters</li>
+        <li><strong>3</strong> map idioms</li>
+        <li><strong>1995–2023</strong> data span</li>
+      </ul>
+    </section>
+
+    <nav class="chapter-nav page" aria-label="Story chapters">
+      <a href="#composition">1. Composition</a>
+      <a href="#life-course">2. Life course</a>
+      <a href="#access">3. Guidelines and access</a>
+      <a href="#place">4. Place and health</a>
+    </nav>
+
+    <section class="story-section" id="composition">
+      <div class="page">
+        <header class="chapter-heading">
+          <p class="chapter-number">01</p>
+          <div>
+            <p class="eyebrow">The national diet</p>
+            <h2>Energy totals hide what food is made of</h2>
+            <p>
+              Australians aged two years and over consumed an average of 8,114 kJ a
+              day in 2023. The mix of nutrients—and the variation within food
+              categories—reveals more than the total alone.
+            </p>
+          </div>
+        </header>
+
+        <figure class="chart-block">
+          <header class="figure-heading">
+            <span>01 / 12</span>
+            <h3>Where does daily energy come from?</h3>
+          </header>
+          <div class="chart-frame" aria-busy="true">
+            <div id="energy-waffle" class="vis" aria-label="Waffle chart showing sources of daily energy"></div>
+          </div>
+          <aside class="chart-annotation" aria-label="Key finding for daily energy">
+            <span>Key finding</span>
+            <p>
+              <strong>Carbohydrate and fat dominate the energy mix.</strong>
+              Carbohydrate supplied 43.5% and total fat 32.4%—75.9% combined.
+            </p>
+          </aside>
+          <figcaption>
+            Each square represents one percentage point of energy.
+            <a href="daily_energy_waffle.vg.json">View specification</a>
+          </figcaption>
+        </figure>
+
+        <figure class="chart-block">
+          <header class="figure-heading">
+            <span>02 / 12</span>
+            <h3>How does the nutrient mix change with age?</h3>
+          </header>
+          <div class="chart-frame" aria-busy="true">
+            <div id="macro-parallel" class="vis" aria-label="Parallel-coordinates chart of energy contribution from nutrients by age"></div>
+          </div>
+          <aside class="chart-annotation" aria-label="Key finding for nutrient mix by age">
+            <span>Key finding</span>
+            <p>
+              <strong>Carbohydrate contributes less energy later in life.</strong>
+              Its share falls from 49.2% at ages 2–4 to a low of 41.1% at ages 65–74,
+              while protein peaks at 19.9% among ages 30–49.
+            </p>
+          </aside>
+          <figcaption>
+            Follow one coloured age-group line across all five nutrient axes.
+            <a href="macronutrient_parallel_coordinates.vg.json">View specification</a>
+          </figcaption>
+        </figure>
+
+        <figure class="chart-block">
+          <header class="figure-heading">
+            <span>03 / 12</span>
+            <h3>Which food categories contain more sugar, fibre or sodium?</h3>
+          </header>
+          <div class="chart-frame" aria-busy="true">
+            <div id="nutrient-ridgeline" class="vis" aria-label="Ridgeline distributions of sugar, fibre and sodium across AUSNUT food categories"></div>
+          </div>
+          <aside class="chart-annotation" aria-label="Key finding for food-category nutrient profiles">
+            <span>Key finding</span>
+            <p>
+              <strong>Category labels conceal wide nutritional variation.</strong>
+              Sugar products have the highest median sugar content at 58.4 g per
+              100 g, while savoury sauces extend to 8,255 mg of sodium per 100 g.
+            </p>
+          </aside>
+          <figcaption>
+            Ridge width shows the distribution of products, not how often they are eaten.
+            <a href="food_category_nutrient_ridgeline.vg.json">View specification</a>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="story-section" id="life-course">
+      <div class="page">
+        <header class="chapter-heading">
+          <p class="chapter-number">02</p>
+          <div>
+            <p class="eyebrow">Age and time</p>
+            <h2>Eating patterns move across the life course</h2>
+            <p>
+              Supplement use rises in later life. Sweetened-drink consumption follows
+              a different pattern: it has fallen since 1995, but remains concentrated
+              among adolescents and younger adults.
+            </p>
+          </div>
+        </header>
+
+        <figure class="chart-block">
+          <header class="figure-heading">
+            <span>04 / 12</span>
+            <h3>How does supplement use change throughout life?</h3>
+          </header>
+          <div class="chart-frame" aria-busy="true">
+            <div id="supplement-pictogram" class="vis" aria-label="Pictogram of supplement use by age group"></div>
+          </div>
+          <aside class="chart-annotation" aria-label="Key finding for supplement use">
+            <span>Key finding</span>
+            <p>
+              <strong>Supplement use more than triples from adolescence to old age.</strong>
+              It rises from 15.0% among ages 12–17 to 50.9% among people aged 75+.
+            </p>
+          </aside>
+          <figcaption>
+            One complete person symbol represents five people in every 100.
+            <a href="supplement_use_life_course_pictogram.vg.json">View specification</a>
+          </figcaption>
+        </figure>
+
+        <figure class="chart-block">
+          <header class="figure-heading">
+            <span>05 / 12</span>
+            <h3>How did beverage consumption shift from 1995 to 2023?</h3>
+          </header>
+          <div class="chart-frame" aria-busy="true">
+            <div id="beverage-dumbbell" class="vis" aria-label="Dumbbell chart comparing beverage consumption in 1995 and 2023"></div>
+          </div>
+          <aside class="chart-annotation" aria-label="Key finding for beverage change">
+            <span>Key finding</span>
+            <p>
+              <strong>The steepest decline occurred among children aged 2–4.</strong>
+              Sugar-sweetened beverage consumption fell from 64.7% to 5.5%, a
+              59.2 percentage-point reduction.
+            </p>
+          </aside>
+          <figcaption>
+            The connecting line shows the size and direction of change for each age group.
+            <a href="beverage_consumption_dumbbell.vg.json">View specification</a>
+          </figcaption>
+        </figure>
+
+        <div class="chart-pair">
+          <figure class="chart-block">
+            <header class="figure-heading">
+              <span>06 / 12</span>
+              <h3>How often do children consume sugar-sweetened drinks?</h3>
+            </header>
+            <div class="chart-frame" aria-busy="true">
+              <div id="kids-sugar-heatmap" class="vis" aria-label="Heatmap of sugar-sweetened drink consumption among children"></div>
+            </div>
+            <aside class="chart-annotation" aria-label="Key finding for children">
+              <span>Key finding</span>
+              <p>
+                <strong>Daily consumption triples by late adolescence.</strong>
+                It rises from 4.1% at ages 2–3 to 12.4% at ages 14–17.
+              </p>
+            </aside>
+            <figcaption>
+              Compare colour intensity across age groups and frequencies.
+              <a href="kids_prevelance_of_sugar_drink_heatmap.vg.json">View specification</a>
+            </figcaption>
+          </figure>
+
+          <figure class="chart-block">
+            <header class="figure-heading">
+              <span>07 / 12</span>
+              <h3>How does the pattern continue through adulthood?</h3>
+            </header>
+            <div class="chart-frame" aria-busy="true">
+              <div id="adult-sugar-heatmap" class="vis" aria-label="Heatmap of sugar-sweetened drink consumption among adults"></div>
+            </div>
+            <aside class="chart-annotation" aria-label="Key finding for adults">
+              <span>Key finding</span>
+              <p>
+                <strong>Non-consumption rises sharply with age.</strong>
+                It increases from 38.7% at ages 18–24 to 81.3% among people aged 75+.
+              </p>
+            </aside>
+            <figcaption>
+              The adult pattern reverses the increase seen through childhood.
+              <a href="adults_prevelance_of_sugar_drink_heatmap.vg.json">View specification</a>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section" id="access">
+      <div class="page">
+        <header class="chapter-heading">
+          <p class="chapter-number">03</p>
+          <div>
+            <p class="eyebrow">Guidelines and access</p>
+            <h2>Recommendations meet unequal circumstances</h2>
+            <p>
+              Australians fall short across several core food groups. Income adds a
+              more fundamental constraint: some households cannot reliably obtain
+              enough food at all.
+            </p>
+          </div>
+        </header>
+
+        <figure class="chart-block">
+          <header class="figure-heading">
+            <span>08 / 12</span>
+            <h3>How far does actual intake sit below recommended serves?</h3>
+          </header>
+          <div class="chart-frame" aria-busy="true">
+            <div id="intake-bullets" class="vis" aria-label="Bullet charts comparing actual and recommended food-group intake"></div>
+          </div>
+          <aside class="chart-annotation" aria-label="Key finding for recommended intake">
+            <span>Key finding</span>
+            <p>
+              <strong>Every group averages only one daily fruit serve.</strong>
+              Men and women aged 18–49 consume half the two serves recommended, and
+              all displayed food groups remain below their benchmark.
+            </p>
+          </aside>
+          <figcaption>
+            Coloured bars show actual intake; grey bars and ticks show recommendations.
+            <a href="male_female_intake_bullets.vg.json">View specification</a>
+          </figcaption>
+        </figure>
+
+        <figure class="chart-block">
+          <header class="figure-heading">
+            <span>09 / 12</span>
+            <h3>How strongly is food security tied to income?</h3>
+          </header>
+          <div class="chart-frame" aria-busy="true">
+            <div id="food-security-income" class="vis" aria-label="Butterfly chart of household food security by income"></div>
+          </div>
+          <aside class="chart-annotation" aria-label="Key finding for food security">
+            <span>Key finding</span>
+            <p>
+              <strong>Food insecurity is about 6.5 times as prevalent at the bottom.</strong>
+              It affects an estimated 23.5% of households in the lowest income quintile,
+              compared with 3.6% in the highest.
+            </p>
+          </aside>
+          <figcaption>
+            Counts were converted to within-quintile shares for the annotation.
+            <a href="food_security_income.vg.json">View specification</a>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="story-section" id="place">
+      <div class="page">
+        <header class="chapter-heading">
+          <p class="chapter-number">04</p>
+          <div>
+            <p class="eyebrow">Place and health</p>
+            <h2>Three maps answer three different questions</h2>
+            <p>
+              Colour compares state shares, graduated symbols show regional variation,
+              and contiguous cartograms resize states by health prevalence. Read each
+              legend before comparing colour, circle area or geographic area.
+            </p>
+          </div>
+        </header>
+
+        <figure class="chart-block">
+          <header class="figure-heading">
+            <span>10 / 12 · Choropleth</span>
+            <h3>How does discretionary energy vary by state and territory?</h3>
+          </header>
+          <div class="chart-frame" aria-busy="true">
+            <div id="discretionary-map" class="vis" aria-label="Paired choropleth maps of discretionary and non-discretionary energy intake"></div>
+          </div>
+          <aside class="chart-annotation" aria-label="Key finding for discretionary energy">
+            <span>Key finding</span>
+            <p>
+              <strong>The state and territory range spans 5.1 percentage points.</strong>
+              Discretionary energy is highest in the Northern Territory at 38.0% and
+              lowest in the Australian Capital Territory at 32.9%.
+            </p>
+          </aside>
+          <figcaption>
+            Colour encodes the share of total energy for people aged two years and over.
+            <a href="discret_vs_nondiscret.vg.json">View specification</a>
+          </figcaption>
+        </figure>
+
+        <figure class="chart-block">
+          <header class="figure-heading">
+            <span>11 / 12 · Graduated symbols</span>
+            <h3>Where do sodium and potassium estimates differ?</h3>
+          </header>
+          <div class="chart-frame" aria-busy="true">
+            <div id="sodium-potassium-map" class="vis" aria-label="Graduated-symbol maps of sodium and potassium intake"></div>
+          </div>
+          <aside class="chart-annotation" aria-label="Key finding for sodium and potassium">
+            <span>Key finding</span>
+            <p>
+              <strong>Different states lead the two nutrient estimates.</strong>
+              Victoria records the highest sodium intake at 2,496.3 mg, while Tasmania
+              records the highest potassium intake at 3,083.0 mg.
+            </p>
+          </aside>
+          <figcaption>
+            The two maps use independent restricted size scales; compare circles within each map only.
+            <a href="sodium_potassium_graduated_symbol.vg.json">View specification</a>
+          </figcaption>
+        </figure>
+
+        <figure class="chart-block">
+          <header class="figure-heading">
+            <span>12 / 12 · Contiguous cartograms</span>
+            <h3>How do diet-related risks reshape the national map?</h3>
+          </header>
+          <div class="chart-frame" aria-busy="true">
+            <div id="health-cartograms" class="vis" aria-label="Contiguous area cartograms of overweight or obesity and diabetes"></div>
+          </div>
+          <aside class="chart-annotation" aria-label="Key finding for health cartograms">
+            <span>Key finding</span>
+            <p>
+              <strong>Tasmania leads overweight or obesity; South Australia leads diabetes.</strong>
+              The estimates are 70.5% of Tasmanian adults and 7.2% of South Australians
+              of all ages, respectively.
+            </p>
+          </aside>
+          <figcaption>
+            Area represents prevalence rather than land size; compare areas within each cartogram only.
+            <a href="health_risk_condition_contiguous_cartograms.vg.json">View specification</a>
+          </figcaption>
+        </figure>
+
+        <aside class="closing-note">
+          <p class="eyebrow">Takeaway</p>
+          <h2>A national average is only the beginning.</h2>
+          <p>
+            Australian eating patterns vary across age, time, income and place.
+            Progress in sweetened-drink consumption sits beside persistent guideline
+            shortfalls and unequal access to food.
+          </p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="sources">
+    <div class="page footer-grid">
+      <section>
+        <p class="eyebrow">Sources</p>
+        <h2>Data and definitions</h2>
+        <ul class="source-list">
+          <li><a href="https://www.abs.gov.au/statistics/health/food-and-nutrition/national-nutrition-and-physical-activity-survey/latest-release">ABS National Nutrition and Physical Activity Survey, 2023</a></li>
+          <li><a href="https://www.abs.gov.au/statistics/health/food-and-nutrition/food-and-nutrients-state-and-territory-findings/latest-release">ABS Australian Health Survey: Nutrition—State and Territory results, 2011–12</a></li>
+          <li><a href="https://www.abs.gov.au/statistics/health/health-conditions-and-risks/national-health-survey-state-and-territory-findings">ABS National Health Survey: State and territory findings, 2022</a></li>
+          <li><a href="https://www.aihw.gov.au/reports/diet">Australian Institute of Health and Welfare: Diet</a></li>
+          <li><a href="https://www.aihw.gov.au/reports/food-nutrition/poor-diet/contents/poor-diet-in-adults">Australian Institute of Health and Welfare: Poor diet in adults</a></li>
+          <li><a href="https://www.foodstandards.gov.au/science-data/food-nutrient-databases/ausnut/data-files">Food Standards Australia New Zealand: AUSNUT 2023 data files</a></li>
+          <li><a href="https://www.nhmrc.gov.au/adg">National Health and Medical Research Council: Australian Dietary Guidelines</a></li>
+        </ul>
+        <p class="source-note">
+          Survey years, populations and units differ. Compare values within a
+          visualisation unless its annotation explicitly supports another comparison.
+        </p>
+      </section>
+
+      <section class="project-metadata">
+        <p class="eyebrow">Project</p>
+        <h2>About this work</h2>
+        <dl>
+          <div><dt>Author</dt><dd>Devtej Singh Gill (34600523)</dd></div>
+          <div><dt>Unit</dt><dd>FIT3179 Data Visualisation 2</dd></div>
+          <div><dt>Date</dt><dd>October 2026</dd></div>
+          <div><dt>Audience</dt><dd>Australians seeking an accessible overview of national nutrition patterns</dd></div>
+        </dl>
+        <p class="ai-note">
+          Generative AI assisted with code scaffolding, debugging and language editing.
+          Data selection, verification, interpretation and final design were done independently by the author.
+        </p>
+      </section>
+    </div>
+  </footer>
+</body>
+</html>

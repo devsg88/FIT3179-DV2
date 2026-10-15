@@ -1,0 +1,326 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Faceted dumbbell chart comparing beverage consumption in 1995 and 2023 across Australian age groups.",
+  "background": "#ffffff",
+  "padding": 20,
+  "title": {
+    "text": "Beverage consumption has shifted across generations",
+    "subtitle": [
+      "Percentage of each age group consuming sugar-sweetened and intense-sweetened beverages, 1995 versus 2023",
+      "The connecting line shows the size and direction of change; hover for the percentage-point difference."
+    ],
+    "anchor": "start",
+    "fontSize": 23,
+    "subtitleFontSize": 12,
+    "subtitlePadding": 8,
+    "offset": 18,
+    "color": "#243746",
+    "subtitleColor": "#536471"
+  },
+  "data": {
+    "url": "Formatted Data/Beverage_Consumption_Dumbbell_Data.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "1995 (%)": "number",
+        "2023 (%)": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datum['2023 (%)'] - datum['1995 (%)']",
+      "as": "Change"
+    },
+    {
+      "calculate": "datum.Change > 0 ? 'Increase' : datum.Change < 0 ? 'Decrease' : 'No change'",
+      "as": "Direction"
+    }
+  ],
+  "facet": {
+    "column": {
+      "field": "Beverage Type",
+      "type": "nominal",
+      "sort": [
+        "Sugar-sweetened",
+        "Intense-sweetened"
+      ],
+      "header": {
+        "title": null,
+        "labelFontSize": 16,
+        "labelFontWeight": "bold",
+        "labelColor": "#243746",
+        "labelPadding": 12
+      }
+    }
+  },
+  "spec": {
+    "width": 360,
+    "height": {
+      "step": 46
+    },
+    "encoding": {
+      "y": {
+        "field": "Age Group",
+        "type": "ordinal",
+        "sort": [
+          "2-4",
+          "5-11",
+          "12-17",
+          "18-29",
+          "30-49",
+          "50-64",
+          "65-74",
+          "75+"
+        ],
+        "axis": {
+          "title": null,
+          "labelFontSize": 12,
+          "labelFontWeight": "bold",
+          "labelColor": "#34495E",
+          "labelPadding": 10,
+          "ticks": false,
+          "domain": false
+        }
+      }
+    },
+    "layer": [
+      {
+        "mark": {
+          "type": "rule",
+          "strokeWidth": 4,
+          "strokeCap": "round",
+          "color": "#AAB7C4"
+        },
+        "encoding": {
+          "x": {
+            "field": "1995 (%)",
+            "type": "quantitative",
+            "scale": {
+              "domain": [
+                0,
+                75
+              ],
+              "nice": false
+            },
+            "axis": {
+              "title": "Age-group consumption (%)",
+              "titleFontSize": 12,
+              "titlePadding": 14,
+              "labelFontSize": 11,
+              "values": [
+                0,
+                10,
+                20,
+                30,
+                40,
+                50,
+                60,
+                70
+              ],
+              "labelExpr": "datum.label + '%'",
+              "grid": true,
+              "gridColor": "#E8EDF1",
+              "gridOpacity": 1,
+              "tickColor": "#BCC7D0",
+              "domain": false
+            }
+          },
+          "x2": {
+            "field": "2023 (%)"
+          },
+          "tooltip": [
+            {
+              "field": "Beverage Type",
+              "type": "nominal",
+              "title": "Beverage type"
+            },
+            {
+              "field": "Age Group",
+              "type": "nominal",
+              "title": "Age group"
+            },
+            {
+              "field": "1995 (%)",
+              "type": "quantitative",
+              "title": "1995",
+              "format": ".1f"
+            },
+            {
+              "field": "2023 (%)",
+              "type": "quantitative",
+              "title": "2023",
+              "format": ".1f"
+            },
+            {
+              "field": "Change",
+              "type": "quantitative",
+              "title": "Change (percentage points)",
+              "format": "+.1f"
+            },
+            {
+              "field": "Direction",
+              "type": "nominal",
+              "title": "Direction"
+            }
+          ]
+        }
+      },
+      {
+        "transform": [
+          {
+            "fold": [
+              "1995 (%)",
+              "2023 (%)"
+            ],
+            "as": [
+              "YearField",
+              "Consumption"
+            ]
+          },
+          {
+            "calculate": "datum.YearField === '1995 (%)' ? '1995' : '2023'",
+            "as": "Year"
+          }
+        ],
+        "mark": {
+          "type": "point",
+          "filled": true,
+          "size": 150,
+          "stroke": "#ffffff",
+          "strokeWidth": 1.5,
+          "cursor": "pointer"
+        },
+        "encoding": {
+          "x": {
+            "field": "Consumption",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "Year",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "1995",
+                "2023"
+              ],
+              "range": [
+                "#E67E22",
+                "#167D9A"
+              ]
+            },
+            "legend": {
+              "title": "Survey year",
+              "orient": "top",
+              "direction": "horizontal",
+              "symbolType": "circle",
+              "symbolSize": 130,
+              "labelFontSize": 12,
+              "titleFontSize": 12,
+              "offset": 8
+            }
+          },
+          "tooltip": [
+            {
+              "field": "Beverage Type",
+              "type": "nominal",
+              "title": "Beverage type"
+            },
+            {
+              "field": "Age Group",
+              "type": "nominal",
+              "title": "Age group"
+            },
+            {
+              "field": "Year",
+              "type": "nominal",
+              "title": "Year"
+            },
+            {
+              "field": "Consumption",
+              "type": "quantitative",
+              "title": "Consumed (%)",
+              "format": ".1f"
+            },
+            {
+              "field": "Change",
+              "type": "quantitative",
+              "title": "1995–2023 change (pp)",
+              "format": "+.1f"
+            }
+          ]
+        }
+      },
+      {
+        "transform": [
+          {
+            "calculate": "format(datum['1995 (%)'], '.1f') + '%'",
+            "as": "ValueLabel"
+          }
+        ],
+        "mark": {
+          "type": "text",
+          "dy": -12,
+          "fontSize": 10,
+          "fontWeight": "bold",
+          "color": "#B85E0B"
+        },
+        "encoding": {
+          "x": {
+            "field": "1995 (%)",
+            "type": "quantitative"
+          },
+          "text": {
+            "field": "ValueLabel",
+            "type": "nominal"
+          }
+        }
+      },
+      {
+        "transform": [
+          {
+            "calculate": "format(datum['2023 (%)'], '.1f') + '%'",
+            "as": "ValueLabel"
+          }
+        ],
+        "mark": {
+          "type": "text",
+          "dy": 13,
+          "fontSize": 10,
+          "fontWeight": "bold",
+          "color": "#11677F"
+        },
+        "encoding": {
+          "x": {
+            "field": "2023 (%)",
+            "type": "quantitative"
+          },
+          "text": {
+            "field": "ValueLabel",
+            "type": "nominal"
+          }
+        }
+      }
+    ]
+  },
+  "resolve": {
+    "scale": {
+      "x": "shared",
+      "y": "shared",
+      "color": "shared"
+    }
+  },
+  "config": {
+    "font": "sans-serif",
+    "facet": {
+      "spacing": 38
+    },
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#536471",
+      "titleColor": "#34495E"
+    }
+  }
+}

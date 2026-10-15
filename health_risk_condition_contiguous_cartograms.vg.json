@@ -1,0 +1,267 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Paired contiguous area cartograms comparing overweight or obesity among adults with diabetes among people across Australian states and territories in 2022.",
+  "title": {
+    "text": "Diet-related health risks and conditions across Australia",
+    "subtitle": [
+      "State area is proportional to the reported percentage in each map, 2022.",
+      "Cartograms preserve neighbouring relationships but distort geographic size and shape; compare areas within each map only."
+    ],
+    "anchor": "start"
+  },
+  "hconcat": [
+    {
+      "title": {
+        "text": "Health risk: overweight or obese",
+        "subtitle": "Adults aged 18 years and over"
+      },
+      "width": 420,
+      "height": 380,
+      "projection": {
+        "type": "identity",
+        "reflectY": false
+      },
+      "data": {
+        "url": "topojson files/STE_2022_overweight_obesity_contiguous_cartogram.json",
+        "format": {
+          "type": "topojson",
+          "feature": "cartogram"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.join_key",
+          "from": {
+            "data": {
+              "url": "Formatted Data/health_cartogram_values_2022.csv",
+              "format": {
+                "type": "csv",
+                "parse": {
+                  "Percent": "number"
+                }
+              }
+            },
+            "key": "JoinKey",
+            "fields": [
+              "Percent",
+              "Metric",
+              "State/Territory",
+              "StateAbbreviation"
+            ]
+          }
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "geoshape",
+            "stroke": "#ffffff",
+            "strokeWidth": 1.2
+          },
+          "encoding": {
+            "color": {
+              "field": "Percent",
+              "type": "quantitative",
+              "scale": {
+                "scheme": "oranges",
+                "domain": [63, 71]
+              },
+              "legend": {
+                "title": "Overweight or obese (%)",
+                "orient": "bottom",
+                "gradientLength": 240,
+                "values": [63, 65, 67, 69, 71],
+                "labelExpr": "datum.label + '%'"
+              }
+            },
+            "tooltip": [
+              {
+                "field": "State/Territory",
+                "type": "nominal",
+                "title": "State / territory"
+              },
+              {
+                "field": "Percent",
+                "type": "quantitative",
+                "title": "Overweight or obese",
+                "format": ".1f"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "fontWeight": "bold",
+            "color": "#243746"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "properties.label_x",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "properties.label_y",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "StateAbbreviation",
+              "type": "nominal"
+            },
+            "tooltip": [
+              {
+                "field": "State/Territory",
+                "type": "nominal",
+                "title": "State / territory"
+              },
+              {
+                "field": "Percent",
+                "type": "quantitative",
+                "title": "Overweight or obese",
+                "format": ".1f"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Long-term condition: diabetes",
+        "subtitle": "People of all ages"
+      },
+      "width": 420,
+      "height": 380,
+      "projection": {
+        "type": "identity",
+        "reflectY": false
+      },
+      "data": {
+        "url": "topojson files/STE_2022_diabetes_contiguous_cartogram.json",
+        "format": {
+          "type": "topojson",
+          "feature": "cartogram"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.join_key",
+          "from": {
+            "data": {
+              "url": "Formatted Data/health_cartogram_values_2022.csv",
+              "format": {
+                "type": "csv",
+                "parse": {
+                  "Percent": "number"
+                }
+              }
+            },
+            "key": "JoinKey",
+            "fields": [
+              "Percent",
+              "Metric",
+              "State/Territory",
+              "StateAbbreviation"
+            ]
+          }
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "geoshape",
+            "stroke": "#ffffff",
+            "strokeWidth": 1.2
+          },
+          "encoding": {
+            "color": {
+              "field": "Percent",
+              "type": "quantitative",
+              "scale": {
+                "scheme": "blues",
+                "domain": [3, 7.5]
+              },
+              "legend": {
+                "title": "Diabetes (%)",
+                "orient": "bottom",
+                "gradientLength": 240,
+                "values": [3, 4, 5, 6, 7],
+                "labelExpr": "datum.label + '%'"
+              }
+            },
+            "tooltip": [
+              {
+                "field": "State/Territory",
+                "type": "nominal",
+                "title": "State / territory"
+              },
+              {
+                "field": "Percent",
+                "type": "quantitative",
+                "title": "Diabetes",
+                "format": ".1f"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "fontWeight": "bold",
+            "color": "#243746"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "properties.label_x",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "properties.label_y",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "StateAbbreviation",
+              "type": "nominal"
+            },
+            "tooltip": [
+              {
+                "field": "State/Territory",
+                "type": "nominal",
+                "title": "State / territory"
+              },
+              {
+                "field": "Percent",
+                "type": "quantitative",
+                "title": "Diabetes",
+                "format": ".1f"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "independent"
+    }
+  },
+  "spacing": 30,
+  "config": {
+    "background": "#ffffff",
+    "font": "sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "fontSize": 18,
+      "subtitleFontSize": 12
+    },
+    "legend": {
+      "titleFontSize": 12,
+      "labelFontSize": 11
+    }
+  }
+}

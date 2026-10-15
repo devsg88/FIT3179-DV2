@@ -1,0 +1,300 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Graduated symbol maps of sodium and potassium intake for adults aged 19 and over. Separate restricted size scales reveal variation between states within each nutrient.",
+  "title": {
+    "text": "Sodium and potassium intake by state and territory",
+    "subtitle": [
+      "Adults aged 19 and over | Intake (mg)",
+      "Restricted scales reveal differences between states within each nutrient.",
+      "Compare circle sizes within each map only; sizes are not comparable between maps."
+    ],
+    "anchor": "start"
+  },
+  "datasets": {
+    "state_centres": [
+      {
+        "state": "New South Wales",
+        "longitude": 147.0044,
+        "latitude": -32.2376
+      },
+      {
+        "state": "Victoria",
+        "longitude": 144.3155,
+        "latitude": -36.8714
+      },
+      {
+        "state": "Queensland",
+        "longitude": 144.5888,
+        "latitude": -22.7383
+      },
+      {
+        "state": "South Australia",
+        "longitude": 135.8687,
+        "latitude": -30.2214
+      },
+      {
+        "state": "Western Australia",
+        "longitude": 122.1319,
+        "latitude": -25.7636
+      },
+      {
+        "state": "Tasmania",
+        "longitude": 146.5961,
+        "latitude": -41.9517
+      },
+      {
+        "state": "Northern Territory",
+        "longitude": 133.3686,
+        "latitude": -19.5556
+      },
+      {
+        "state": "Australian Capital Territory",
+        "longitude": 149.0024,
+        "latitude": -35.4894
+      }
+    ]
+  },
+  "hconcat": [
+    {
+      "title": {
+        "text": "Sodium intake"
+      },
+      "width": 420,
+      "height": 380,
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "topojson files/STE_2021_AUST_GDA2020.json",
+            "format": {
+              "type": "topojson",
+              "feature": "STE_2021_AUST_GDA2020"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#f0f0f0",
+            "stroke": "#b0b0b0",
+            "strokeWidth": 0.7
+          }
+        },
+        {
+          "data": {
+            "url": "Formatted Data/Australian_Sodium_Potassium_19plus.csv",
+            "format": {
+              "type": "csv",
+              "parse": {
+                "Sodium Intake (mg) - 19 and over": "number"
+              }
+            }
+          },
+          "transform": [
+            {
+              "lookup": "State/Territory",
+              "from": {
+                "data": {
+                  "name": "state_centres"
+                },
+                "key": "state",
+                "fields": [
+                  "longitude",
+                  "latitude"
+                ]
+              }
+            }
+          ],
+          "mark": {
+            "type": "circle",
+            "color": "#d95f0e",
+            "opacity": 0.75,
+            "stroke": "#ffffff",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "size": {
+              "field": "Sodium Intake (mg) - 19 and over",
+              "type": "quantitative",
+              "scale": {
+                "type": "linear",
+                "zero": false,
+                "nice": false,
+                "domain": [
+                  2380.6,
+                  2496.3
+                ],
+                "range": [
+                  300,
+                  1200
+                ]
+              },
+              "legend": {
+                "title": "Sodium intake (mg)",
+                "orient": "bottom",
+                "values": [
+                  2380.6,
+                  2440,
+                  2496.3
+                ],
+                "format": ",.0f"
+              }
+            },
+            "tooltip": [
+              {
+                "field": "State/Territory",
+                "type": "nominal",
+                "title": "State / territory"
+              },
+              {
+                "field": "Sodium Intake (mg) - 19 and over",
+                "type": "quantitative",
+                "title": "Sodium intake (mg)",
+                "format": ",.1f"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Potassium intake"
+      },
+      "width": 420,
+      "height": 380,
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "topojson files/STE_2021_AUST_GDA2020.json",
+            "format": {
+              "type": "topojson",
+              "feature": "STE_2021_AUST_GDA2020"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#f0f0f0",
+            "stroke": "#b0b0b0",
+            "strokeWidth": 0.7
+          }
+        },
+        {
+          "data": {
+            "url": "Formatted Data/Australian_Sodium_Potassium_19plus.csv",
+            "format": {
+              "type": "csv",
+              "parse": {
+                "Potassium Intake (mg) - 19 and over": "number"
+              }
+            }
+          },
+          "transform": [
+            {
+              "lookup": "State/Territory",
+              "from": {
+                "data": {
+                  "name": "state_centres"
+                },
+                "key": "state",
+                "fields": [
+                  "longitude",
+                  "latitude"
+                ]
+              }
+            }
+          ],
+          "mark": {
+            "type": "circle",
+            "color": "#2171b5",
+            "opacity": 0.75,
+            "stroke": "#ffffff",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "size": {
+              "field": "Potassium Intake (mg) - 19 and over",
+              "type": "quantitative",
+              "scale": {
+                "type": "linear",
+                "zero": false,
+                "nice": false,
+                "domain": [
+                  2847.6,
+                  3083
+                ],
+                "range": [
+                  300,
+                  1200
+                ]
+              },
+              "legend": {
+                "title": "Potassium intake (mg)",
+                "orient": "bottom",
+                "values": [
+                  2847.6,
+                  2965,
+                  3083
+                ],
+                "format": ",.0f"
+              }
+            },
+            "tooltip": [
+              {
+                "field": "State/Territory",
+                "type": "nominal",
+                "title": "State / territory"
+              },
+              {
+                "field": "Potassium Intake (mg) - 19 and over",
+                "type": "quantitative",
+                "title": "Potassium intake (mg)",
+                "format": ",.1f"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "size": "independent"
+    }
+  },
+  "spacing": 30,
+  "config": {
+    "background": "#ffffff",
+    "font": "sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "fontSize": 18,
+      "subtitleFontSize": 12
+    },
+    "legend": {
+      "titleFontSize": 12,
+      "labelFontSize": 11
+    }
+  }
+}

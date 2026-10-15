@@ -1,0 +1,51 @@
+Nutrient,Parent,Mean_Value_Ages_2_17,Unit
+Other,All Nutrients,,
+All Nutrients,,,
+Minerals,All Nutrients,,
+Vitamins,All Nutrients,,
+Macronutrients,All Nutrients,,
+Energy,All Nutrients,7908,kJ
+Moisture,All Nutrients,2197.9,g
+Protein,Macronutrients,78,g
+Total fat,Macronutrients,70.2,g
+Saturated fat,Total fat,28.2,g
+Monounsaturated fat,Total fat,26,g
+Polyunsaturated fat,Total fat,10.2,g
+Linoleic acid,Polyunsaturated fat,8.5,g
+Alpha-linolenic acid,Polyunsaturated fat,1.3,g
+Long chain omega 3 fatty acids,Polyunsaturated fat,145,mg
+Trans fatty acids,Total fat,1114.2,mg
+Carbohydrate,Macronutrients,226.7,g
+Total sugars,Carbohydrate,91,g
+Free sugars,Total sugars,47.5,g
+Added sugars,Total sugars,40.3,g
+Starch,Carbohydrate,133.3,g
+Dietary fibre,Macronutrients,20,g
+Alcohol,Macronutrients,0.1,g
+Preformed vitamin A,Vitamins,266,µg
+Pro vitamin A,Vitamins,2207,µg
+Vitamin A retinol equivalents,Vitamins,633,µg
+Thiamin,All Nutrients,1.6,mg
+Riboflavin,All Nutrients,1.6,mg
+Niacin,All Nutrients,18,mg
+Niacin equivalents,Vitamins,32.8,mg
+"Folate, natural",Vitamins,245,µg
+Folic acid,Vitamins,233,µg
+Total folates,Vitamins,478,µg
+Folate equivalents,Vitamins,634,µg
+Vitamin B6,Vitamins,1.1,mg
+Vitamin B12,Vitamins,3.1,µg
+Vitamin C,Vitamins,87,mg
+Vitamin D3 equivalents,Vitamins,4.2,µg
+Vitamin E,Vitamins,8.3,mg
+Calcium,Minerals,790,mg
+Iodine,Minerals,174.3,µg
+Iron,Minerals,9.8,mg
+Magnesium,Minerals,289,mg
+Phosphorus,Minerals,1252,mg
+Potassium,Minerals,2482,mg
+Selenium,Minerals,72.4,µg
+Sodium,Minerals,2339,mg
+Zinc,Minerals,8.7,mg
+Caffeine,Other,22,mg
+Cholesterol,Other,256,mg

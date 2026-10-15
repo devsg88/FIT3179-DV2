@@ -1,0 +1,139 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "2x2 bullet graph grid. Thick grey bars show recommended serves, coloured bars show actual intake, and red ticks mark the recommendation.",
+  "spacing": 30,
+  "vconcat": [
+    {
+      "hconcat": [
+        {
+          "title": "Male (18-29)",
+          "width": 300,
+          "height": {"step": 44},
+          "layer": [
+            {
+              "data": {"url": "Formatted Data/male_recommended_19_50.csv"},
+              "mark": {"type": "bar", "color": "#dedede", "size": 32},
+              "encoding": {
+                "x": {"field": "recommended_daily_serves", "type": "quantitative", "title": "Serves per person per day"},
+                "y": {"field": "food_group", "type": "nominal", "title": null}
+              }
+            },
+            {
+              "data": {"url": "Formatted Data/male_actual_18_29.csv"},
+              "mark": {"type": "bar", "color": "#2874a6", "size": 20},
+              "encoding": {
+                "x": {"field": "mean_daily_serves", "type": "quantitative", "title": "Serves per person per day"},
+                "y": {"field": "food_group", "type": "nominal", "title": null}
+              }
+            },
+            {
+              "data": {"url": "Formatted Data/male_recommended_19_50.csv"},
+              "mark": {"type": "tick", "color": "red", "thickness": 3, "size": 35},
+              "encoding": {
+                "x": {"field": "recommended_daily_serves", "type": "quantitative"},
+                "y": {"field": "food_group", "type": "nominal", "title": null}
+              }
+            }
+          ]
+        },
+        {
+          "title": "Male (30-49)",
+          "width": 300,
+          "height": {"step": 44},
+          "layer": [
+            {
+              "data": {"url": "Formatted Data/male_recommended_19_50.csv"},
+              "mark": {"type": "bar", "color": "#dedede", "size": 32},
+              "encoding": {
+                "x": {"field": "recommended_daily_serves", "type": "quantitative", "title": "Serves per person per day"},
+                "y": {"field": "food_group", "type": "nominal", "title": null}
+              }
+            },
+            {
+              "data": {"url": "Formatted Data/male_actual_30_49.csv"},
+              "mark": {"type": "bar", "color": "#2874a6", "size": 20},
+              "encoding": {
+                "x": {"field": "mean_daily_serves", "type": "quantitative", "title": "Serves per person per day"},
+                "y": {"field": "food_group", "type": "nominal", "title": null}
+              }
+            },
+            {
+              "data": {"url": "Formatted Data/male_recommended_19_50.csv"},
+              "mark": {"type": "tick", "color": "red", "thickness": 3, "size": 35},
+              "encoding": {
+                "x": {"field": "recommended_daily_serves", "type": "quantitative"},
+                "y": {"field": "food_group", "type": "nominal", "title": null}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "hconcat": [
+        {
+          "title": "Female (18-29)",
+          "width": 300,
+          "height": {"step": 44},
+          "layer": [
+            {
+              "data": {"url": "Formatted Data/female_recommended_19_50.csv"},
+              "mark": {"type": "bar", "color": "#dedede", "size": 32},
+              "encoding": {
+                "x": {"field": "recommended_daily_serves", "type": "quantitative", "title": "Serves per person per day"},
+                "y": {"field": "food_group", "type": "nominal", "title": null}
+              }
+            },
+            {
+              "data": {"url": "Formatted Data/female_actual_18_29.csv"},
+              "mark": {"type": "bar", "color": "#884ea0", "size": 20},
+              "encoding": {
+                "x": {"field": "mean_daily_serves", "type": "quantitative", "title": "Serves per person per day"},
+                "y": {"field": "food_group", "type": "nominal", "title": null}
+              }
+            },
+            {
+              "data": {"url": "Formatted Data/female_recommended_19_50.csv"},
+              "mark": {"type": "tick", "color": "red", "thickness": 3, "size": 35},
+              "encoding": {
+                "x": {"field": "recommended_daily_serves", "type": "quantitative"},
+                "y": {"field": "food_group", "type": "nominal", "title": null}
+              }
+            }
+          ]
+        },
+        {
+          "title": "Female (30-49)",
+          "width": 300,
+          "height": {"step": 44},
+          "layer": [
+            {
+              "data": {"url": "Formatted Data/female_recommended_19_50.csv"},
+              "mark": {"type": "bar", "color": "#dedede", "size": 32},
+              "encoding": {
+                "x": {"field": "recommended_daily_serves", "type": "quantitative", "title": "Serves per person per day"},
+                "y": {"field": "food_group", "type": "nominal", "title": null}
+              }
+            },
+            {
+              "data": {"url": "Formatted Data/female_actual_30_49.csv"},
+              "mark": {"type": "bar", "color": "#884ea0", "size": 20},
+              "encoding": {
+                "x": {"field": "mean_daily_serves", "type": "quantitative", "title": "Serves per person per day"},
+                "y": {"field": "food_group", "type": "nominal", "title": null}
+              }
+            },
+            {
+              "data": {"url": "Formatted Data/female_recommended_19_50.csv"},
+              "mark": {"type": "tick", "color": "red", "thickness": 3, "size": 35},
+              "encoding": {
+                "x": {"field": "recommended_daily_serves", "type": "quantitative"},
+                "y": {"field": "food_group", "type": "nominal", "title": null}
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

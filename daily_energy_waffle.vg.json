@@ -1,0 +1,169 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Interactive 100-square waffle chart showing the mean contribution of mutually exclusive macronutrient categories to daily energy intake. Values are from ABS National Nutrition and Physical Activity Survey: Food and Nutrients, 2023, Table 2.1.",
+  "background": "#ffffff",
+  "padding": 20,
+  "width": 440,
+  "height": 440,
+  "title": {
+    "text": "Where does daily energy come from?",
+    "subtitle": [
+      "Mean contribution to daily energy intake, Australia, 2023",
+      "Each square represents approximately 1 percentage point; hover for exact values.",
+      "Source: ABS National Nutrition and Physical Activity Survey, Table 2.1"
+    ],
+    "anchor": "start",
+    "fontSize": 23,
+    "subtitleFontSize": 12,
+    "subtitlePadding": 8,
+    "offset": 18,
+    "color": "#243746",
+    "subtitleColor": "#536471"
+  },
+  "params": [
+    {
+      "name": "ageGroup",
+      "value": "All people aged 2+",
+      "bind": {
+        "input": "select",
+        "name": "Age group: ",
+        "options": [
+          "All people aged 2+",
+          "Children aged 2–17",
+          "Adults aged 18+"
+        ]
+      }
+    }
+  ],
+  "data": {
+    "url": "Formatted Data/daily_energy_waffle.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Mean_Daily_Energy_kJ": "number",
+        "Exact_Share_Percent": "number",
+        "Waffle_Squares": "number",
+        "Tile": "number",
+        "Column": "number",
+        "Row": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.Age_Group === ageGroup"
+    },
+    {
+      "calculate": "datum.Exact_Share_Percent * datum.Mean_Daily_Energy_kJ / 100",
+      "as": "ApproximateEnergy_kJ"
+    }
+  ],
+  "mark": {
+    "type": "rect",
+    "cornerRadius": 3,
+    "stroke": "#ffffff",
+    "strokeWidth": 2,
+    "cursor": "pointer"
+  },
+  "encoding": {
+    "x": {
+      "field": "Column",
+      "type": "ordinal",
+      "sort": "ascending",
+      "axis": null
+    },
+    "y": {
+      "field": "Row",
+      "type": "ordinal",
+      "sort": "ascending",
+      "axis": null
+    },
+    "color": {
+      "field": "Energy_Source",
+      "type": "nominal",
+      "sort": [
+        "Protein",
+        "Total fat",
+        "Carbohydrate",
+        "Dietary fibre",
+        "Alcohol",
+        "Unallocated / rounding"
+      ],
+      "scale": {
+        "domain": [
+          "Protein",
+          "Total fat",
+          "Carbohydrate",
+          "Dietary fibre",
+          "Alcohol",
+          "Unallocated / rounding"
+        ],
+        "range": [
+          "#4E79A7",
+          "#F28E2B",
+          "#59A14F",
+          "#EDC948",
+          "#B07AA1",
+          "#BAB0AC"
+        ]
+      },
+      "legend": {
+        "title": "Energy source",
+        "orient": "right",
+        "symbolType": "square",
+        "symbolSize": 170,
+        "labelFontSize": 12,
+        "titleFontSize": 13,
+        "labelLimit": 180,
+        "offset": 18
+      }
+    },
+    "opacity": {
+      "condition": {
+        "test": "datum.Energy_Source === 'Unallocated / rounding'",
+        "value": 0.55
+      },
+      "value": 1
+    },
+    "tooltip": [
+      {
+        "field": "Age_Group",
+        "type": "nominal",
+        "title": "Age group"
+      },
+      {
+        "field": "Energy_Source",
+        "type": "nominal",
+        "title": "Energy source"
+      },
+      {
+        "field": "Exact_Share_Percent",
+        "type": "quantitative",
+        "title": "Exact energy share (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "ApproximateEnergy_kJ",
+        "type": "quantitative",
+        "title": "Approximate energy (kJ/day)",
+        "format": ",.0f"
+      },
+      {
+        "field": "Mean_Daily_Energy_kJ",
+        "type": "quantitative",
+        "title": "Mean total energy (kJ/day)",
+        "format": ",.0f"
+      }
+    ]
+  },
+  "config": {
+    "font": "sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelColor": "#243746",
+      "titleColor": "#243746"
+    }
+  }
+}

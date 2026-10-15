@@ -1,0 +1,54 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": { "text": "Prevalance of sugar sweetened drink consumption in Kids" },
+    "data": {
+        "url": "Formatted Data/kids_data_no_ci.csv"
+    },
+    "width":400,
+    "height":300,
+    "transform": [
+        {
+            "fold": [
+                "Did not consume (%)",
+                "Daily (%)",
+                "1-3 days (%)",
+                "4-6 days (%)"
+            ],
+            "as": ["Consumption Frequency", "Percentage"]
+        }, 
+        {
+            "calculate": "replace(datum['Consumption Frequency'], ' (%)', '')",
+            "as": "Cleaned Frequency"
+        }
+    ],
+
+    "mark": {
+        "type": "rect",
+        "tooltip": true,
+        "stroke":"white"
+    },
+    "encoding": {
+        "y": {
+            "field": "Age group (years)",
+            "type": "ordinal",
+            "title": null
+        },
+        "x": {
+            "field": "Cleaned Frequency",
+            "type": "ordinal",
+            "title": "Consumption Frequency",
+            "sort": ["Did not consume", "1-3 days", "4-6 days", "Daily"],
+            "axis": {"labelAngle": -45}
+        },
+        "color":{
+            "field": "Percentage",
+            "type": "quantitative",
+            "scale":{
+                "scheme": "tealblues",
+                "type": "symlog",
+                "constant":10
+            }
+        }
+    }
+}
+

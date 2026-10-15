@@ -1,0 +1,508 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Ridgeline distributions of total sugars, dietary fibre and sodium per 100 grams across ten broad AUSNUT 2023 food groups.",
+  "background": "#ffffff",
+  "padding": 20,
+  "title": {
+    "text": "Nutrient profiles vary widely across food categories",
+    "subtitle": [
+      "Distribution of nutrient content among individual AUSNUT 2023 foods, measured per 100 g",
+      "Each ridge is normalised to its own peak; ridge width shows the range, not how often Australians eat the food.",
+      "Sodium uses a symlog scale to retain valid high-sodium foods without compressing the main distribution."
+    ],
+    "anchor": "start",
+    "fontSize": 23,
+    "subtitleFontSize": 12,
+    "subtitlePadding": 8,
+    "offset": 20,
+    "color": "#243746",
+    "subtitleColor": "#536471"
+  },
+  "data": {
+    "url": "Formatted Data/ausnut_ridgeline_nutrients.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Food_ID": "string",
+        "Value": "number"
+      }
+    }
+  },
+  "hconcat": [
+    {
+      "title": {
+        "text": "Total sugars",
+        "subtitle": "grams per 100 g",
+        "anchor": "middle",
+        "fontSize": 16,
+        "subtitleFontSize": 11,
+        "color": "#8E3B46",
+        "subtitleColor": "#6B7280",
+        "offset": 10
+      },
+      "transform": [
+        {
+          "filter": "datum.Nutrient === 'Total sugars (g/100 g)'"
+        },
+        {
+          "density": "Value",
+          "groupby": [
+            "Food_Group"
+          ],
+          "extent": [
+            0,
+            100
+          ],
+          "steps": 300,
+          "as": [
+            "NutrientValue",
+            "Density"
+          ]
+        },
+        {
+          "joinaggregate": [
+            {
+              "op": "max",
+              "field": "Density",
+              "as": "PeakDensity"
+            }
+          ],
+          "groupby": [
+            "Food_Group"
+          ]
+        },
+        {
+          "calculate": "datum.PeakDensity > 0 ? datum.Density / datum.PeakDensity : 0",
+          "as": "RelativeDensity"
+        }
+      ],
+      "facet": {
+        "row": {
+          "field": "Food_Group",
+          "type": "nominal",
+          "sort": [
+            "Cereals and cereal products",
+            "Cereal based products and dishes",
+            "Fruit products and dishes",
+            "Vegetable products and dishes",
+            "Meat, poultry and game products and dishes",
+            "Milk products and dishes",
+            "Savoury sauces and condiments",
+            "Snack foods",
+            "Sugar products and dishes",
+            "Confectionery and cereal, nut, fruit and seed bars"
+          ],
+          "header": {
+            "title": null,
+            "labelAngle": 0,
+            "labelAlign": "left",
+            "labelFontSize": 11,
+            "labelFontWeight": "bold",
+            "labelColor": "#34495E",
+            "labelLimit": 250,
+            "labelPadding": 10
+          }
+        }
+      },
+      "spec": {
+        "width": 260,
+        "height": 34,
+        "mark": {
+          "type": "area",
+          "interpolate": "monotone",
+          "fill": "#C95D6B",
+          "fillOpacity": 0.65,
+          "stroke": "#8E3B46",
+          "strokeWidth": 1.3,
+          "clip": false,
+          "cursor": "crosshair"
+        },
+        "encoding": {
+          "x": {
+            "field": "NutrientValue",
+            "type": "quantitative",
+            "scale": {
+              "domain": [
+                0,
+                100
+              ],
+              "nice": false,
+              "zero": true
+            },
+            "axis": {
+              "title": "Total sugars (g/100 g)",
+              "titleFontSize": 11,
+              "titlePadding": 12,
+              "labelFontSize": 10,
+              "values": [
+                0,
+                20,
+                40,
+                60,
+                80,
+                100
+              ],
+              "grid": false,
+              "domainColor": "#AAB7C4",
+              "tickColor": "#AAB7C4"
+            }
+          },
+          "y": {
+            "field": "RelativeDensity",
+            "type": "quantitative",
+            "scale": {
+              "domain": [
+                0,
+                1
+              ],
+              "range": [
+                34,
+                -10
+              ],
+              "clamp": true
+            },
+            "axis": null
+          },
+          "tooltip": [
+            {
+              "field": "Food_Group",
+              "type": "nominal",
+              "title": "Food group"
+            },
+            {
+              "field": "NutrientValue",
+              "type": "quantitative",
+              "title": "Sugar (g/100 g)",
+              "format": ".1f"
+            },
+            {
+              "field": "RelativeDensity",
+              "type": "quantitative",
+              "title": "Relative density",
+              "format": ".2f"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "title": {
+        "text": "Dietary fibre",
+        "subtitle": "grams per 100 g",
+        "anchor": "middle",
+        "fontSize": 16,
+        "subtitleFontSize": 11,
+        "color": "#2A7F62",
+        "subtitleColor": "#6B7280",
+        "offset": 10
+      },
+      "transform": [
+        {
+          "filter": "datum.Nutrient === 'Dietary fibre (g/100 g)'"
+        },
+        {
+          "density": "Value",
+          "groupby": [
+            "Food_Group"
+          ],
+          "extent": [
+            0,
+            45
+          ],
+          "steps": 300,
+          "as": [
+            "NutrientValue",
+            "Density"
+          ]
+        },
+        {
+          "joinaggregate": [
+            {
+              "op": "max",
+              "field": "Density",
+              "as": "PeakDensity"
+            }
+          ],
+          "groupby": [
+            "Food_Group"
+          ]
+        },
+        {
+          "calculate": "datum.PeakDensity > 0 ? datum.Density / datum.PeakDensity : 0",
+          "as": "RelativeDensity"
+        }
+      ],
+      "facet": {
+        "row": {
+          "field": "Food_Group",
+          "type": "nominal",
+          "sort": [
+            "Cereals and cereal products",
+            "Cereal based products and dishes",
+            "Fruit products and dishes",
+            "Vegetable products and dishes",
+            "Meat, poultry and game products and dishes",
+            "Milk products and dishes",
+            "Savoury sauces and condiments",
+            "Snack foods",
+            "Sugar products and dishes",
+            "Confectionery and cereal, nut, fruit and seed bars"
+          ],
+          "header": {
+            "title": null,
+            "labels": false
+          }
+        }
+      },
+      "spec": {
+        "width": 260,
+        "height": 34,
+        "mark": {
+          "type": "area",
+          "interpolate": "monotone",
+          "fill": "#4AA785",
+          "fillOpacity": 0.65,
+          "stroke": "#237258",
+          "strokeWidth": 1.3,
+          "clip": false,
+          "cursor": "crosshair"
+        },
+        "encoding": {
+          "x": {
+            "field": "NutrientValue",
+            "type": "quantitative",
+            "scale": {
+              "domain": [
+                0,
+                45
+              ],
+              "nice": false,
+              "zero": true
+            },
+            "axis": {
+              "title": "Dietary fibre (g/100 g)",
+              "titleFontSize": 11,
+              "titlePadding": 12,
+              "labelFontSize": 10,
+              "values": [
+                0,
+                10,
+                20,
+                30,
+                40
+              ],
+              "grid": false,
+              "domainColor": "#AAB7C4",
+              "tickColor": "#AAB7C4"
+            }
+          },
+          "y": {
+            "field": "RelativeDensity",
+            "type": "quantitative",
+            "scale": {
+              "domain": [
+                0,
+                1
+              ],
+              "range": [
+                34,
+                -10
+              ],
+              "clamp": true
+            },
+            "axis": null
+          },
+          "tooltip": [
+            {
+              "field": "Food_Group",
+              "type": "nominal",
+              "title": "Food group"
+            },
+            {
+              "field": "NutrientValue",
+              "type": "quantitative",
+              "title": "Fibre (g/100 g)",
+              "format": ".1f"
+            },
+            {
+              "field": "RelativeDensity",
+              "type": "quantitative",
+              "title": "Relative density",
+              "format": ".2f"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "title": {
+        "text": "Sodium",
+        "subtitle": "milligrams per 100 g · symlog scale",
+        "anchor": "middle",
+        "fontSize": 16,
+        "subtitleFontSize": 11,
+        "color": "#496D9B",
+        "subtitleColor": "#6B7280",
+        "offset": 10
+      },
+      "transform": [
+        {
+          "filter": "datum.Nutrient === 'Sodium (mg/100 g)'"
+        },
+        {
+          "density": "Value",
+          "groupby": [
+            "Food_Group"
+          ],
+          "extent": [
+            0,
+            8500
+          ],
+          "steps": 400,
+          "as": [
+            "NutrientValue",
+            "Density"
+          ]
+        },
+        {
+          "joinaggregate": [
+            {
+              "op": "max",
+              "field": "Density",
+              "as": "PeakDensity"
+            }
+          ],
+          "groupby": [
+            "Food_Group"
+          ]
+        },
+        {
+          "calculate": "datum.PeakDensity > 0 ? datum.Density / datum.PeakDensity : 0",
+          "as": "RelativeDensity"
+        }
+      ],
+      "facet": {
+        "row": {
+          "field": "Food_Group",
+          "type": "nominal",
+          "sort": [
+            "Cereals and cereal products",
+            "Cereal based products and dishes",
+            "Fruit products and dishes",
+            "Vegetable products and dishes",
+            "Meat, poultry and game products and dishes",
+            "Milk products and dishes",
+            "Savoury sauces and condiments",
+            "Snack foods",
+            "Sugar products and dishes",
+            "Confectionery and cereal, nut, fruit and seed bars"
+          ],
+          "header": {
+            "title": null,
+            "labels": false
+          }
+        }
+      },
+      "spec": {
+        "width": 290,
+        "height": 34,
+        "mark": {
+          "type": "area",
+          "interpolate": "monotone",
+          "fill": "#6F93C2",
+          "fillOpacity": 0.65,
+          "stroke": "#3F628F",
+          "strokeWidth": 1.3,
+          "clip": false,
+          "cursor": "crosshair"
+        },
+        "encoding": {
+          "x": {
+            "field": "NutrientValue",
+            "type": "quantitative",
+            "scale": {
+              "type": "symlog",
+              "constant": 100,
+              "domain": [
+                0,
+                8500
+              ],
+              "nice": false,
+              "zero": true
+            },
+            "axis": {
+              "title": "Sodium (mg/100 g)",
+              "titleFontSize": 11,
+              "titlePadding": 12,
+              "labelFontSize": 10,
+              "values": [
+                0,
+                100,
+                500,
+                1000,
+                2000,
+                4000,
+                8000
+              ],
+              "labelExpr": "datum.value >= 1000 ? format(datum.value / 1000, '.0f') + 'k' : datum.label",
+              "grid": false,
+              "domainColor": "#AAB7C4",
+              "tickColor": "#AAB7C4"
+            }
+          },
+          "y": {
+            "field": "RelativeDensity",
+            "type": "quantitative",
+            "scale": {
+              "domain": [
+                0,
+                1
+              ],
+              "range": [
+                34,
+                -10
+              ],
+              "clamp": true
+            },
+            "axis": null
+          },
+          "tooltip": [
+            {
+              "field": "Food_Group",
+              "type": "nominal",
+              "title": "Food group"
+            },
+            {
+              "field": "NutrientValue",
+              "type": "quantitative",
+              "title": "Sodium (mg/100 g)",
+              "format": ".0f"
+            },
+            {
+              "field": "RelativeDensity",
+              "type": "quantitative",
+              "title": "Relative density",
+              "format": ".2f"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "sans-serif",
+    "concat": {
+      "spacing": 28
+    },
+    "facet": {
+      "spacing": 0
+    },
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#536471",
+      "titleColor": "#34495E"
+    }
+  }
+}

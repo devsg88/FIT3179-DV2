@@ -1,0 +1,55 @@
+food_group,recommendation_group,sex,age_group,life_stage,recommended_daily_serves,target_note
+Vegetables and legumes/beans,Men 19-50,Men,19-50,General,6,User-provided recommendation table
+Fruit,Men 19-50,Men,19-50,General,2,User-provided recommendation table
+Grains (cereals),Men 19-50,Men,19-50,General,6,User-provided recommendation table
+Lean meats and alternatives,Men 19-50,Men,19-50,General,3,User-provided recommendation table
+"Milk, yoghurt, cheese and alternatives",Men 19-50,Men,19-50,General,2.5,User-provided recommendation table
+Unsaturated spreads and oils,Men 19-50,Men,19-50,General,null,Image footnote gives a shared allowance for unsaturated spreads or oils and nuts or seeds; no separate oils-only target
+Vegetables and legumes/beans,Men 51-70,Men,51-70,General,5.5,User-provided recommendation table
+Fruit,Men 51-70,Men,51-70,General,2,User-provided recommendation table
+Grains (cereals),Men 51-70,Men,51-70,General,6,User-provided recommendation table
+Lean meats and alternatives,Men 51-70,Men,51-70,General,2.5,User-provided recommendation table
+"Milk, yoghurt, cheese and alternatives",Men 51-70,Men,51-70,General,2.5,User-provided recommendation table
+Unsaturated spreads and oils,Men 51-70,Men,51-70,General,null,Image footnote gives a shared allowance for unsaturated spreads or oils and nuts or seeds; no separate oils-only target
+Vegetables and legumes/beans,Men 70+,Men,70+,General,5,User-provided recommendation table
+Fruit,Men 70+,Men,70+,General,2,User-provided recommendation table
+Grains (cereals),Men 70+,Men,70+,General,4.5,User-provided recommendation table
+Lean meats and alternatives,Men 70+,Men,70+,General,2.5,User-provided recommendation table
+"Milk, yoghurt, cheese and alternatives",Men 70+,Men,70+,General,3.5,User-provided recommendation table
+Unsaturated spreads and oils,Men 70+,Men,70+,General,null,Image footnote gives a shared allowance for unsaturated spreads or oils and nuts or seeds; no separate oils-only target
+Vegetables and legumes/beans,Women 19-50,Women,19-50,General,5,User-provided recommendation table
+Fruit,Women 19-50,Women,19-50,General,2,User-provided recommendation table
+Grains (cereals),Women 19-50,Women,19-50,General,6,User-provided recommendation table
+Lean meats and alternatives,Women 19-50,Women,19-50,General,2.5,User-provided recommendation table
+"Milk, yoghurt, cheese and alternatives",Women 19-50,Women,19-50,General,2.5,User-provided recommendation table
+Unsaturated spreads and oils,Women 19-50,Women,19-50,General,null,Image footnote gives a shared allowance for unsaturated spreads or oils and nuts or seeds; no separate oils-only target
+Vegetables and legumes/beans,Women 51-70,Women,51-70,General,5,User-provided recommendation table
+Fruit,Women 51-70,Women,51-70,General,2,User-provided recommendation table
+Grains (cereals),Women 51-70,Women,51-70,General,4,User-provided recommendation table
+Lean meats and alternatives,Women 51-70,Women,51-70,General,2,User-provided recommendation table
+"Milk, yoghurt, cheese and alternatives",Women 51-70,Women,51-70,General,4,User-provided recommendation table
+Unsaturated spreads and oils,Women 51-70,Women,51-70,General,null,Image footnote gives a shared allowance for unsaturated spreads or oils and nuts or seeds; no separate oils-only target
+Vegetables and legumes/beans,Women 70+,Women,70+,General,5,User-provided recommendation table
+Fruit,Women 70+,Women,70+,General,2,User-provided recommendation table
+Grains (cereals),Women 70+,Women,70+,General,3,User-provided recommendation table
+Lean meats and alternatives,Women 70+,Women,70+,General,2,User-provided recommendation table
+"Milk, yoghurt, cheese and alternatives",Women 70+,Women,70+,General,4,User-provided recommendation table
+Unsaturated spreads and oils,Women 70+,Women,70+,General,null,Image footnote gives a shared allowance for unsaturated spreads or oils and nuts or seeds; no separate oils-only target
+Vegetables and legumes/beans,Pregnant,Women,Not specified in image,Pregnant,5,User-provided recommendation table
+Fruit,Pregnant,Women,Not specified in image,Pregnant,2,User-provided recommendation table
+Grains (cereals),Pregnant,Women,Not specified in image,Pregnant,8.5,User-provided recommendation table
+Lean meats and alternatives,Pregnant,Women,Not specified in image,Pregnant,3.5,User-provided recommendation table
+"Milk, yoghurt, cheese and alternatives",Pregnant,Women,Not specified in image,Pregnant,2.5,User-provided recommendation table
+Unsaturated spreads and oils,Pregnant,Women,Not specified in image,Pregnant,null,Image footnote gives a shared allowance for unsaturated spreads or oils and nuts or seeds; no separate oils-only target
+Vegetables and legumes/beans,Lactating,Women,Not specified in image,Lactating,7.5,User-provided recommendation table
+Fruit,Lactating,Women,Not specified in image,Lactating,2,User-provided recommendation table
+Grains (cereals),Lactating,Women,Not specified in image,Lactating,9,User-provided recommendation table
+Lean meats and alternatives,Lactating,Women,Not specified in image,Lactating,2.5,User-provided recommendation table
+"Milk, yoghurt, cheese and alternatives",Lactating,Women,Not specified in image,Lactating,2.5,User-provided recommendation table
+Unsaturated spreads and oils,Lactating,Women,Not specified in image,Lactating,null,Image footnote gives a shared allowance for unsaturated spreads or oils and nuts or seeds; no separate oils-only target
+Vegetables and legumes/beans,All persons 2+,Persons,2+,All,null,No all-persons age-2-plus target specified in the image
+Fruit,All persons 2+,Persons,2+,All,null,No all-persons age-2-plus target specified in the image
+Grains (cereals),All persons 2+,Persons,2+,All,null,No all-persons age-2-plus target specified in the image
+Lean meats and alternatives,All persons 2+,Persons,2+,All,null,No all-persons age-2-plus target specified in the image
+"Milk, yoghurt, cheese and alternatives",All persons 2+,Persons,2+,All,null,No all-persons age-2-plus target specified in the image
+Unsaturated spreads and oils,All persons 2+,Persons,2+,All,null,No all-persons age-2-plus target specified in the image

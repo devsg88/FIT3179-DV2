@@ -1,0 +1,97 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "State and territory shares of energy from discretionary and non-discretionary foods, using the total population aged 2 years and over.",
+  "title": {
+    "text": "Discretionary and non-discretionary energy intake",
+    "subtitle": "Share of total energy (%): People aged 2 years and over",
+    "anchor": "start"
+  },
+  "data": {
+    "url": "Formatted Data/Australian_Energy_Proportions_by_State.csv",
+    "format": {
+      "type": "csv",
+      "parse": {"Total 2 years and over (%)": "number"}
+    }
+  },
+  "transform": [
+    {
+      "lookup": "State/Territory",
+      "from": {
+        "data": {
+            "url": "topojson files/STE_2021_AUST_GDA2020.json",
+          "format": {
+              "type": "topojson",
+              "feature": "STE_2021_AUST_GDA2020"
+          }
+        },
+          "key": "properties.STE_NAME21"
+      },
+      "as": "geometry"
+    }
+  ],
+  "hconcat": [
+    {
+      "title": "Discretionary",
+      "width": 420,
+      "height": 380,
+      "transform": [{"filter": "datum.Category === 'Discretionary'"}],
+      "projection": {"type": "mercator"},
+      "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 0.7},
+      "encoding": {
+        "shape": {"field": "geometry", "type": "geojson"},
+        "color": {
+          "field": "Total 2 years and over (%)",
+          "type": "quantitative",
+          "scale": {"type": "log", "scheme": "oranges", "domain": [32, 39]},
+          "legend": {
+            "title": "Discretionary energy (%, log scale)",
+            "values": [32, 34, 36, 38, 39],
+            "orient": "bottom",
+            "gradientLength": 260,
+            "labelExpr": "datum.label + '%'"
+          }
+        },
+        "tooltip": [
+          {"field": "State/Territory", "type": "nominal", "title": "State / territory"},
+          {"field": "Total 2 years and over (%)", "type": "quantitative", "title": "Discretionary (%)", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "title": "Non-discretionary",
+      "width": 420,
+      "height": 380,
+      "transform": [{"filter": "datum.Category === 'Non-discretionary'"}],
+      "projection": {"type": "mercator"},
+      "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 0.7},
+      "encoding": {
+        "shape": {"field": "geometry", "type": "geojson"},
+        "color": {
+          "field": "Total 2 years and over (%)",
+          "type": "quantitative",
+          "scale": {"type": "log", "scheme": "blues", "domain": [61, 68]},
+          "legend": {
+            "title": "Non-discretionary energy (%, log scale)",
+            "values": [61, 63, 65, 67, 68],
+            "orient": "bottom",
+            "gradientLength": 260,
+            "labelExpr": "datum.label + '%'"
+          }
+        },
+        "tooltip": [
+          {"field": "State/Territory", "type": "nominal", "title": "State / territory"},
+          {"field": "Total 2 years and over (%)", "type": "quantitative", "title": "Non-discretionary (%)", "format": ".1f"}
+        ]
+      }
+    }
+  ],
+  "resolve": {"scale": {"color": "independent"}},
+  "spacing": 30,
+  "config": {
+    "background": "#ffffff",
+    "font": "sans-serif",
+    "view": {"stroke": null},
+    "title": {"fontSize": 18, "subtitleFontSize": 12},
+    "legend": {"titleFontSize": 12, "labelFontSize": 11}
+  }
+}

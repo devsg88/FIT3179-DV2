@@ -1,0 +1,7 @@
+food_group,mean_daily_serves,age_group,sex,food_scope,is_core_food_group,reference_year,source_food_group,source_cell
+Vegetables and legumes/beans,3.0,2+,Persons,Non-discretionary,true,2023,Vegetables and legumes/beans,L9
+Fruit,1.2,2+,Persons,Non-discretionary,true,2023,Fruit,L13
+Grains (cereals),4.4,2+,Persons,Non-discretionary,true,2023,Grains (cereals),L17
+Lean meats and alternatives,1.8,2+,Persons,Non-discretionary,true,2023,"Meats and poultry, fish, eggs, tofu, nuts and seeds, and legumes/beans",L21
+"Milk, yoghurt, cheese and alternatives",1.4,2+,Persons,Non-discretionary,true,2023,"Milk, yoghurt, cheese and alternatives",L25
+Unsaturated spreads and oils,2.6,2+,Persons,Non-discretionary,false,2023,Unsaturated spreads and oils,L29

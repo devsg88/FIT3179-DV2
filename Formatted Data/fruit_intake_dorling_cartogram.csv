@@ -1,0 +1,9 @@
+state,abbreviation,fruit_number,fruit_rate,ci_low,ci_high,dorling_x,dorling_y
+New South Wales,NSW,2796814,44.7,44.2,45.2,630,350
+Victoria,VIC,2300611,45.3,44.7,45.8,480,480
+Queensland,QLD,1701059,42.9,42.3,43.5,610,155
+South Australia,SA,612288,42.7,41.7,43.7,340,340
+Western Australia,WA,936003,45.1,44.3,45.9,105,325
+Tasmania,TAS,189117,42.2,41.0,43.4,535,570
+Northern Territory,NT,53874,40.3,38.5,42.1,335,110
+Australian Capital Territory,ACT,150860,43.8,42.6,45.0,745,390

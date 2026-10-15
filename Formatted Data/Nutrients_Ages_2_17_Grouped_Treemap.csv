@@ -1,0 +1,32 @@
+Nutrient,Parent,Group,Mean_Value_Ages_2_17,Unit,Value_g,Details,Source_cells
+All nutrients,,,0,,0,Grouping node only,
+Macronutrients,All nutrients,Macronutrients,0,,0,Grouping node only,
+Vitamins,All nutrients,Vitamins,0,,0,Grouping node only,
+Minerals,All nutrients,Minerals,0,,0,Grouping node only,
+Other,All nutrients,Other,0,,0,Grouping node only,
+Protein,Macronutrients,Macronutrients,78,g,78,Reported mean daily intake,K11
+Total fat,Macronutrients,Macronutrients,70.2,g,70.2,"Includes saturated fat (28.2 g), monounsaturated fat (26 g), polyunsaturated fat (10.2 g), trans fatty acids (1114.2 mg) and cholesterol (256 mg). These components are not added again as tiles.",K12
+Carbohydrate,Macronutrients,Macronutrients,226.7,g,226.7,"Includes total sugars (91 g) and starch (133.3 g). Free sugars (47.5 g) include added sugars (40.3 g); these are overlapping subsets, not additional amounts.",K20
+Dietary fibre,Macronutrients,Macronutrients,20,g,20,Reported mean daily intake,K25
+Preformed vitamin A,Vitamins,Vitamins,266,µg,0.000266,Retinol equivalents combine vitamin A measures and are not added again as a tile.,K28
+Pro vitamin A,Vitamins,Vitamins,2207,µg,0.002207,Reported provitamin A amount; retinol equivalents are not an additional nutrient.,K29
+Thiamin,Vitamins,Vitamins,1.6,mg,0.0016,Vitamin B1,K31
+Riboflavin,Vitamins,Vitamins,1.6,mg,0.0016,Vitamin B2,K32
+Niacin,Vitamins,Vitamins,18,mg,0.018,Vitamin B3; niacin equivalents are not added again.,K33
+"Folate, natural",Vitamins,Vitamins,245,µg,0.000245,Total folates and folate equivalents are summary measures and are not added again.,K35
+Folic acid,Vitamins,Vitamins,233,µg,0.000233,Total folates and folate equivalents are summary measures and are not added again.,K36
+Vitamin B6,Vitamins,Vitamins,1.1,mg,0.0011,Reported mean daily intake,K39
+Vitamin B12,Vitamins,Vitamins,3.1,µg,0.0000031,Reported mean daily intake,K40
+Vitamin C,Vitamins,Vitamins,87,mg,0.087,Reported mean daily intake,K41
+Vitamin E,Vitamins,Vitamins,8.3,mg,0.0083,Reported mean daily intake,K43
+Calcium,Minerals,Minerals,790,mg,0.79,Reported mean daily intake,K45
+Iodine,Minerals,Minerals,174.3,µg,0.0001743,Reported mean daily intake,K46
+Iron,Minerals,Minerals,9.8,mg,0.0098,Reported mean daily intake,K47
+Magnesium,Minerals,Minerals,289,mg,0.289,Reported mean daily intake,K48
+Phosphorus,Minerals,Minerals,1252,mg,1.252,Reported mean daily intake,K49
+Potassium,Minerals,Minerals,2482,mg,2.482,Reported mean daily intake,K50
+Selenium,Minerals,Minerals,72.4,µg,0.0000724,Reported mean daily intake,K51
+Sodium,Minerals,Minerals,2339,mg,2.339,May exclude discretionary salt added at home or at the table.,K52
+Zinc,Minerals,Minerals,8.7,mg,0.0087,Reported mean daily intake,K53
+Alcohol,Other,Other,0.1,g,0.1,Pure alcohol (ethanol); grouped under Other for this chart.,K26
+Caffeine,Other,Other,22,mg,0.022,Reported mean daily intake,K55

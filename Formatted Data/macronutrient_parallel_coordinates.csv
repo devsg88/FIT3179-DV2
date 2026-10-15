@@ -1,0 +1,41 @@
+Age_Group,Nutrient,Energy_Percent
+2–4,Protein,16.1
+2–4,Total fat,31.5
+2–4,Carbohydrate,49.2
+2–4,Total sugars,20.4
+2–4,Dietary fibre,2.2
+5–11,Protein,16.2
+5–11,Total fat,31.9
+5–11,Carbohydrate,48.8
+5–11,Total sugars,19.2
+5–11,Dietary fibre,2.2
+12–17,Protein,18.1
+12–17,Total fat,33.0
+12–17,Carbohydrate,46.2
+12–17,Total sugars,17.2
+12–17,Dietary fibre,1.9
+18–29,Protein,19.2
+18–29,Total fat,32.0
+18–29,Carbohydrate,44.7
+18–29,Total sugars,16.7
+18–29,Dietary fibre,2.0
+30–49,Protein,19.9
+30–49,Total fat,32.7
+30–49,Carbohydrate,42.2
+30–49,Total sugars,15.1
+30–49,Dietary fibre,2.1
+50–64,Protein,19.5
+50–64,Total fat,32.6
+50–64,Carbohydrate,41.2
+50–64,Total sugars,15.9
+50–64,Dietary fibre,2.2
+65–74,Protein,19.3
+65–74,Total fat,32.5
+65–74,Carbohydrate,41.1
+65–74,Total sugars,16.3
+65–74,Dietary fibre,2.2
+75+,Protein,19.1
+75+,Total fat,32.1
+75+,Carbohydrate,42.7
+75+,Total sugars,18.2
+75+,Dietary fibre,2.3

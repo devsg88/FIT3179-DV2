@@ -1,0 +1,210 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Butterfly chart of estimated food-secure and food-insecure households by equivalised gross weekly household income quintile. Values are households in thousands, from the 2023 survey. Both sides use the same numeric range.",
+  "title": {
+    "text": "Household food security by income",
+    "subtitle": [
+      "Estimated households (thousands), 2023",
+      "Income groups based on equivalised gross weekly household income"
+    ],
+    "anchor": "start",
+    "offset": 20
+  },
+  "data": {
+    "url": "Formatted Data/Household_Food_Security_by_Income.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Total food secure": "number",
+        "Total food insecure": "number"
+      }
+    }
+  },
+  "hconcat": [
+    {
+      "title": {
+        "text": "Total food secure",
+        "color": "#287d8e"
+      },
+      "width": 300,
+      "height": 280,
+      "mark": {
+        "type": "bar",
+        "color": "#287d8e",
+        "size": 28
+      },
+      "encoding": {
+        "y": {
+          "field": "Equivalised gross weekly household income quintiles",
+          "type": "ordinal",
+          "sort": [
+            "Lowest quintile",
+            "2nd quintile",
+            "3rd quintile",
+            "4th quintile",
+            "Highest quintile"
+          ],
+          "axis": null
+        },
+        "x": {
+          "field": "Total food secure",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              2000
+            ],
+            "reverse": true,
+            "nice": false
+          },
+          "axis": {
+            "orient": "top",
+            "title": null,
+            "values": [
+              0,
+              500,
+              1000,
+              1500,
+              2000
+            ],
+            "format": ",.0f"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Equivalised gross weekly household income quintiles",
+            "type": "ordinal",
+            "title": "Income group"
+          },
+          {
+            "field": "Total food secure",
+            "type": "quantitative",
+            "title": "Total food secure (thousands)",
+            "format": ",.1f"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Income group",
+      "width": 120,
+      "height": 280,
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "align": "center",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "y": {
+          "field": "Equivalised gross weekly household income quintiles",
+          "type": "ordinal",
+          "sort": [
+            "Lowest quintile",
+            "2nd quintile",
+            "3rd quintile",
+            "4th quintile",
+            "Highest quintile"
+          ],
+          "axis": null
+        },
+        "text": {
+          "field": "Equivalised gross weekly household income quintiles",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "title": {
+        "text": "Total food insecure",
+        "color": "#c65b32"
+      },
+      "width": 300,
+      "height": 280,
+      "mark": {
+        "type": "bar",
+        "color": "#c65b32",
+        "size": 28
+      },
+      "encoding": {
+        "y": {
+          "field": "Equivalised gross weekly household income quintiles",
+          "type": "ordinal",
+          "sort": [
+            "Lowest quintile",
+            "2nd quintile",
+            "3rd quintile",
+            "4th quintile",
+            "Highest quintile"
+          ],
+          "axis": null
+        },
+        "x": {
+          "field": "Total food insecure",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              2000
+            ],
+            "reverse": false,
+            "nice": false
+          },
+          "axis": {
+            "orient": "top",
+            "title": null,
+            "values": [
+              0,
+              500,
+              1000,
+              1500,
+              2000
+            ],
+            "format": ",.0f"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Equivalised gross weekly household income quintiles",
+            "type": "ordinal",
+            "title": "Income group"
+          },
+          {
+            "field": "Total food insecure",
+            "type": "quantitative",
+            "title": "Total food insecure (thousands)",
+            "format": ",.1f"
+          }
+        ]
+      }
+    }
+  ],
+  "spacing": 10,
+  "resolve": {
+    "scale": {
+      "x": "independent",
+      "y": "shared"
+    }
+  },
+  "config": {
+    "background": "#ffffff",
+    "font": "sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "fontSize": 18,
+      "subtitleFontSize": 12
+    },
+    "axis": {
+      "domain": false,
+      "ticks": false,
+      "gridColor": "#e5e7eb",
+      "labelFontSize": 11,
+      "labelPadding": 10
+    },
+    "concat": {
+      "spacing": 10
+    }
+  }
+}
