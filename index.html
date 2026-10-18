@@ -96,19 +96,20 @@
             <h3>How does the nutrient mix change with age?</h3>
           </header>
           <div class="chart-frame" aria-busy="true">
-            <div id="macro-parallel" class="vis" aria-label="Parallel-coordinates chart of energy contribution from nutrients by age"></div>
+            <div id="macro-deviation" class="vis" aria-label="Faceted deviation charts showing percentage-point changes in nutrient contributions across age groups"></div>
           </div>
           <aside class="chart-annotation" aria-label="Key finding for nutrient mix by age">
             <span>Key finding</span>
             <p>
               <strong>Carbohydrate contributes less energy later in life.</strong>
               Its share falls from 49.2% at ages 2–4 to a low of 41.1% at ages 65–74,
-              while protein peaks at 19.9% among ages 30–49.
+              while protein peaks at 19.9% among ages 30–49. Dietary fibre remains
+              nearly constant across age groups, contributing between 1.9% and 2.3%.
             </p>
           </aside>
           <figcaption>
-            Follow one coloured age-group line across all five nutrient axes.
-            <a href="macronutrient_parallel_coordinates.vg.json">View specification</a>
+            Each panel measures change from its nutrient's value at ages 2–4; all panels share the same percentage-point scale.
+            <a href="macronutrient_age_deviation.vg.json">View specification</a>
           </figcaption>
         </figure>
 

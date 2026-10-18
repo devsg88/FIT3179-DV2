@@ -42,12 +42,17 @@
         "color": {
           "field": "Total 2 years and over (%)",
           "type": "quantitative",
-          "scale": {"type": "log", "scheme": "oranges", "domain": [32, 39]},
+          "scale": {"type": "linear", "scheme": "oranges", "domain": [32, 39]},
           "legend": {
-            "title": "Discretionary energy (%, log scale)",
-            "values": [32, 34, 36, 38, 39],
+            "title": [
+              "Percentage of discretionary energy",
+              "in daily energy intake"
+            ],
+            "values": [32, 34, 36, 39],
             "orient": "bottom",
-            "gradientLength": 260,
+            "gradientLength": 300,
+            "titleLimit": 300,
+            "titleLineHeight": 14,
             "labelExpr": "datum.label + '%'"
           }
         },
@@ -69,12 +74,17 @@
         "color": {
           "field": "Total 2 years and over (%)",
           "type": "quantitative",
-          "scale": {"type": "log", "scheme": "blues", "domain": [61, 68]},
+          "scale": {"type": "linear", "scheme": "blues", "domain": [61, 68]},
           "legend": {
-            "title": "Non-discretionary energy (%, log scale)",
-            "values": [61, 63, 65, 67, 68],
+            "title": [
+              "Percentage of non-discretionary energy",
+              "in daily energy intake"
+            ],
+            "values": [61, 63, 65, 68],
             "orient": "bottom",
-            "gradientLength": 260,
+            "gradientLength": 300,
+            "titleLimit": 300,
+            "titleLineHeight": 14,
             "labelExpr": "datum.label + '%'"
           }
         },

@@ -2,78 +2,23 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Energy contribution from nutrients by age (2023)",
-    "subtitle": "Lines show age groups; axes are normalised within each nutrient (hover for actual %)."
+    "subtitle": "Lines show how each nutrient's share of energy changes across age groups."
   },
   "data": {
     "url": "Formatted Data/macronutrient_parallel_coordinates.csv"
   },
   "width": 670,
   "height": 370,
-  "transform": [
-    {
-      "calculate": "indexof(['Protein','Total fat','Carbohydrate','Total sugars','Dietary fibre'], datum.Nutrient)",
-      "as": "AxisOrder"
-    },
-    {
-      "joinaggregate": [
-        {
-          "op": "min",
-          "field": "Energy_Percent",
-          "as": "Min"
-        },
-        {
-          "op": "max",
-          "field": "Energy_Percent",
-          "as": "Max"
-        }
-      ],
-      "groupby": [
-        "Nutrient"
-      ]
-    },
-    {
-      "calculate": "(datum.Energy_Percent - datum.Min) / (datum.Max - datum.Min)",
-      "as": "Relative"
-    }
-  ],
   "mark": {
     "type": "line",
     "point": true,
     "strokeWidth": 2.5,
-    "opacity": 0.75
+    "opacity": 0.85
   },
   "encoding": {
     "x": {
-      "field": "Nutrient",
-      "type": "nominal",
-      "sort": [
-        "Protein",
-        "Total fat",
-        "Carbohydrate",
-        "Total sugars",
-        "Dietary fibre"
-      ],
-      "axis": {
-        "title": null,
-        "labelAngle": 0
-      }
-    },
-    "y": {
-      "field": "Relative",
-      "type": "quantitative",
-      "scale": {
-        "domain": [
-          0,
-          1
-        ]
-      },
-      "axis": {
-        "title": "Relative intake (0–1)"
-      }
-    },
-    "color": {
       "field": "Age_Group",
-      "type": "nominal",
+      "type": "ordinal",
       "sort": [
         "2–4",
         "5–11",
@@ -84,8 +29,37 @@
         "65–74",
         "75+"
       ],
+      "axis": {
+        "title": "Age group",
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "Energy_Percent",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          0,
+          50
+        ]
+      },
+      "axis": {
+        "title": "Energy contribution (%)",
+        "format": ".0f"
+      }
+    },
+    "color": {
+      "field": "Nutrient",
+      "type": "nominal",
+      "sort": [
+        "Protein",
+        "Total fat",
+        "Carbohydrate",
+        "Total sugars",
+        "Dietary fibre"
+      ],
       "legend": {
-        "title": "Age group"
+        "title": "Nutrient type"
       }
     },
     "tooltip": [
@@ -98,17 +72,13 @@
       },
       {
         "field": "Energy_Percent",
-        "title": "Energy (%)",
+        "title": "Energy contribution (%)",
         "format": ".1f"
       }
     ],
     "detail": {
-      "field": "Age_Group",
+      "field": "Nutrient",
       "type": "nominal"
-    },
-    "order": {
-      "field": "AxisOrder",
-      "type": "quantitative"
     }
   }
 }

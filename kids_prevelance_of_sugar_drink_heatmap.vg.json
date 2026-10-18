@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": { "text": "Prevalance of sugar sweetened drink consumption in Kids" },
+    "title": { "text": "Prevalence of sugar-sweetened drink consumption in children" },
     "data": {
         "url": "Formatted Data/kids_data_no_ci.csv"
     },

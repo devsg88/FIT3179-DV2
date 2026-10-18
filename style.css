@@ -269,6 +269,22 @@ p {
   height: auto;
 }
 
+#macro-deviation,
+#macro-deviation.vega-embed,
+#macro-deviation .vega-embed {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  justify-content: center;
+}
+
+#macro-deviation svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
 .chart-annotation {
   display: grid;
   grid-template-columns: 88px minmax(0, 680px);
@@ -320,6 +336,11 @@ figcaption a {
 .chart-pair .chart-annotation {
   grid-template-columns: 1fr;
   gap: 6px;
+}
+
+.chart-pair .figure-heading {
+  min-height: 74px;
+  align-content: start;
 }
 
 .chart-pair .chart-block:last-of-type {
@@ -420,6 +441,10 @@ figcaption a {
 
   .chart-pair {
     gap: 0;
+  }
+
+  .chart-pair .figure-heading {
+    min-height: 0;
   }
 
   .footer-grid {

@@ -1,0 +1,349 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Faceted deviation charts showing how each nutrient's contribution to energy changes from the ages 2–4 baseline.",
+  "background": "#ffffff",
+  "padding": 20,
+  "title": {
+    "text": "How nutrient contributions shift with age",
+    "subtitle": [
+      "Percentage-point change from ages 2–4; panels use the same scale.",
+      "Values above zero increased from the baseline; values below zero decreased."
+    ],
+    "anchor": "start",
+    "fontSize": 23,
+    "subtitleFontSize": 12,
+    "subtitlePadding": 8,
+    "offset": 18,
+    "color": "#243746",
+    "subtitleColor": "#536471"
+  },
+  "data": {
+    "url": "Formatted Data/macronutrient_parallel_coordinates.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Energy_Percent": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datum.Age_Group === '2–4' ? datum.Energy_Percent : null",
+      "as": "BaselineCandidate"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "BaselineCandidate",
+          "as": "BaselinePercent"
+        }
+      ],
+      "groupby": [
+        "Nutrient"
+      ]
+    },
+    {
+      "calculate": "datum.Energy_Percent - datum.BaselinePercent",
+      "as": "PercentagePointChange"
+    },
+    {
+      "calculate": "datum.Nutrient === 'Protein' && datum.Age_Group === '30–49' ? 'Peak: +3.8 pp' : datum.Nutrient === 'Total fat' && datum.Age_Group === '12–17' ? 'Small peak: +1.5 pp' : datum.Nutrient === 'Carbohydrate' && datum.Age_Group === '65–74' ? 'Lowest point: −8.1 pp' : datum.Nutrient === 'Total sugars' && datum.Age_Group === '30–49' ? 'Largest drop: −5.3 pp' : datum.Nutrient === 'Dietary fibre' && datum.Age_Group === '12–17' ? 'Nearly flat: −0.3 to +0.1 pp' : null",
+      "as": "AnnotationText"
+    },
+    {
+      "calculate": "datum.Nutrient === 'Protein' ? 2.6 : datum.Nutrient === 'Total fat' ? 2.8 : datum.Nutrient === 'Carbohydrate' ? -6.8 : datum.Nutrient === 'Total sugars' ? -3.9 : datum.Nutrient === 'Dietary fibre' ? 1.2 : 0",
+      "as": "AnnotationY"
+    }
+  ],
+  "facet": {
+    "field": "Nutrient",
+    "type": "nominal",
+    "sort": [
+      "Protein",
+      "Total fat",
+      "Carbohydrate",
+      "Total sugars",
+      "Dietary fibre"
+    ],
+    "header": {
+      "title": null,
+      "labelAnchor": "start",
+      "labelColor": "#243746",
+      "labelFontSize": 15,
+      "labelFontWeight": "bold",
+      "labelPadding": 8
+    }
+  },
+  "columns": 3,
+  "spec": {
+    "width": 330,
+    "height": 260,
+    "layer": [
+      {
+        "mark": {
+          "type": "rule",
+          "color": "#7C8992",
+          "strokeWidth": 1.2
+        },
+        "encoding": {
+          "y": {
+            "datum": 0
+          }
+        }
+      },
+      {
+        "mark": {
+          "type": "line",
+          "color": "#315F72",
+          "strokeWidth": 3.5
+        },
+        "encoding": {
+          "x": {
+            "field": "Age_Group",
+            "type": "ordinal",
+            "sort": [
+              "2–4",
+              "5–11",
+              "12–17",
+              "18–29",
+              "30–49",
+              "50–64",
+              "65–74",
+              "75+"
+            ],
+            "axis": {
+              "title": "Age group",
+              "labelAngle": -35,
+              "labelFontSize": 11,
+              "labelLimit": 55,
+              "titleFontSize": 13,
+              "titlePadding": 8
+            }
+          },
+          "y": {
+            "field": "PercentagePointChange",
+            "type": "quantitative",
+            "scale": {
+              "domain": [-9, 4]
+            },
+            "axis": {
+              "title": "Change (pp)",
+              "values": [-8, -4, 0, 4],
+              "labelFontSize": 11,
+              "titleFontSize": 13,
+              "grid": true
+            }
+          }
+        }
+      },
+      {
+        "mark": {
+          "type": "point",
+          "filled": true,
+          "size": 105,
+          "stroke": "#ffffff",
+          "strokeWidth": 1
+        },
+        "encoding": {
+          "x": {
+            "field": "Age_Group",
+            "type": "ordinal",
+            "sort": [
+              "2–4",
+              "5–11",
+              "12–17",
+              "18–29",
+              "30–49",
+              "50–64",
+              "65–74",
+              "75+"
+            ]
+          },
+          "y": {
+            "field": "PercentagePointChange",
+            "type": "quantitative"
+          },
+          "color": {
+            "condition": {
+              "test": "datum.PercentagePointChange >= 0",
+              "value": "#168C88"
+            },
+            "value": "#D95F45"
+          },
+          "tooltip": [
+            {
+              "field": "Nutrient",
+              "type": "nominal",
+              "title": "Nutrient"
+            },
+            {
+              "field": "Age_Group",
+              "type": "ordinal",
+              "title": "Age group"
+            },
+            {
+              "field": "Energy_Percent",
+              "type": "quantitative",
+              "title": "Energy contribution (%)",
+              "format": ".1f"
+            },
+            {
+              "field": "BaselinePercent",
+              "type": "quantitative",
+              "title": "Ages 2–4 baseline (%)",
+              "format": ".1f"
+            },
+            {
+              "field": "PercentagePointChange",
+              "type": "quantitative",
+              "title": "Change (percentage points)",
+              "format": "+.1f"
+            }
+          ]
+        }
+      },
+      {
+        "transform": [
+          {
+            "filter": "datum.AnnotationText !== null"
+          }
+        ],
+        "mark": {
+          "type": "rule",
+          "color": "#6B7280",
+          "strokeWidth": 1.2,
+          "strokeDash": [3, 3]
+        },
+        "encoding": {
+          "x": {
+            "field": "Age_Group",
+            "type": "ordinal",
+            "sort": [
+              "2–4",
+              "5–11",
+              "12–17",
+              "18–29",
+              "30–49",
+              "50–64",
+              "65–74",
+              "75+"
+            ]
+          },
+          "y": {
+            "field": "PercentagePointChange",
+            "type": "quantitative"
+          },
+          "y2": {
+            "field": "AnnotationY"
+          }
+        }
+      },
+      {
+        "transform": [
+          {
+            "filter": "datum.AnnotationText !== null"
+          }
+        ],
+        "mark": {
+          "type": "text",
+          "fontSize": 11,
+          "fontWeight": "bold",
+          "align": "center",
+          "baseline": "middle",
+          "fill": "#ffffff",
+          "stroke": "#ffffff",
+          "strokeWidth": 4
+        },
+        "encoding": {
+          "x": {
+            "field": "Age_Group",
+            "type": "ordinal",
+            "sort": [
+              "2–4",
+              "5–11",
+              "12–17",
+              "18–29",
+              "30–49",
+              "50–64",
+              "65–74",
+              "75+"
+            ]
+          },
+          "y": {
+            "field": "AnnotationY",
+            "type": "quantitative"
+          },
+          "text": {
+            "field": "AnnotationText",
+            "type": "nominal"
+          }
+        }
+      },
+      {
+        "transform": [
+          {
+            "filter": "datum.AnnotationText !== null"
+          }
+        ],
+        "mark": {
+          "type": "text",
+          "fontSize": 11,
+          "fontWeight": "bold",
+          "align": "center",
+          "baseline": "middle",
+          "color": "#34495E"
+        },
+        "encoding": {
+          "x": {
+            "field": "Age_Group",
+            "type": "ordinal",
+            "sort": [
+              "2–4",
+              "5–11",
+              "12–17",
+              "18–29",
+              "30–49",
+              "50–64",
+              "65–74",
+              "75+"
+            ]
+          },
+          "y": {
+            "field": "AnnotationY",
+            "type": "quantitative"
+          },
+          "text": {
+            "field": "AnnotationText",
+            "type": "nominal"
+          }
+        }
+      }
+    ]
+  },
+  "resolve": {
+    "scale": {
+      "x": "shared",
+      "y": "shared"
+    }
+  },
+  "config": {
+    "font": "sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "domain": false,
+      "tickColor": "#CAD2D8",
+      "gridColor": "#E6EAED",
+      "labelColor": "#536471",
+      "titleColor": "#243746"
+    },
+    "facet": {
+      "spacing": {
+        "row": 55,
+        "column": 28
+      }
+    }
+  }
+}

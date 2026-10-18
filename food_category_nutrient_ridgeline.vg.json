@@ -38,6 +38,7 @@
         "subtitleFontSize": 11,
         "color": "#8E3B46",
         "subtitleColor": "#6B7280",
+        "dx": 130,
         "offset": 10
       },
       "transform": [
@@ -100,6 +101,8 @@
             "labelFontWeight": "bold",
             "labelColor": "#34495E",
             "labelLimit": 250,
+            "labelExpr": "datum.value === 'Confectionery and cereal, nut, fruit and seed bars' ? 'Confectionery and cereal, nut,|fruit and seed bars' : datum.label",
+            "labelLineHeight": 12,
             "labelPadding": 10
           }
         }
@@ -491,6 +494,11 @@
   ],
   "config": {
     "font": "sans-serif",
+    "style": {
+      "guide-label": {
+        "lineBreak": "|"
+      }
+    },
     "concat": {
       "spacing": 28
     },

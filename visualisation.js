@@ -1,6 +1,6 @@
 const visualisations = [
   { container: "#energy-waffle", specification: "daily_energy_waffle.vg.json" },
-  { container: "#macro-parallel", specification: "macronutrient_parallel_coordinates.vg.json" },
+  { container: "#macro-deviation", specification: "macronutrient_age_deviation.vg.json" },
   { container: "#nutrient-ridgeline", specification: "food_category_nutrient_ridgeline.vg.json" },
   { container: "#supplement-pictogram", specification: "supplement_use_life_course_pictogram.vg.json" },
   { container: "#beverage-dumbbell", specification: "beverage_consumption_dumbbell.vg.json" },
