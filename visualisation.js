@@ -9,7 +9,8 @@ const visualisations = [
   { container: "#intake-bullets", specification: "male_female_intake_bullets.vg.json" },
   { container: "#food-security-income", specification: "food_security_income.vg.json" },
   { container: "#discretionary-map", specification: "discret_vs_nondiscret.vg.json" },
-  { container: "#sodium-potassium-map", specification: "sodium_potassium_graduated_symbol.vg.json" },
+  { container: "#sodium-map", specification: "sodium_graduated_symbol.vg.json" },
+  { container: "#potassium-map", specification: "potassium_graduated_symbol.vg.json" },
   { container: "#health-cartograms", specification: "health_risk_condition_contiguous_cartograms.vg.json" }
 ];
 
