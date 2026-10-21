@@ -833,36 +833,37 @@ The underlying data is already normalized: the two categories sum to 100% in eve
 
 > I join normalized state percentages to TopoJSON geometry, filter the two food categories into separate maps, and encode percentage with independent linear colour scales. A choropleth is appropriate because the variable is a within-state share rather than an absolute count.
 
-## 13. Chart 11: sodium and potassium graduated-symbol maps
+## 13. Charts 11 and 12: sodium and potassium graduated-symbol maps
 
 Files:
 
-- [`sodium_potassium_graduated_symbol.vg.json`](sodium_potassium_graduated_symbol.vg.json)
+- [`sodium_graduated_symbol.vg.json`](sodium_graduated_symbol.vg.json)
+- [`potassium_graduated_symbol.vg.json`](potassium_graduated_symbol.vg.json)
 - [`Formatted Data/Australian_Sodium_Potassium_19plus.csv`](Formatted%20Data/Australian_Sodium_Potassium_19plus.csv)
 - Australian state TopoJSON.
 
 ### What the chart answers
 
-It compares estimated sodium and potassium intake across states and territories.
+The two standalone maps show how estimated sodium and potassium intake varies across states and territories. They are presented as separate figures rather than as a synchronized side-by-side comparison.
 
 ### Named inline dataset
 
 `datasets.state_centres` stores one manually chosen longitude/latitude position for every state. These points position the graduated circles.
 
-### Two layers per map
+### Two layers in each map
 
 1. A grey `geoshape` layer draws the state basemap.
 2. A circle layer loads the nutrient CSV and looks up each state's centre coordinates.
 
 `longitude` and `latitude` position each circle. `size` represents nutrient intake.
 
-The size scales have `zero: false` and restricted domains, deliberately magnifying the fairly small differences between states. Sodium and potassium use independent size scales and therefore must only be compared within their own maps.
+The size scales have `zero: false` and restricted domains, deliberately magnifying the fairly small differences between states. Each standalone map discloses this restriction in its subtitle and must be interpreted independently. The data year, 2011–12, is also stated in each subtitle.
 
 ### Interview explanation
 
-> The basemap provides geographic context, while proportional circles encode nutrient intake. A lookup joins each state to a representative centre point. Restricted independent size scales reveal within-nutrient variation, so the subtitle explicitly warns against comparing circle sizes across the two maps.
+> The basemap provides geographic context, while graduated circles encode nutrient intake. A lookup joins each state to a representative centre point. Sodium and potassium are shown in separate figures because each uses a restricted nutrient-specific scale intended only to reveal within-nutrient state variation.
 
-## 14. Chart 12: health-risk contiguous cartograms
+## 14. Chart 13: health-risk contiguous cartograms
 
 Files:
 
