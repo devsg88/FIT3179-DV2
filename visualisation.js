@@ -13,7 +13,8 @@ const visualisations = [
   { container: "#discretionary-map", specification: "discret_vs_nondiscret.vg.json" },
   { container: "#sodium-map", specification: "sodium_graduated_symbol.vg.json" },
   { container: "#potassium-map", specification: "potassium_graduated_symbol.vg.json" },
-  { container: "#health-cartograms", specification: "health_risk_condition_contiguous_cartograms.vg.json" }
+  { container: "#health-cartograms", specification: "health_risk_condition_contiguous_cartograms.vg.json" },
+  { container: "#fruit-dot-map", specification: "fruit_intake_dot_map.vg.json" }
 ];
 
 //a  set to keep track of already loaded charts so that the browser doesnt load them multiple times
