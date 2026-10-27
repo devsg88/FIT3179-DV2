@@ -9,7 +9,11 @@
   >
 
   <title>Australia on a Plate | Nutrition and Healthy Eating</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:,">
 
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
@@ -17,7 +21,7 @@
   <script src="visualisation.js" defer></script>
 </head>
 
-<body> 
+<body>
   <!-- Clicking on the Australia on a  plate words at the topleft will skip to the main
    stuff of the page -->
   <a class="skip-link" href="#main-content">Skip to the story</a>
@@ -34,18 +38,18 @@
       <p class="eyebrow">Nutrition and healthy eating in Australia</p>
       <h1>What Australians eat—and what shapes it</h1>
       <p class="introduction">
-        Fourteen visualisations trace the national diet from nutrients and age to
-        food access, geography and diet-related health.
+        Thirteen visual sections trace the national diet from nutrients and age to
+        food access, geography and the local food environment.
       </p>
       <p class="hero-guide">
-        Read from top to bottom for the story. Each chart is followed by one finding;
+        Read from top to bottom for the story. Each chart includes a highlighted finding;
         hover over marks for exact values.
       </p>
       <ul class="project-facts" aria-label="Project summary">
-        <li><strong>14</strong> visualisations</li>
+        <li><strong>13</strong> visual sections</li>
         <li><strong>4</strong> story chapters</li>
-        <li><strong>4</strong> map idioms</li>
-        <li><strong>1995–2023</strong> data span</li>
+        <li><strong>3</strong> map idioms</li>
+        <li><strong><span class="nowrap">1995–2024</span></strong> data span</li>
       </ul>
     </section>
 
@@ -54,7 +58,7 @@
       <a href="#composition">1. Composition</a>
       <a href="#life-course">2. Life course</a>
       <a href="#access">3. Guidelines and access</a>
-      <a href="#place">4. Place and health</a>
+      <a href="#place">4. Place and food</a>
     </nav>
 
     <section class="story-section" id="composition">
@@ -74,67 +78,76 @@
 
         <figure class="chart-block">
           <header class="figure-heading">
-            <span>01 / 14</span>
+            <span>01 / 13</span>
             <h3>Where does daily energy come from?</h3>
           </header>
-          <div class="chart-frame" aria-busy="true">
+          <div class="chart-layout">
+          <div class="chart-frame" aria-busy="true" tabindex="0" role="region" aria-label="Interactive chart; scroll horizontally on smaller screens">
             <div id="energy-waffle" class="vis" aria-label="Waffle chart showing sources of daily energy"></div>
           </div>
           <aside class="chart-annotation" aria-label="Key finding for daily energy">
             <span>Key finding</span>
             <p>
-              <strong>Carbohydrate and fat dominate the energy mix.</strong>
-              Carbohydrate supplied 43.5% and total fat 32.4%—75.9% combined.
+              <strong>Across all people aged 2+, carbohydrate and fat dominate.</strong>
+              Carbohydrate supplied 43.5% and total fat 32.4%, together 75.9%.
             </p>
           </aside>
+          </div>
           <figcaption>
             Each square represents one percentage point of energy.
-            <a href="daily_energy_waffle.vg.json">View specification</a>
+            Source: <a href="https://www.abs.gov.au/statistics/health/food-and-nutrition/food-and-nutrients/2023">ABS Food and nutrients, 2023, Table 2.1</a>.
+            <a class="spec-link" href="daily_energy_waffle.vg.json">View specification</a>
           </figcaption>
         </figure>
 
         <figure class="chart-block">
           <header class="figure-heading">
-            <span>02 / 14</span>
+            <span>02 / 13</span>
             <h3>How does the nutrient mix change with age?</h3>
           </header>
-          <div class="chart-frame" aria-busy="true">
+          <div class="chart-layout chart-layout-wide">
+          <div class="chart-frame" aria-busy="true" tabindex="0" role="region" aria-label="Interactive chart; scroll horizontally on smaller screens">
             <div id="macro-deviation" class="vis" aria-label="Faceted deviation charts showing percentage-point changes in nutrient contributions across age groups"></div>
           </div>
           <aside class="chart-annotation" aria-label="Key finding for nutrient mix by age">
             <span>Key finding</span>
             <p>
               <strong>Carbohydrate contributes less energy later in life.</strong>
-              Its share falls from 49.2% at ages 2–4 to a low of 41.1% at ages 65–74,
-              while protein peaks at 19.9% among ages 30–49. Dietary fibre remains
+              Its share falls from 49.2% at ages <span class="nowrap">2–4</span> to a low of 41.1% at ages <span class="nowrap">65–74</span>,
+              while protein peaks at 19.9% among ages <span class="nowrap">30–49</span>. Dietary fibre remains
               nearly constant across age groups, contributing between 1.9% and 2.3%.
             </p>
           </aside>
+          </div>
           <figcaption>
-            Each panel measures change from its nutrient's value at ages 2–4; all panels share the same percentage-point scale.
-            <a href="macronutrient_age_deviation.vg.json">View specification</a>
+            Each panel measures change from its nutrient's value at ages <span class="nowrap">2–4</span>; all panels share the same percentage-point scale.
+            Source: <a href="https://www.abs.gov.au/statistics/health/food-and-nutrition/food-and-nutrients/2023">ABS Food and nutrients, 2023</a>.
+            <a class="spec-link" href="macronutrient_age_deviation.vg.json">View specification</a>
           </figcaption>
         </figure>
 
         <figure class="chart-block">
           <header class="figure-heading">
-            <span>03 / 14</span>
+            <span>03 / 13</span>
             <h3>Which food categories contain more sugar, fibre or sodium?</h3>
           </header>
-          <div class="chart-frame" aria-busy="true">
+          <div class="chart-layout chart-layout-wide">
+          <div class="chart-frame" aria-busy="true" tabindex="0" role="region" aria-label="Interactive chart; scroll horizontally on smaller screens">
             <div id="nutrient-ridgeline" class="vis" aria-label="Ridgeline distributions of sugar, fibre and sodium across AUSNUT food categories"></div>
           </div>
           <aside class="chart-annotation" aria-label="Key finding for food-category nutrient profiles">
             <span>Key finding</span>
             <p>
               <strong>Category labels conceal wide nutritional variation.</strong>
-              Sugar products have the highest median sugar content at 58.4 g per
-              100 g, while savoury sauces extend to 8,255 mg of sodium per 100 g.
+              The sugar-product ridge spreads across much of the sugar scale.
+              Sauces and condiments also span a wide range of sodium content.
             </p>
           </aside>
+          </div>
           <figcaption>
-            Ridge width shows the distribution of products, not how often they are eaten.
-            <a href="food_category_nutrient_ridgeline.vg.json">View specification</a>
+            Horizontal spread shows the distribution of foods, not how often they are eaten. Larger sodium values are compressed to keep low values readable.
+            Source: <a href="https://www.foodstandards.gov.au/science-data/food-nutrient-databases/ausnut/data-files">FSANZ AUSNUT 2023 food nutrient profiles</a>.
+            <a class="spec-link" href="food_category_nutrient_ridgeline.vg.json">View specification</a>
           </figcaption>
         </figure>
       </div>
@@ -157,87 +170,105 @@
 
         <figure class="chart-block">
           <header class="figure-heading">
-            <span>04 / 14</span>
+            <span>04 / 13</span>
             <h3>How does supplement use change throughout life?</h3>
           </header>
-          <div class="chart-frame" aria-busy="true">
+          <div class="chart-layout">
+          <div class="chart-frame" aria-busy="true" tabindex="0" role="region" aria-label="Interactive chart; scroll horizontally on smaller screens">
             <div id="supplement-pictogram" class="vis" aria-label="Pictogram of supplement use by age group"></div>
           </div>
           <aside class="chart-annotation" aria-label="Key finding for supplement use">
             <span>Key finding</span>
             <p>
               <strong>Supplement use more than triples from adolescence to old age.</strong>
-              It rises from 15.0% among ages 12–17 to 50.9% among people aged 75+.
+              It rises from 15.0% among ages <span class="nowrap">12–17</span> to 50.9% among people aged 75+.
             </p>
           </aside>
+          </div>
           <figcaption>
             One complete person symbol represents five people in every 100.
-            <a href="supplement_use_life_course_pictogram.vg.json">View specification</a>
+            Source: <a href="https://www.abs.gov.au/statistics/health/food-and-nutrition/food-and-nutrients/2023">ABS Food and nutrients, 2023</a>.
+            <a class="spec-link" href="supplement_use_life_course_pictogram.vg.json">View specification</a>
           </figcaption>
         </figure>
 
         <figure class="chart-block">
           <header class="figure-heading">
-            <span>05 / 14</span>
+            <span>05 / 13</span>
             <h3>How did beverage consumption shift from 1995 to 2023?</h3>
           </header>
-          <div class="chart-frame" aria-busy="true">
+          <div class="chart-layout chart-layout-wide">
+          <div class="chart-frame" aria-busy="true" tabindex="0" role="region" aria-label="Interactive chart; scroll horizontally on smaller screens">
             <div id="beverage-dumbbell" class="vis" aria-label="Dumbbell chart comparing beverage consumption in 1995 and 2023"></div>
           </div>
           <aside class="chart-annotation" aria-label="Key finding for beverage change">
             <span>Key finding</span>
             <p>
-              <strong>The steepest decline occurred among children aged 2–4.</strong>
-              Sugar-sweetened beverage consumption fell from 64.7% to 5.5%, a
-              59.2 percentage-point reduction.
+              <strong>The steepest decline occurred among children aged
+                <span class="nowrap">2–4</span>.</strong>
+              Sugar-sweetened drinks fell from 64.7% to 5.5%, a drop of
+              59.2 percentage points.
+            </p>
+            <p>
+              Diet drinks moved the other way for adults. Consumption of
+              intense-sweetened drinks fell in every group under 18 but
+              rose in every group aged 18 and over.
             </p>
           </aside>
+          </div>
           <figcaption>
             The connecting line shows the size and direction of change for each age group.
-            <a href="beverage_consumption_dumbbell.vg.json">View specification</a>
+            Source: <a href="https://www.abs.gov.au/statistics/health/food-and-nutrition/food-and-nutrients/2023">ABS Food and nutrients, 2023; comparison with 1995</a>.
+            <a class="spec-link" href="beverage_consumption_dumbbell.vg.json">View specification</a>
           </figcaption>
         </figure>
 
         <div class="chart-pair">
           <figure class="chart-block">
             <header class="figure-heading">
-              <span>06 / 14</span>
+              <span>06 / 13</span>
               <h3>How often do children consume sugar-sweetened drinks?</h3>
             </header>
-            <div class="chart-frame" aria-busy="true">
+            <div class="chart-layout">
+          <div class="chart-frame" aria-busy="true" tabindex="0" role="region" aria-label="Interactive chart; scroll horizontally on smaller screens">
               <div id="kids-sugar-heatmap" class="vis" aria-label="Heatmap of sugar-sweetened drink consumption among children"></div>
             </div>
             <aside class="chart-annotation" aria-label="Key finding for children">
               <span>Key finding</span>
               <p>
                 <strong>Daily consumption triples by late adolescence.</strong>
-                It rises from 4.1% at ages 2–3 to 12.4% at ages 14–17.
+                It rises from 4.1% at ages <span class="nowrap">2–3</span> to 12.4% at ages <span class="nowrap">14–17</span>.
               </p>
             </aside>
+          </div>
             <figcaption>
-              Compare colour intensity across age groups and frequencies.
-              <a href="kids_prevelance_of_sugar_drink_heatmap.vg.json">View specification</a>
+              Children and adults use the same <span class="nowrap">0–100%</span> colour scale. Cell labels give exact percentages; outlined cells highlight the finding.
+              Source: <a href="https://www.aihw.gov.au/reports/food-nutrition/poor-diet/contents/poor-diet-in-adults">AIHW Poor diet, Table S2 (ABS <span class="nowrap">2017–18</span>)</a>.
+            <a class="spec-link" href="kids_prevelance_of_sugar_drink_heatmap.vg.json">View specification</a>
             </figcaption>
           </figure>
 
           <figure class="chart-block">
             <header class="figure-heading">
-              <span>07 / 14</span>
+              <span>07 / 13</span>
               <h3>How does the pattern continue through adulthood?</h3>
             </header>
-            <div class="chart-frame" aria-busy="true">
+            <div class="chart-layout">
+          <div class="chart-frame" aria-busy="true" tabindex="0" role="region" aria-label="Interactive chart; scroll horizontally on smaller screens">
               <div id="adult-sugar-heatmap" class="vis" aria-label="Heatmap of sugar-sweetened drink consumption among adults"></div>
             </div>
             <aside class="chart-annotation" aria-label="Key finding for adults">
               <span>Key finding</span>
               <p>
                 <strong>Non-consumption rises sharply with age.</strong>
-                It increases from 38.7% at ages 18–24 to 81.3% among people aged 75+.
+                It increases from 38.7% at ages <span class="nowrap">18–24</span> to 81.3% among people aged 75+.
               </p>
             </aside>
+          </div>
             <figcaption>
-              The adult pattern reverses the increase seen through childhood.
-              <a href="adults_prevelance_of_sugar_drink_heatmap.vg.json">View specification</a>
+              Children and adults use the same <span class="nowrap">0–100%</span> colour scale. Cell labels give exact percentages; outlined cells highlight the finding.
+              Source: <a href="https://www.aihw.gov.au/reports/food-nutrition/poor-diet/contents/poor-diet-in-adults">AIHW Poor diet, Table S3 (ABS <span class="nowrap">2017–18</span>)</a>.
+            <a class="spec-link" href="adults_prevelance_of_sugar_drink_heatmap.vg.json">View specification</a>
             </figcaption>
           </figure>
         </div>
@@ -261,45 +292,51 @@
 
         <figure class="chart-block">
           <header class="figure-heading">
-            <span>08 / 14</span>
+            <span>08 / 13</span>
             <h3>How far does actual intake sit below recommended serves?</h3>
           </header>
-          <div class="chart-frame" aria-busy="true">
+          <div class="chart-layout chart-layout-wide">
+          <div class="chart-frame" aria-busy="true" tabindex="0" role="region" aria-label="Interactive chart; scroll horizontally on smaller screens">
             <div id="intake-bullets" class="vis" aria-label="Bullet charts comparing actual and recommended food-group intake"></div>
           </div>
           <aside class="chart-annotation" aria-label="Key finding for recommended intake">
             <span>Key finding</span>
             <p>
-              <strong>Every group averages only one daily fruit serve.</strong>
-              Men and women aged 18–49 consume half the two serves recommended, and
+              <strong>Each displayed group averages one daily fruit serve.</strong>
+              Men and women aged <span class="nowrap">18–49</span> consume half the two serves recommended, and
               all displayed food groups remain below their benchmark.
             </p>
           </aside>
+          </div>
           <figcaption>
-            Coloured bars show actual intake; grey bars and ticks show recommendations.
-            <a href="male_female_intake_bullets.vg.json">View specification</a>
+            Slate bars show actual intake; grey bars show recommended serves. The adult benchmark is for ages <span class="nowrap">19–50</span>, while the younger intake group includes age 18.
+            Source: <a href="https://www.abs.gov.au/statistics/health/food-and-nutrition/national-nutrition-and-physical-activity-survey/2023/ADGDC01-05.xlsx">ABS Australian Dietary Guidelines, 2023</a>.
+            <a class="spec-link" href="male_female_intake_bullets.vg.json">View specification</a>
           </figcaption>
         </figure>
 
         <figure class="chart-block">
           <header class="figure-heading">
-            <span>09 / 14</span>
+            <span>09 / 13</span>
             <h3>How strongly is food security tied to income?</h3>
           </header>
-          <div class="chart-frame" aria-busy="true">
-            <div id="food-security-income" class="vis" aria-label="Butterfly chart of household food security by income"></div>
+          <div class="chart-layout">
+          <div class="chart-frame" aria-busy="true" tabindex="0" role="region" aria-label="Interactive chart; scroll horizontally on smaller screens">
+            <div id="food-security-income" class="vis" aria-label="Butterfly chart of published food-secure and food-insecure household percentages by income"></div>
           </div>
           <aside class="chart-annotation" aria-label="Key finding for food security">
             <span>Key finding</span>
             <p>
-              <strong>Food insecurity is about 6.5 times as prevalent at the bottom.</strong>
-              It affects an estimated 23.5% of households in the lowest income quintile,
+              <strong>Food insecurity is about 6.4 times as prevalent in the lowest income group.</strong>
+              It affects 23.2% of households in the lowest income group,
               compared with 3.6% in the highest.
             </p>
           </aside>
+          </div>
           <figcaption>
-            Counts were converted to within-quintile shares for the annotation.
-            <a href="food_security_income.vg.json">View specification</a>
+            Left bars show food-secure households; right bars show food-insecure households. Both axes use the same 0–100% scale. Percentages are published rates from the supplied income-group CSV. Income is adjusted for the number and ages of people in each household; households with unknown income are excluded.
+            Source: <a href="https://www.abs.gov.au/statistics/health/food-and-nutrition/food-insecurity/2023">ABS Food insecurity, 2023, Tables 13.3 and 13.4</a>.
+            <a class="spec-link" href="food_security_income.vg.json">View specification</a>
           </figcaption>
         </figure>
       </div>
@@ -310,22 +347,23 @@
         <header class="chapter-heading">
           <p class="chapter-number">04</p>
           <div>
-            <p class="eyebrow">Place and health</p>
-            <h2>Three maps answer three different questions</h2>
+            <p class="eyebrow">Place and food</p>
+            <h2>Three map types connect diet and place</h2>
             <p>
-              Colour compares state shares, graduated symbols show regional variation,
-              and contiguous cartograms resize states by health prevalence. Read each
-              legend before comparing colour, circle area or geographic area.
+              Colour compares state energy shares, graduated circles show nutrient
+              intake, and a Melbourne case study highlights grocery and fresh-produce outlets. Read each
+              legend: these maps use different measures and geographic scales.
             </p>
           </div>
         </header>
 
         <figure class="chart-block">
           <header class="figure-heading">
-            <span>10 / 14 · Choropleth</span>
+            <span>10 / 13 · Choropleth</span>
             <h3>How does discretionary energy vary by state and territory?</h3>
           </header>
-          <div class="chart-frame" aria-busy="true">
+          <div class="chart-layout chart-layout-wide">
+          <div class="chart-frame" aria-busy="true" tabindex="0" role="region" aria-label="Interactive chart; scroll horizontally on smaller screens">
             <div id="discretionary-map" class="vis" aria-label="Paired choropleth maps of discretionary and non-discretionary energy intake"></div>
           </div>
           <aside class="chart-annotation" aria-label="Key finding for discretionary energy">
@@ -336,92 +374,102 @@
               lowest in the Australian Capital Territory at 32.9%.
             </p>
           </aside>
+          </div>
           <figcaption>
             Colour encodes the share of total energy for people aged two years and over.
-            <a href="discret_vs_nondiscret.vg.json">View specification</a>
+            Source: <a href="https://www.abs.gov.au/statistics/health/food-and-nutrition/food-and-nutrients-state-and-territory-findings/2011-12">ABS Nutrition: State and territory, <span class="nowrap">2011–12</span></a>.
+            <a class="spec-link" href="discret_vs_nondiscret.vg.json">View specification</a>
+          </figcaption>
+        </figure>
+
+        <figure class="chart-block nutrient-map-block">
+          <header class="figure-heading">
+            <span>11 / 13 · Graduated symbols</span>
+            <h3>How does sodium intake vary by state and territory?</h3>
+          </header>
+          <div class="chart-layout chart-layout-finding-right">
+            <div class="chart-frame" aria-busy="true" tabindex="0" role="region" aria-label="Interactive sodium map; scroll horizontally on smaller screens">
+              <div id="sodium-map" class="vis" aria-label="Graduated-symbol map of sodium intake with a restricted size scale"></div>
+            </div>
+            <aside class="chart-annotation sodium-finding" aria-label="Key finding for sodium intake">
+              <span>Key finding</span>
+              <p><strong>State sodium is much the same everywhere.</strong>
+                Victoria is highest at 2,496 mg and Queensland lowest at
+                2,381 mg. The two ranges overlap, so no state clearly
+                stands out.</p>
+              <p>Higher sodium intake raises blood pressure, increasing the risk of heart disease. <a href="https://www.who.int/news-room/fact-sheets/detail/sodium-reduction">WHO</a>.</p>
+            </aside>
+          </div>
+          <figcaption>
+            The restricted size scale makes small state differences visible; circle areas do not begin at zero.
+            Compare circle sizes within this map only. Hover for the
+            intake figure and how far it may vary. Sodium excludes salt
+            added at the table or in home cooking.
+            Source: <a href="https://www.abs.gov.au/statistics/health/food-and-nutrition/food-and-nutrients-state-and-territory-findings/2011-12">ABS <span class="nowrap">2011–12</span>, Tables 1.1 and 1.2</a>.
+            <a class="spec-link" href="sodium_graduated_symbol.vg.json">View specification</a>
+          </figcaption>
+        </figure>
+
+        <figure class="chart-block nutrient-map-block">
+          <header class="figure-heading">
+            <span>12 / 13 · Graduated symbols</span>
+            <h3>How does potassium intake vary by state and territory?</h3>
+          </header>
+          <div class="chart-layout chart-layout-finding-right">
+            <div class="chart-frame" aria-busy="true" tabindex="0" role="region" aria-label="Interactive potassium map; scroll horizontally on smaller screens">
+              <div id="potassium-map" class="vis" aria-label="Graduated-symbol map of potassium intake with a restricted size scale"></div>
+            </div>
+            <aside class="chart-annotation potassium-finding" aria-label="Key finding for potassium intake">
+              <span>Key finding</span>
+              <p><strong>Potassium intake is similar across states.</strong>
+                It runs from 2,848 mg in South Australia to 3,083 mg in
+                Tasmania. The ranges overlap, so Tasmania is not clearly
+                the highest.</p>
+              <p>Increasing potassium intake from food can lower blood pressure and help reduce the risk of heart disease. <a href="https://www.who.int/tools/elena/interventions/potassium-cvd-adults">WHO</a>.</p>
+            </aside>
+          </div>
+          <figcaption>
+            The restricted size scale makes small state differences visible; circle areas do not begin at zero.
+            Compare circle sizes within this map only. Hover for the
+            intake figure and how far it may vary.
+            Source: <a href="https://www.abs.gov.au/statistics/health/food-and-nutrition/food-and-nutrients-state-and-territory-findings/2011-12">ABS <span class="nowrap">2011–12</span>, Tables 1.1 and 1.2</a>.
+            <a class="spec-link" href="potassium_graduated_symbol.vg.json">View specification</a>
           </figcaption>
         </figure>
 
         <figure class="chart-block">
           <header class="figure-heading">
-            <span>11 / 14 · Graduated symbols</span>
-            <h3>Where is estimated sodium intake highest?</h3>
+            <span>13 / 13 &middot; Fresh-food availability</span>
+            <h3>Where can you buy fresh food in the City of Melbourne?</h3>
           </header>
-          <div class="chart-frame" aria-busy="true">
-            <div id="sodium-map" class="vis" aria-label="Graduated-symbol map of sodium intake"></div>
+          <div class="chart-layout">
+          <div class="chart-frame" aria-busy="true" tabindex="0" role="region" aria-label="Interactive chart; scroll horizontally on smaller screens">
+            <div id="melbourne-food-outlets" class="vis" aria-label="Fresh-food and grocery outlets highlighted over neighbourhood ratios in the City of Melbourne, 2024"></div>
           </div>
-          <aside class="chart-annotation" aria-label="Key finding for sodium intake">
+          <aside class="chart-annotation" aria-label="Key finding for Melbourne food outlets">
             <span>Key finding</span>
-            <p>
-              <strong>Victoria records the highest estimated sodium intake.</strong>
-              Its estimate is 2,496.3 mg, compared with the lowest estimate of
-              2,380.6 mg in Queensland.
-            </p>
+            <p><strong>Only 4.6% of the 2,592 mapped food outlets are grocery or fresh-produce shops.</strong>
+              That is 119 outlets: 108 supermarkets and groceries, plus 11 fruit and vegetable shops.</p>
+            <p>Eight of the 12 neighbourhoods outside the CBD have five or fewer.
+              West Melbourne (Industrial) has no fresh-food outlet in the 2024 data.</p>
+            <p>The shortfall in fruit and vegetable serves in <a href="#intake-bullets">chart 8</a>
+              makes places to buy ingredients relevant. <a href="#food-security-income">Chart 9</a>
+              shows that income matters too: nearby shops alone do not establish that food is affordable.</p>
           </aside>
-          <figcaption>
-            The restricted size scale makes small state differences visible; circle area does not begin at zero.
-            <a href="sodium_graduated_symbol.vg.json">View specification</a>
-          </figcaption>
-        </figure>
-
-        <figure class="chart-block">
-          <header class="figure-heading">
-            <span>12 / 14 · Graduated symbols</span>
-            <h3>Where is estimated potassium intake highest?</h3>
-          </header>
-          <div class="chart-frame" aria-busy="true">
-            <div id="potassium-map" class="vis" aria-label="Graduated-symbol map of potassium intake"></div>
-          </div>
-          <aside class="chart-annotation" aria-label="Key finding for potassium intake">
-            <span>Key finding</span>
-            <p>
-              <strong>Tasmania records the highest estimated potassium intake.</strong>
-              Its estimate is 3,083.0 mg, compared with the lowest estimate of
-              2,847.6 mg in South Australia.
-            </p>
-          </aside>
-          <figcaption>
-            The restricted size scale makes small state differences visible; circle area does not begin at zero.
-            <a href="potassium_graduated_symbol.vg.json">View specification</a>
-          </figcaption>
-        </figure>
-
-        <figure class="chart-block">
-          <header class="figure-heading">
-            <span>13 / 14 · Contiguous cartograms</span>
-            <h3>How do diet-related risks reshape the national map?</h3>
-          </header>
-          <div class="chart-frame" aria-busy="true">
-            <div id="health-cartograms" class="vis" aria-label="Contiguous area cartograms of overweight or obesity and diabetes"></div>
-          </div>
-          <aside class="chart-annotation" aria-label="Key finding for health cartograms">
-            <span>Key finding</span>
-            <p>
-              <strong>Tasmania leads overweight or obesity; South Australia leads diabetes.</strong>
-              The estimates are 70.5% of Tasmanian adults and 7.2% of South Australians
-              of all ages, respectively.
-            </p>
-          </aside>
-          <figcaption>
-            Area represents prevalence rather than land size; compare areas within each cartogram only.
-            <a href="health_risk_condition_contiguous_cartograms.vg.json">View specification</a>
-          </figcaption>
-        </figure>
-
-        <figure class="chart-block">
-          <header class="figure-heading">
-            <span>14 / 14 &middot; Dot density</span>
-            <h3>Where do adequate-fruit consumers live?</h3>
-          </header>
-          <div class="chart-frame" aria-busy="true">
-            <div id="fruit-dot-map" class="vis" aria-label="Dot density map of estimated adequate-fruit consumers in Australia, with each dot representing approximately 2,500 people"></div>
           </div>
           <figcaption>
-            Each dot represents approximately 2,500 people. Dot positions are illustrative
-            within Population Health Areas, not individual addresses. Density shows
-            estimated counts, not the proportion meeting fruit intake guidelines.
-            Source: PHIDU health status estimates, 2022; PHA boundaries, 2021.
-            <a href="fruit_intake_dot_map.vg.json">View specification</a>
+            City of Melbourne municipality, 2024. Fresh food and groceries combines supermarkets,
+            grocery stores, and fruit and vegetable shops. Ready-to-eat means cafes, restaurants and takeaway.
+            Area colour shows fresh-food outlets ÷ ready-to-eat outlets × 10; other specialised shops are excluded from this ratio.
+            Each point is one establishment; coincident outlets may overlap. Larger dark circles and diamonds highlight fresh-food groups.
+            Outlet type does not establish nutritional quality or the range of food stocked.
+            Ratios describe the mix of outlets, not shop size, travel distance or affordability.
+            The City of Melbourne has few residents compared with workers and visitors,
+            so this shows what is available, not what people eat.
+            Sources: <a href="https://data.melbourne.vic.gov.au/explore/dataset/business-establishments-with-address-and-industry-classification/">City of Melbourne CLUE</a>;
+            <a href="https://data.melbourne.vic.gov.au/explore/dataset/small-areas-for-census-of-land-use-and-employment-clue/">CLUE boundaries</a>;
+            <a href="https://www.vic.gov.au/know-your-council-melbourne-city-council">city population context</a>.
+            <a class="spec-link" href="melbourne_food_outlets_dot_map.vg.json">View specification</a>
           </figcaption>
         </figure>
 
@@ -445,7 +493,7 @@
         <h2>Data and definitions</h2>
         <ul class="source-list">
           <li><a href="https://www.abs.gov.au/statistics/health/food-and-nutrition/national-nutrition-and-physical-activity-survey/latest-release">ABS National Nutrition and Physical Activity Survey, 2023</a></li>
-          <li><a href="https://www.abs.gov.au/statistics/health/food-and-nutrition/food-and-nutrients-state-and-territory-findings/latest-release">ABS Australian Health Survey: Nutrition—State and Territory results, 2011–12</a></li>
+          <li><a href="https://www.abs.gov.au/statistics/health/food-and-nutrition/food-and-nutrients-state-and-territory-findings/latest-release">ABS Australian Health Survey: Nutrition—State and Territory results, <span class="nowrap">2011–12</span></a></li>
           <li><a href="https://www.abs.gov.au/statistics/health/health-conditions-and-risks/national-health-survey-state-and-territory-findings">ABS National Health Survey: State and territory findings, 2022</a></li>
           <li><a href="https://www.aihw.gov.au/reports/diet">Australian Institute of Health and Welfare: Diet</a></li>
           <li><a href="https://www.aihw.gov.au/reports/food-nutrition/poor-diet/contents/poor-diet-in-adults">Australian Institute of Health and Welfare: Poor diet in adults</a></li>
@@ -453,7 +501,7 @@
           <li><a href="https://www.nhmrc.gov.au/adg">National Health and Medical Research Council: Australian Dietary Guidelines</a></li>
         </ul>
         <p class="source-note">
-          Survey years, populations and units differ. Compare values within a
+          Age bands follow each original survey: for example, <span class="nowrap">2–4</span> versus <span class="nowrap">2–3</span> and <span class="nowrap">18–29</span> versus <span class="nowrap">18–24</span>. These groups are not directly interchangeable. Survey years, populations and units also differ. Compare values within a
           visualisation unless its annotation explicitly supports another comparison.
         </p>
       </section>

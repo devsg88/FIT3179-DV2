@@ -2,7 +2,9 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Energy contribution from nutrients by age (2023)",
-    "subtitle": "Lines show how each nutrient's share of energy changes across age groups."
+    "subtitle": "Lines show how each nutrient's share of energy changes across age groups.",
+    "anchor": "start",
+    "frame": "bounds"
   },
   "data": {
     "url": "Formatted Data/macronutrient_parallel_coordinates.csv"
@@ -79,6 +81,46 @@
     "detail": {
       "field": "Nutrient",
       "type": "nominal"
+    }
+  },
+  "padding": 0,
+  "config": {
+    "font": "Inter",
+    "background": "#ffffff",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "anchor": "start",
+      "frame": "bounds",
+      "fontSize": 20,
+      "subtitleFontSize": 15,
+      "subtitleLineHeight": 21,
+      "color": "#20333b",
+      "subtitleColor": "#414f57"
+    },
+    "axis": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelPadding": 8,
+      "titlePadding": 12,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b",
+      "gridColor": "#e5e9eb",
+      "domain": false
+    },
+    "legend": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b"
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15
+    },
+    "text": {
+      "fontSize": 15
     }
   }
 }

@@ -3,14 +3,20 @@
   "description": "State and territory shares of energy from discretionary and non-discretionary foods, using the total population aged 2 years and over.",
   "title": {
     "text": "Discretionary and non-discretionary energy intake",
-    "subtitle": "Share of total energy (%): People aged 2 years and over",
-    "anchor": "start"
+    "subtitle": [
+      "People aged 2+ | 2011–12 | Share of total energy (%)",
+      "Each panel has its own labelled colour range; shares are complementary."
+    ],
+    "anchor": "start",
+    "frame": "bounds"
   },
   "data": {
     "url": "Formatted Data/Australian_Energy_Proportions_by_State.csv",
     "format": {
       "type": "csv",
-      "parse": {"Total 2 years and over (%)": "number"}
+      "parse": {
+        "Total 2 years and over (%)": "number"
+      }
     }
   },
   "transform": [
@@ -18,13 +24,13 @@
       "lookup": "State/Territory",
       "from": {
         "data": {
-            "url": "topojson files/STE_2021_AUST_GDA2020.json",
+          "url": "topojson files/STE_2021_AUST_GDA2020.json",
           "format": {
-              "type": "topojson",
-              "feature": "STE_2021_AUST_GDA2020"
+            "type": "topojson",
+            "feature": "STE_2021_AUST_GDA2020"
           }
         },
-          "key": "properties.STE_NAME21"
+        "key": "properties.STE_NAME21"
       },
       "as": "geometry"
     }
@@ -34,74 +40,349 @@
       "title": "Discretionary",
       "width": 420,
       "height": 380,
-      "transform": [{"filter": "datum.Category === 'Discretionary'"}],
-      "projection": {"type": "mercator"},
-      "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 0.7},
-      "encoding": {
-        "shape": {"field": "geometry", "type": "geojson"},
-        "color": {
-          "field": "Total 2 years and over (%)",
-          "type": "quantitative",
-          "scale": {"type": "linear", "scheme": "oranges", "domain": [32, 39]},
-          "legend": {
-            "title": [
-              "Percentage of discretionary energy",
-              "in daily energy intake"
-            ],
-            "values": [32, 34, 36, 39],
-            "orient": "bottom",
-            "gradientLength": 300,
-            "titleLimit": 300,
-            "titleLineHeight": 14,
-            "labelExpr": "datum.label + '%'"
+      "transform": [
+        {
+          "filter": "datum.Category === 'Discretionary'"
+        }
+      ],
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "geoshape",
+            "stroke": "#ffffff",
+            "strokeWidth": 0.7
+          },
+          "encoding": {
+            "shape": {
+              "field": "geometry",
+              "type": "geojson"
+            },
+            "color": {
+              "field": "Total 2 years and over (%)",
+              "type": "quantitative",
+              "scale": {
+                "type": "linear",
+                "domain": [
+                  32,
+                  39
+                ],
+                "range": [
+                  "#fcf2d2",
+                  "#8E6415"
+                ]
+              },
+              "legend": {
+                "title": [
+                  "Percentage of discretionary energy",
+                  "in daily energy intake"
+                ],
+                "values": [
+                  32,
+                  34,
+                  36,
+                  39
+                ],
+                "orient": "bottom",
+                "gradientLength": 300,
+                "titleLimit": 300,
+                "titleLineHeight": 18,
+                "labelExpr": "datum.label + '%'"
+              }
+            },
+            "tooltip": [
+              {
+                "field": "State/Territory",
+                "type": "nominal",
+                "title": "State / territory"
+              },
+              {
+                "field": "Total 2 years and over (%)",
+                "type": "quantitative",
+                "title": "Discretionary (%)",
+                "format": ".1f"
+              }
+            ]
           }
         },
-        "tooltip": [
-          {"field": "State/Territory", "type": "nominal", "title": "State / territory"},
-          {"field": "Total 2 years and over (%)", "type": "quantitative", "title": "Discretionary (%)", "format": ".1f"}
-        ]
-      }
+        {
+          "data": {
+            "name": "state_labels"
+          },
+          "transform": [],
+          "mark": {
+            "type": "text",
+            "fontSize": 15,
+            "fontWeight": "bold",
+            "stroke": "white",
+            "strokeWidth": 3,
+            "fill": "white"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "abbr"
+            }
+          }
+        },
+        {
+          "data": {
+            "name": "state_labels"
+          },
+          "transform": [],
+          "mark": {
+            "type": "text",
+            "fontSize": 15,
+            "fontWeight": "bold",
+            "color": "#20333b"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "abbr"
+            }
+          }
+        }
+      ]
     },
     {
       "title": "Non-discretionary",
       "width": 420,
       "height": 380,
-      "transform": [{"filter": "datum.Category === 'Non-discretionary'"}],
-      "projection": {"type": "mercator"},
-      "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 0.7},
-      "encoding": {
-        "shape": {"field": "geometry", "type": "geojson"},
-        "color": {
-          "field": "Total 2 years and over (%)",
-          "type": "quantitative",
-          "scale": {"type": "linear", "scheme": "blues", "domain": [61, 68]},
-          "legend": {
-            "title": [
-              "Percentage of non-discretionary energy",
-              "in daily energy intake"
-            ],
-            "values": [61, 63, 65, 68],
-            "orient": "bottom",
-            "gradientLength": 300,
-            "titleLimit": 300,
-            "titleLineHeight": 14,
-            "labelExpr": "datum.label + '%'"
+      "transform": [
+        {
+          "filter": "datum.Category === 'Non-discretionary'"
+        }
+      ],
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "geoshape",
+            "stroke": "#ffffff",
+            "strokeWidth": 0.7
+          },
+          "encoding": {
+            "shape": {
+              "field": "geometry",
+              "type": "geojson"
+            },
+            "color": {
+              "field": "Total 2 years and over (%)",
+              "type": "quantitative",
+              "scale": {
+                "type": "linear",
+                "domain": [
+                  61,
+                  68
+                ],
+                "range": [
+                  "#e8eef4",
+                  "#405C7A"
+                ]
+              },
+              "legend": {
+                "title": [
+                  "Percentage of non-discretionary energy",
+                  "in daily energy intake"
+                ],
+                "values": [
+                  61,
+                  63,
+                  65,
+                  68
+                ],
+                "orient": "bottom",
+                "gradientLength": 300,
+                "titleLimit": 300,
+                "titleLineHeight": 18,
+                "labelExpr": "datum.label + '%'"
+              }
+            },
+            "tooltip": [
+              {
+                "field": "State/Territory",
+                "type": "nominal",
+                "title": "State / territory"
+              },
+              {
+                "field": "Total 2 years and over (%)",
+                "type": "quantitative",
+                "title": "Non-discretionary (%)",
+                "format": ".1f"
+              }
+            ]
           }
         },
-        "tooltip": [
-          {"field": "State/Territory", "type": "nominal", "title": "State / territory"},
-          {"field": "Total 2 years and over (%)", "type": "quantitative", "title": "Non-discretionary (%)", "format": ".1f"}
-        ]
-      }
+        {
+          "data": {
+            "name": "state_labels"
+          },
+          "transform": [],
+          "mark": {
+            "type": "text",
+            "fontSize": 15,
+            "fontWeight": "bold",
+            "stroke": "white",
+            "strokeWidth": 3,
+            "fill": "white"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "abbr"
+            }
+          }
+        },
+        {
+          "data": {
+            "name": "state_labels"
+          },
+          "transform": [],
+          "mark": {
+            "type": "text",
+            "fontSize": 15,
+            "fontWeight": "bold",
+            "color": "#20333b"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "abbr"
+            }
+          }
+        }
+      ]
     }
   ],
-  "resolve": {"scale": {"color": "independent"}},
+  "resolve": {
+    "scale": {
+      "color": "independent"
+    }
+  },
   "spacing": 30,
   "config": {
     "background": "#ffffff",
-    "font": "sans-serif",
-    "view": {"stroke": null},
-    "title": {"fontSize": 18, "subtitleFontSize": 12},
-    "legend": {"titleFontSize": 12, "labelFontSize": 11}
-  }
+    "font": "Inter",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "fontSize": 20,
+      "subtitleFontSize": 15,
+      "anchor": "start",
+      "subtitleLineHeight": 21,
+      "color": "#20333b",
+      "subtitleColor": "#414f57",
+      "frame": "bounds"
+    },
+    "legend": {
+      "titleFontSize": 15,
+      "labelFontSize": 15,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b"
+    },
+    "axis": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b",
+      "gridColor": "#e5e9eb",
+      "domain": false,
+      "labelPadding": 8,
+      "titlePadding": 12
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15
+    },
+    "text": {
+      "fontSize": 15
+    }
+  },
+  "datasets": {
+    "state_labels": [
+      {
+        "state": "New South Wales",
+        "longitude": 147.0044,
+        "latitude": -32.2376,
+        "abbr": "NSW"
+      },
+      {
+        "state": "Victoria",
+        "longitude": 144.3155,
+        "latitude": -36.8714,
+        "abbr": "Vic"
+      },
+      {
+        "state": "Queensland",
+        "longitude": 144.5888,
+        "latitude": -22.7383,
+        "abbr": "Qld"
+      },
+      {
+        "state": "South Australia",
+        "longitude": 135.8687,
+        "latitude": -30.2214,
+        "abbr": "SA"
+      },
+      {
+        "state": "Western Australia",
+        "longitude": 122.1319,
+        "latitude": -25.7636,
+        "abbr": "WA"
+      },
+      {
+        "state": "Tasmania",
+        "longitude": 146.5961,
+        "latitude": -41.9517,
+        "abbr": "Tas"
+      },
+      {
+        "state": "Northern Territory",
+        "longitude": 133.3686,
+        "latitude": -19.5556,
+        "abbr": "NT"
+      },
+      {
+        "state": "Australian Capital Territory",
+        "longitude": 149.0024,
+        "latitude": -35.4894,
+        "abbr": "ACT"
+      }
+    ]
+  },
+  "padding": 0
 }

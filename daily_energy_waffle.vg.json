@@ -2,23 +2,23 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Interactive 100-square waffle chart showing the mean contribution of mutually exclusive macronutrient categories to daily energy intake. Values are from ABS National Nutrition and Physical Activity Survey: Food and Nutrients, 2023, Table 2.1.",
   "background": "#ffffff",
-  "padding": 20,
+  "padding": 0,
   "width": 440,
   "height": 440,
   "title": {
-    "text": "Where does daily energy come from?",
+    "text": "Carbohydrate and fat supply most daily energy",
     "subtitle": [
-      "Mean contribution to daily energy intake, Australia, 2023",
-      "Each square represents approximately 1 percentage point; hover for exact values.",
-      "Source: ABS National Nutrition and Physical Activity Survey, Table 2.1"
+      "Mean share of daily energy, Australia, 2023",
+      "One square ≈ 1 percentage point; letters identify nutrients."
     ],
     "anchor": "start",
     "fontSize": 23,
-    "subtitleFontSize": 12,
+    "subtitleFontSize": 15,
     "subtitlePadding": 8,
     "offset": 18,
     "color": "#243746",
-    "subtitleColor": "#536471"
+    "subtitleColor": "#20333b",
+    "frame": "bounds"
   },
   "params": [
     {
@@ -56,114 +56,201 @@
     {
       "calculate": "datum.Exact_Share_Percent * datum.Mean_Daily_Energy_kJ / 100",
       "as": "ApproximateEnergy_kJ"
+    },
+    {
+      "calculate": "datum.Energy_Source === 'Protein' ? 'P' : datum.Energy_Source === 'Total fat' ? 'F' : datum.Energy_Source === 'Carbohydrate' ? 'C' : datum.Energy_Source === 'Dietary fibre' ? 'D' : datum.Energy_Source === 'Alcohol' ? 'A' : 'R'",
+      "as": "CategoryCode"
     }
   ],
-  "mark": {
-    "type": "rect",
-    "cornerRadius": 3,
-    "stroke": "#ffffff",
-    "strokeWidth": 2,
-    "cursor": "pointer"
-  },
-  "encoding": {
-    "x": {
-      "field": "Column",
-      "type": "ordinal",
-      "sort": "ascending",
-      "axis": null
-    },
-    "y": {
-      "field": "Row",
-      "type": "ordinal",
-      "sort": "ascending",
-      "axis": null
-    },
-    "color": {
-      "field": "Energy_Source",
-      "type": "nominal",
-      "sort": [
-        "Protein",
-        "Total fat",
-        "Carbohydrate",
-        "Dietary fibre",
-        "Alcohol",
-        "Unallocated / rounding"
-      ],
-      "scale": {
-        "domain": [
-          "Protein",
-          "Total fat",
-          "Carbohydrate",
-          "Dietary fibre",
-          "Alcohol",
-          "Unallocated / rounding"
-        ],
-        "range": [
-          "#0072B2",
-          "#E69F00",
-          "#009E73",
-          "#CC79A7",
-          "#D55E00",
-          "#999999"
-        ]
-      },
-      "legend": {
-        "title": "Energy source",
-        "orient": "right",
-        "symbolType": "square",
-        "symbolSize": 170,
-        "labelFontSize": 12,
-        "titleFontSize": 13,
-        "labelLimit": 180,
-        "offset": 18
-      }
-    },
-    "opacity": {
-      "condition": {
-        "test": "datum.Energy_Source === 'Unallocated / rounding'",
-        "value": 0.55
-      },
-      "value": 1
-    },
-    "tooltip": [
-      {
-        "field": "Age_Group",
-        "type": "nominal",
-        "title": "Age group"
-      },
-      {
-        "field": "Energy_Source",
-        "type": "nominal",
-        "title": "Energy source"
-      },
-      {
-        "field": "Exact_Share_Percent",
-        "type": "quantitative",
-        "title": "Exact energy share (%)",
-        "format": ".1f"
-      },
-      {
-        "field": "ApproximateEnergy_kJ",
-        "type": "quantitative",
-        "title": "Approximate energy (kJ/day)",
-        "format": ",.0f"
-      },
-      {
-        "field": "Mean_Daily_Energy_kJ",
-        "type": "quantitative",
-        "title": "Mean total energy (kJ/day)",
-        "format": ",.0f"
-      }
-    ]
-  },
   "config": {
-    "font": "sans-serif",
+    "font": "Inter",
     "view": {
       "stroke": null
     },
     "legend": {
-      "labelColor": "#243746",
-      "titleColor": "#243746"
+      "labelColor": "#20333b",
+      "titleColor": "#20333b",
+      "labelFontSize": 15,
+      "titleFontSize": 15
+    },
+    "background": "#ffffff",
+    "axis": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b",
+      "gridColor": "#e5e9eb",
+      "domain": false,
+      "labelPadding": 8,
+      "titlePadding": 12
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 20,
+      "subtitleFontSize": 15,
+      "subtitleLineHeight": 21,
+      "color": "#20333b",
+      "subtitleColor": "#414f57",
+      "frame": "bounds"
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15
+    },
+    "text": {
+      "fontSize": 15
     }
-  }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 3,
+        "stroke": "#ffffff",
+        "strokeWidth": 2,
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "x": {
+          "field": "Column",
+          "type": "ordinal",
+          "sort": "ascending",
+          "axis": null
+        },
+        "y": {
+          "field": "Row",
+          "type": "ordinal",
+          "sort": "ascending",
+          "axis": null
+        },
+        "color": {
+          "field": "Energy_Source",
+          "type": "nominal",
+          "sort": [
+            "Protein",
+            "Total fat",
+            "Carbohydrate",
+            "Dietary fibre",
+            "Alcohol",
+            "Unallocated / rounding"
+          ],
+          "scale": {
+            "domain": [
+              "Protein",
+              "Total fat",
+              "Carbohydrate",
+              "Dietary fibre",
+              "Alcohol",
+              "Unallocated / rounding"
+            ],
+            "range": [
+              "#2166AC",
+              "#A66100",
+              "#5B4B9A",
+              "#387C44",
+              "#766245",
+              "#777777"
+            ]
+          },
+          "legend": {
+            "title": "Energy source",
+            "orient": "bottom",
+            "symbolType": "square",
+            "symbolSize": 170,
+            "labelFontSize": 15,
+            "titleFontSize": 15,
+            "labelLimit": 260,
+            "offset": 18,
+            "columns": 2,
+            "labelExpr": "(datum.label === 'Protein' ? 'P' : datum.label === 'Total fat' ? 'F' : datum.label === 'Carbohydrate' ? 'C' : datum.label === 'Dietary fibre' ? 'D' : datum.label === 'Alcohol' ? 'A' : 'R') + ' · ' + datum.label"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Age_Group",
+            "type": "nominal",
+            "title": "Age group"
+          },
+          {
+            "field": "Energy_Source",
+            "type": "nominal",
+            "title": "Energy source"
+          },
+          {
+            "field": "Exact_Share_Percent",
+            "type": "quantitative",
+            "title": "Exact energy share (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "ApproximateEnergy_kJ",
+            "type": "quantitative",
+            "title": "Approximate energy (kJ/day)",
+            "format": ",.0f"
+          },
+          {
+            "field": "Mean_Daily_Energy_kJ",
+            "type": "quantitative",
+            "title": "Mean total energy (kJ/day)",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 15,
+        "fontWeight": "bold",
+        "color": "white"
+      },
+      "encoding": {
+        "x": {
+          "field": "Column",
+          "type": "ordinal",
+          "sort": "ascending",
+          "axis": null
+        },
+        "y": {
+          "field": "Row",
+          "type": "ordinal",
+          "sort": "ascending",
+          "axis": null
+        },
+        "text": {
+          "field": "CategoryCode"
+        },
+        "tooltip": [
+          {
+            "field": "Age_Group",
+            "type": "nominal",
+            "title": "Age group"
+          },
+          {
+            "field": "Energy_Source",
+            "type": "nominal",
+            "title": "Energy source"
+          },
+          {
+            "field": "Exact_Share_Percent",
+            "type": "quantitative",
+            "title": "Exact energy share (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "ApproximateEnergy_kJ",
+            "type": "quantitative",
+            "title": "Approximate energy (kJ/day)",
+            "format": ",.0f"
+          },
+          {
+            "field": "Mean_Daily_Energy_kJ",
+            "type": "quantitative",
+            "title": "Mean total energy (kJ/day)",
+            "format": ",.0f"
+          }
+        ]
+      }
+    }
+  ]
 }

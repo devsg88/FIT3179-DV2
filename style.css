@@ -1,12 +1,12 @@
 :root {
   --ink: #1d2d35;
-  --muted: #5f6d73;
+  --muted: #414f57;
   --line: #dfe4e5;
   --soft: #f6f8f8;
-  --teal: #08766f;
-  --orange: #b85c27;
+  --teal: #005c50;
+  --orange: #8c3b0b;
   --focus: #e7962d;
-  --page-width: 1180px;
+  --page-width: 1280px;
 }
 
 * {
@@ -22,7 +22,7 @@ body {
   overflow-x: hidden;
   background: #ffffff;
   color: var(--ink);
-  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  font-family: "Source Serif 4", Georgia, serif;
   font-size: 16px;
   line-height: 1.55;
 }
@@ -42,11 +42,11 @@ a:focus-visible {
 }
 
 p {
-  max-width: 62ch;
+  max-width: 60ch;
 }
 
 .page {
-  width: min(var(--page-width), calc(100% - 48px));
+  width: min(var(--page-width), calc(100% - 80px));
   margin-inline: auto;
 }
 
@@ -56,13 +56,18 @@ p {
   top: 12px;
   left: 12px;
   padding: 9px 13px;
-  transform: translateY(-180%);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
   background: var(--ink);
   color: #ffffff;
 }
 
 .skip-link:focus {
-  transform: translateY(0);
+  clip-path: none;
+  width: auto;
+  height: auto;
 }
 
 .site-header {
@@ -81,7 +86,7 @@ p {
 .site-title,
 .header-link {
   color: var(--ink);
-  font-size: 0.84rem;
+  font-size: 0.875rem;
   font-weight: 700;
   text-decoration: none;
 }
@@ -98,7 +103,7 @@ p {
 .eyebrow {
   margin: 0 0 10px;
   color: var(--teal);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -110,11 +115,12 @@ p {
   font-size: clamp(2.8rem, 6vw, 5rem);
   font-weight: 760;
   letter-spacing: -0.05em;
-  line-height: 0.98;
+  line-height: 1.1;
 }
 
 .introduction {
   margin: 26px 0 0;
+  max-width: 56ch;
   color: var(--ink);
   font-size: clamp(1.12rem, 2vw, 1.34rem);
   line-height: 1.45;
@@ -134,7 +140,7 @@ p {
   padding: 17px 0 0;
   border-top: 1px solid var(--line);
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   list-style: none;
 }
 
@@ -154,7 +160,7 @@ p {
 
 .chapter-nav a {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   font-weight: 700;
   text-decoration: none;
 }
@@ -168,8 +174,8 @@ p {
 
 .chapter-heading {
   display: grid;
-  grid-template-columns: 58px minmax(0, 760px);
-  gap: 24px;
+  grid-template-columns: minmax(0, 800px);
+  gap: 14px;
   align-items: start;
   margin-bottom: clamp(54px, 7vw, 82px);
 }
@@ -187,7 +193,7 @@ p {
 .site-footer h2 {
   margin: 0;
   letter-spacing: -0.035em;
-  line-height: 1.08;
+  line-height: 1.2;
 }
 
 .chapter-heading h2 {
@@ -213,15 +219,15 @@ p {
 
 .figure-heading {
   display: grid;
-  grid-template-columns: 88px minmax(0, 1fr);
-  gap: 18px;
+  grid-template-columns: 1fr;
+  gap: 8px;
   align-items: baseline;
   margin-bottom: 24px;
 }
 
 .figure-heading span {
   color: var(--orange);
-  font-size: 0.7rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -237,7 +243,17 @@ p {
 .chart-frame {
   position: relative;
   min-height: 250px;
-  overflow: hidden;
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  padding: 0 0 12px;
+}
+
+.chart-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 350px;
+  gap: 32px;
+  align-items: start;
 }
 
 .chart-frame[aria-busy="true"]::before {
@@ -249,19 +265,22 @@ p {
   background: #ffffff;
   color: var(--muted);
   content: "Loading visualisation…";
-  font-size: 0.82rem;
+  font-size: 0.875rem;
 }
 
 .vis,
 .vega-embed {
-  width: 100%;
+  width: max-content;
+  max-width: 100%;
 }
 
 .vis,
 .vega-embed {
   display: flex;
   min-width: 0;
-  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .vega-embed svg {
@@ -269,13 +288,36 @@ p {
   height: auto;
 }
 
+#melbourne-food-outlets,
+#melbourne-food-outlets .vega-embed {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#melbourne-food-outlets .vega-bindings {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+#melbourne-food-outlets select {
+  max-width: 100%;
+  margin-left: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #ffffff;
+  color: var(--ink);
+  font: inherit;
+}
+
 #macro-deviation,
 #macro-deviation.vega-embed,
 #macro-deviation .vega-embed {
-  width: 100%;
+  width: max-content;
   max-width: 100%;
-  margin-inline: auto;
-  justify-content: center;
+  margin-inline: 0;
+  justify-content: flex-start;
 }
 
 #macro-deviation svg {
@@ -287,17 +329,17 @@ p {
 
 .chart-annotation {
   display: grid;
-  grid-template-columns: 88px minmax(0, 680px);
-  gap: 18px;
-  margin-top: 26px;
-  padding: 18px 0;
-  border-top: 2px solid var(--teal);
-  border-bottom: 1px solid var(--line);
+  grid-template-columns: 1fr;
+  gap: 9px;
+  width: min(350px, 100%);
+  margin-top: 0;
+  padding: 16px 0 0;
+  border-top: 2px solid var(--line);
 }
 
 .chart-annotation > span {
   color: var(--teal);
-  font-size: 0.69rem;
+  font-size: 0.875rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -306,7 +348,8 @@ p {
 .chart-annotation p {
   margin: 0;
   color: var(--muted);
-  font-size: 0.94rem;
+  font-size: 1.0625rem;
+  line-height: 1.6;
 }
 
 .chart-annotation strong {
@@ -314,22 +357,63 @@ p {
 }
 
 figcaption {
+  max-width: 56ch;
   margin-top: 12px;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   line-height: 1.45;
 }
 
 figcaption a {
-  display: inline-block;
-  margin-left: 0.55em;
-  white-space: nowrap;
+  display: inline;
+  margin-left: 0;
 }
 
 .chart-pair {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 34px;
+}
+
+.chart-pair .chart-layout {
+  display: block;
+}
+
+.chart-pair .chart-annotation {
+  margin-top: 18px;
+}
+
+.vega-bindings {
+  padding-block: 12px;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.vega-bindings select {
+  padding: 7px;
+  font: inherit;
+  color: var(--ink);
+  background: white;
+  border: 1px solid #69777d;
+  border-radius: 4px;
+}
+
+.chart-frame:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1280px) {
+  .chart-layout {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .chart-annotation {
+    margin-top: 0;
+    max-width: 60ch;
+  }
 }
 
 .chart-pair .figure-heading,
@@ -359,9 +443,9 @@ figcaption a {
 
 .closing-note {
   max-width: 800px;
-  margin: clamp(70px, 8vw, 105px) 0 0 82px;
-  padding-left: 24px;
-  border-left: 3px solid var(--orange);
+  margin: clamp(70px, 8vw, 105px) 0 0;
+  padding-top: 24px;
+  border-top: 3px solid var(--orange);
 }
 
 .closing-note h2 {
@@ -393,19 +477,20 @@ figcaption a {
 .source-list {
   display: grid;
   gap: 9px;
-  max-width: 70ch;
+  max-width: 56ch;
   margin: 22px 0 0;
   padding-left: 1.15rem;
   color: var(--muted);
-  font-size: 0.83rem;
+  font-size: 0.875rem;
   line-height: 1.45;
 }
 
 .source-note,
 .ai-note {
+  max-width: 56ch;
   margin-top: 22px;
   color: var(--muted);
-  font-size: 0.84rem;
+  font-size: 0.875rem;
 }
 
 .project-metadata dl {
@@ -422,14 +507,14 @@ figcaption a {
 
 .project-metadata dt {
   color: var(--ink);
-  font-size: 0.76rem;
+  font-size: 0.875rem;
   font-weight: 750;
 }
 
 .project-metadata dd {
   margin: 0;
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   line-height: 1.45;
 }
 
@@ -453,7 +538,7 @@ figcaption a {
 
   .chart-pair .figure-heading,
   .chart-pair .chart-annotation {
-    grid-template-columns: 88px minmax(0, 680px);
+    grid-template-columns: 1fr;
     gap: 18px;
   }
 }
@@ -491,8 +576,8 @@ figcaption a {
   }
 
   figcaption a {
-    display: block;
-    margin: 7px 0 0;
+    display: inline;
+    margin: 0;
   }
 }
 
@@ -512,4 +597,74 @@ figcaption a {
   .chart-block {
     break-inside: avoid;
   }
+}
+
+/* Screen text stays at least 15 px, including captions and metadata. */
+h1, h2, h3,
+.chart-metadata,
+.site-header, .chapter-nav, .eyebrow, .project-facts,
+.figure-heading, .chapter-number, .chart-annotation > span,
+.vis, .vega-bindings, #vg-tooltip-element {
+  font-family: Inter, "Segoe UI", sans-serif;
+}
+
+.nowrap, .spec-link {
+  white-space: nowrap;
+}
+
+.chart-metadata {
+  margin: 0 0 20px;
+  color: var(--ink);
+}
+
+.chart-title {
+  margin: 0 0 4px;
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.chart-subtitle {
+  max-width: 56ch;
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.sodium-finding > span { color: #B54F22; }
+.potassium-finding > span { color: #007C83; }
+
+/* Keep every prose line at 60 characters or fewer. */
+figcaption,
+.chart-subtitle,
+.introduction,
+.hero-guide,
+.source-note,
+.ai-note,
+.source-list,
+.closing-note p,
+.chapter-heading p,
+.chapter-heading p:last-child {
+  max-width: 24em;
+}
+
+figcaption {
+  max-width: 23em;
+}
+
+.site-title,
+.header-link,
+.eyebrow,
+.project-facts,
+.chapter-nav a,
+.figure-heading span,
+.chart-annotation > span,
+figcaption,
+.source-list,
+.source-note,
+.ai-note,
+.project-metadata dt,
+.project-metadata dd {
+  font-size: 0.9375rem;
 }

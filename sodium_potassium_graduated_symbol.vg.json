@@ -1,68 +1,73 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Graduated symbol maps of sodium and potassium intake for adults aged 19 and over. Separate restricted size scales reveal variation between states within each nutrient.",
+  "padding": 0,
+  "config": {
+    "font": "Inter",
+    "background": "#ffffff",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "anchor": "start",
+      "frame": "bounds",
+      "fontSize": 20,
+      "subtitleFontSize": 15,
+      "subtitleLineHeight": 21,
+      "color": "#20333b",
+      "subtitleColor": "#414f57"
+    },
+    "axis": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelPadding": 8,
+      "titlePadding": 12,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b",
+      "gridColor": "#e5e9eb",
+      "domain": false
+    },
+    "legend": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b"
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15
+    },
+    "text": {
+      "fontSize": 15
+    }
+  },
+  "description": "Archived paired view of the two separately displayed maps, without reference rings.",
   "title": {
-    "text": "Sodium and potassium intake by state and territory",
+    "text": "Sodium and potassium intake estimates",
     "subtitle": [
-      "Adults aged 19 and over | Intake (mg)",
-      "Restricted scales reveal differences between states within each nutrient.",
-      "Compare circle sizes within each map only; sizes are not comparable between maps."
+      "Adults 19 and over, 2011–12.",
+      "Separate restricted size scales; compare circles within each map only."
     ],
     "anchor": "start"
   },
-  "datasets": {
-    "state_centres": [
-      {
-        "state": "New South Wales",
-        "longitude": 147.0044,
-        "latitude": -32.2376
-      },
-      {
-        "state": "Victoria",
-        "longitude": 144.3155,
-        "latitude": -36.8714
-      },
-      {
-        "state": "Queensland",
-        "longitude": 144.5888,
-        "latitude": -22.7383
-      },
-      {
-        "state": "South Australia",
-        "longitude": 135.8687,
-        "latitude": -30.2214
-      },
-      {
-        "state": "Western Australia",
-        "longitude": 122.1319,
-        "latitude": -25.7636
-      },
-      {
-        "state": "Tasmania",
-        "longitude": 146.5961,
-        "latitude": -41.9517
-      },
-      {
-        "state": "Northern Territory",
-        "longitude": 133.3686,
-        "latitude": -19.5556
-      },
-      {
-        "state": "Australian Capital Territory",
-        "longitude": 149.0024,
-        "latitude": -35.4894
-      }
-    ]
-  },
   "hconcat": [
     {
-      "title": {
-        "text": "Sodium intake"
-      },
-      "width": 420,
-      "height": 380,
+      "width": 600,
+      "height": 440,
       "projection": {
-        "type": "mercator"
+        "type": "mercator",
+        "scale": 570,
+        "translate": [
+          -1060,
+          -70
+        ]
+      },
+      "title": {
+        "text": "Sodium intake by state and territory",
+        "subtitle": [
+          "Average daily intake, adults 19 and over, 2011–12 (mg).",
+          "Restricted size scale; compare circles within this map only."
+        ],
+        "anchor": "start"
       },
       "layer": [
         {
@@ -86,31 +91,19 @@
             "format": {
               "type": "csv",
               "parse": {
-                "Sodium Intake (mg) - 19 and over": "number"
+                "labelDx": "number",
+                "labelDy": "number",
+                "longitude": "number",
+                "latitude": "number"
               }
             }
           },
-          "transform": [
-            {
-              "lookup": "State/Territory",
-              "from": {
-                "data": {
-                  "name": "state_centres"
-                },
-                "key": "state",
-                "fields": [
-                  "longitude",
-                  "latitude"
-                ]
-              }
-            }
-          ],
           "mark": {
-            "type": "circle",
-            "color": "#d95f0e",
-            "opacity": 0.75,
-            "stroke": "#ffffff",
-            "strokeWidth": 1
+            "type": "point",
+            "shape": "circle",
+            "filled": true,
+            "color": "#B54F22",
+            "opacity": 1
           },
           "encoding": {
             "longitude": {
@@ -126,16 +119,16 @@
               "type": "quantitative",
               "scale": {
                 "type": "linear",
-                "zero": false,
-                "nice": false,
                 "domain": [
                   2380.6,
                   2496.3
                 ],
                 "range": [
-                  300,
-                  1200
-                ]
+                  120,
+                  900
+                ],
+                "zero": false,
+                "nice": false
               },
               "legend": {
                 "title": "Sodium intake (mg)",
@@ -145,7 +138,11 @@
                   2440,
                   2496.3
                 ],
-                "format": ",.0f"
+                "format": ",.0f",
+                "titleLimit": 450,
+                "symbolFill": "#B54F22",
+                "symbolStroke": "transparent",
+                "symbolOpacity": 1
               }
             },
             "tooltip": [
@@ -157,8 +154,168 @@
               {
                 "field": "Sodium Intake (mg) - 19 and over",
                 "type": "quantitative",
-                "title": "Sodium intake (mg)",
-                "format": ",.1f"
+                "title": "Sodium intake (mg/day)",
+                "format": ",.0f"
+              },
+              {
+                "field": "Sodium MOE (mg)",
+                "type": "quantitative",
+                "title": "Approx. 95% margin of error (± mg)",
+                "format": ",.0f"
+              },
+              {
+                "field": "Sodium RSE (%)",
+                "type": "quantitative",
+                "title": "Relative standard error (%)",
+                "format": ".1f"
+              }
+            ]
+          }
+        },
+        {
+          "data": {
+            "url": "Formatted Data/Australian_Sodium_Potassium_19plus.csv",
+            "format": {
+              "type": "csv",
+              "parse": {
+                "labelDx": "number",
+                "labelDy": "number",
+                "longitude": "number",
+                "latitude": "number"
+              }
+            }
+          },
+          "transform": [
+            {
+              "calculate": "datum.abbr + ' ' + format(datum['Sodium Intake (mg) - 19 and over'], ',.0f')",
+              "as": "StateValue"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "fontSize": 15,
+            "fontWeight": 600,
+            "dx": {
+              "expr": "datum.labelDx"
+            },
+            "dy": {
+              "expr": "datum.labelDy"
+            },
+            "align": {
+              "expr": "datum.labelAlign"
+            },
+            "stroke": "#ffffff",
+            "strokeWidth": 3,
+            "fill": "#ffffff"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "StateValue"
+            },
+            "tooltip": [
+              {
+                "field": "State/Territory",
+                "type": "nominal",
+                "title": "State / territory"
+              },
+              {
+                "field": "Sodium Intake (mg) - 19 and over",
+                "type": "quantitative",
+                "title": "Sodium intake (mg/day)",
+                "format": ",.0f"
+              },
+              {
+                "field": "Sodium MOE (mg)",
+                "type": "quantitative",
+                "title": "Approx. 95% margin of error (± mg)",
+                "format": ",.0f"
+              },
+              {
+                "field": "Sodium RSE (%)",
+                "type": "quantitative",
+                "title": "Relative standard error (%)",
+                "format": ".1f"
+              }
+            ]
+          }
+        },
+        {
+          "data": {
+            "url": "Formatted Data/Australian_Sodium_Potassium_19plus.csv",
+            "format": {
+              "type": "csv",
+              "parse": {
+                "labelDx": "number",
+                "labelDy": "number",
+                "longitude": "number",
+                "latitude": "number"
+              }
+            }
+          },
+          "transform": [
+            {
+              "calculate": "datum.abbr + ' ' + format(datum['Sodium Intake (mg) - 19 and over'], ',.0f')",
+              "as": "StateValue"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "fontSize": 15,
+            "fontWeight": 600,
+            "color": "#20333b",
+            "dx": {
+              "expr": "datum.labelDx"
+            },
+            "dy": {
+              "expr": "datum.labelDy"
+            },
+            "align": {
+              "expr": "datum.labelAlign"
+            }
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "StateValue"
+            },
+            "tooltip": [
+              {
+                "field": "State/Territory",
+                "type": "nominal",
+                "title": "State / territory"
+              },
+              {
+                "field": "Sodium Intake (mg) - 19 and over",
+                "type": "quantitative",
+                "title": "Sodium intake (mg/day)",
+                "format": ",.0f"
+              },
+              {
+                "field": "Sodium MOE (mg)",
+                "type": "quantitative",
+                "title": "Approx. 95% margin of error (± mg)",
+                "format": ",.0f"
+              },
+              {
+                "field": "Sodium RSE (%)",
+                "type": "quantitative",
+                "title": "Relative standard error (%)",
+                "format": ".1f"
               }
             ]
           }
@@ -166,13 +323,23 @@
       ]
     },
     {
-      "title": {
-        "text": "Potassium intake"
-      },
-      "width": 420,
-      "height": 380,
+      "width": 600,
+      "height": 440,
       "projection": {
-        "type": "mercator"
+        "type": "mercator",
+        "scale": 570,
+        "translate": [
+          -1060,
+          -70
+        ]
+      },
+      "title": {
+        "text": "Potassium intake by state and territory",
+        "subtitle": [
+          "Average daily intake, adults 19 and over, 2011–12 (mg).",
+          "Restricted size scale; compare circles within this map only."
+        ],
+        "anchor": "start"
       },
       "layer": [
         {
@@ -196,31 +363,19 @@
             "format": {
               "type": "csv",
               "parse": {
-                "Potassium Intake (mg) - 19 and over": "number"
+                "labelDx": "number",
+                "labelDy": "number",
+                "longitude": "number",
+                "latitude": "number"
               }
             }
           },
-          "transform": [
-            {
-              "lookup": "State/Territory",
-              "from": {
-                "data": {
-                  "name": "state_centres"
-                },
-                "key": "state",
-                "fields": [
-                  "longitude",
-                  "latitude"
-                ]
-              }
-            }
-          ],
           "mark": {
-            "type": "circle",
-            "color": "#2171b5",
-            "opacity": 0.75,
-            "stroke": "#ffffff",
-            "strokeWidth": 1
+            "type": "point",
+            "shape": "circle",
+            "filled": true,
+            "color": "#007C83",
+            "opacity": 1
           },
           "encoding": {
             "longitude": {
@@ -236,16 +391,16 @@
               "type": "quantitative",
               "scale": {
                 "type": "linear",
-                "zero": false,
-                "nice": false,
                 "domain": [
                   2847.6,
                   3083
                 ],
                 "range": [
-                  300,
-                  1200
-                ]
+                  120,
+                  900
+                ],
+                "zero": false,
+                "nice": false
               },
               "legend": {
                 "title": "Potassium intake (mg)",
@@ -255,7 +410,11 @@
                   2965,
                   3083
                 ],
-                "format": ",.0f"
+                "format": ",.0f",
+                "titleLimit": 450,
+                "symbolFill": "#007C83",
+                "symbolStroke": "transparent",
+                "symbolOpacity": 1
               }
             },
             "tooltip": [
@@ -267,8 +426,168 @@
               {
                 "field": "Potassium Intake (mg) - 19 and over",
                 "type": "quantitative",
-                "title": "Potassium intake (mg)",
-                "format": ",.1f"
+                "title": "Potassium intake (mg/day)",
+                "format": ",.0f"
+              },
+              {
+                "field": "Potassium MOE (mg)",
+                "type": "quantitative",
+                "title": "Approx. 95% margin of error (± mg)",
+                "format": ",.0f"
+              },
+              {
+                "field": "Potassium RSE (%)",
+                "type": "quantitative",
+                "title": "Relative standard error (%)",
+                "format": ".1f"
+              }
+            ]
+          }
+        },
+        {
+          "data": {
+            "url": "Formatted Data/Australian_Sodium_Potassium_19plus.csv",
+            "format": {
+              "type": "csv",
+              "parse": {
+                "labelDx": "number",
+                "labelDy": "number",
+                "longitude": "number",
+                "latitude": "number"
+              }
+            }
+          },
+          "transform": [
+            {
+              "calculate": "datum.abbr + ' ' + format(datum['Potassium Intake (mg) - 19 and over'], ',.0f')",
+              "as": "StateValue"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "fontSize": 15,
+            "fontWeight": 600,
+            "dx": {
+              "expr": "datum.labelDx"
+            },
+            "dy": {
+              "expr": "datum.labelDy"
+            },
+            "align": {
+              "expr": "datum.labelAlign"
+            },
+            "stroke": "#ffffff",
+            "strokeWidth": 3,
+            "fill": "#ffffff"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "StateValue"
+            },
+            "tooltip": [
+              {
+                "field": "State/Territory",
+                "type": "nominal",
+                "title": "State / territory"
+              },
+              {
+                "field": "Potassium Intake (mg) - 19 and over",
+                "type": "quantitative",
+                "title": "Potassium intake (mg/day)",
+                "format": ",.0f"
+              },
+              {
+                "field": "Potassium MOE (mg)",
+                "type": "quantitative",
+                "title": "Approx. 95% margin of error (± mg)",
+                "format": ",.0f"
+              },
+              {
+                "field": "Potassium RSE (%)",
+                "type": "quantitative",
+                "title": "Relative standard error (%)",
+                "format": ".1f"
+              }
+            ]
+          }
+        },
+        {
+          "data": {
+            "url": "Formatted Data/Australian_Sodium_Potassium_19plus.csv",
+            "format": {
+              "type": "csv",
+              "parse": {
+                "labelDx": "number",
+                "labelDy": "number",
+                "longitude": "number",
+                "latitude": "number"
+              }
+            }
+          },
+          "transform": [
+            {
+              "calculate": "datum.abbr + ' ' + format(datum['Potassium Intake (mg) - 19 and over'], ',.0f')",
+              "as": "StateValue"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "fontSize": 15,
+            "fontWeight": 600,
+            "color": "#20333b",
+            "dx": {
+              "expr": "datum.labelDx"
+            },
+            "dy": {
+              "expr": "datum.labelDy"
+            },
+            "align": {
+              "expr": "datum.labelAlign"
+            }
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "StateValue"
+            },
+            "tooltip": [
+              {
+                "field": "State/Territory",
+                "type": "nominal",
+                "title": "State / territory"
+              },
+              {
+                "field": "Potassium Intake (mg) - 19 and over",
+                "type": "quantitative",
+                "title": "Potassium intake (mg/day)",
+                "format": ",.0f"
+              },
+              {
+                "field": "Potassium MOE (mg)",
+                "type": "quantitative",
+                "title": "Approx. 95% margin of error (± mg)",
+                "format": ",.0f"
+              },
+              {
+                "field": "Potassium RSE (%)",
+                "type": "quantitative",
+                "title": "Relative standard error (%)",
+                "format": ".1f"
               }
             ]
           }
@@ -276,25 +595,10 @@
       ]
     }
   ],
+  "spacing": 40,
   "resolve": {
     "scale": {
       "size": "independent"
-    }
-  },
-  "spacing": 30,
-  "config": {
-    "background": "#ffffff",
-    "font": "sans-serif",
-    "view": {
-      "stroke": null
-    },
-    "title": {
-      "fontSize": 18,
-      "subtitleFontSize": 12
-    },
-    "legend": {
-      "titleFontSize": 12,
-      "labelFontSize": 11
     }
   }
 }

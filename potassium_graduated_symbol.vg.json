@@ -1,30 +1,62 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Graduated symbol map of estimated potassium intake for Australian adults aged 19 and over in 2011–12.",
+  "padding": 0,
+  "config": {
+    "font": "Inter",
+    "background": "#ffffff",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "anchor": "start",
+      "frame": "bounds",
+      "fontSize": 20,
+      "subtitleFontSize": 15,
+      "subtitleLineHeight": 21,
+      "color": "#20333b",
+      "subtitleColor": "#414f57"
+    },
+    "axis": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelPadding": 8,
+      "titlePadding": 12,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b",
+      "gridColor": "#e5e9eb",
+      "domain": false
+    },
+    "legend": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b"
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15
+    },
+    "text": {
+      "fontSize": 15
+    }
+  },
+  "width": 600,
+  "height": 440,
+  "projection": {
+    "type": "mercator",
+    "scale": 570,
+    "translate": [
+      -1060,
+      -70
+    ]
+  },
   "title": {
     "text": "Potassium intake by state and territory",
     "subtitle": [
-      "Adults aged 19 and over | 2011–12 | Intake (mg)",
-      "A restricted size scale highlights the small differences between states; compare circles within this map only."
+      "Average daily intake, adults 19 and over, 2011–12 (mg).",
+      "Restricted size scale; compare circles within this map only."
     ],
     "anchor": "start"
-  },
-  "width": 700,
-  "height": 480,
-  "projection": {
-    "type": "mercator"
-  },
-  "datasets": {
-    "state_centres": [
-      {"state": "New South Wales", "longitude": 147.0044, "latitude": -32.2376},
-      {"state": "Victoria", "longitude": 144.3155, "latitude": -36.8714},
-      {"state": "Queensland", "longitude": 144.5888, "latitude": -22.7383},
-      {"state": "South Australia", "longitude": 135.8687, "latitude": -30.2214},
-      {"state": "Western Australia", "longitude": 122.1319, "latitude": -25.7636},
-      {"state": "Tasmania", "longitude": 146.5961, "latitude": -41.9517},
-      {"state": "Northern Territory", "longitude": 133.3686, "latitude": -19.5556},
-      {"state": "Australian Capital Territory", "longitude": 149.0024, "latitude": -35.4894}
-    ]
   },
   "layer": [
     {
@@ -48,64 +80,235 @@
         "format": {
           "type": "csv",
           "parse": {
-            "Potassium Intake (mg) - 19 and over": "number"
+            "labelDx": "number",
+            "labelDy": "number",
+            "longitude": "number",
+            "latitude": "number"
           }
         }
       },
-      "transform": [
-        {
-          "lookup": "State/Territory",
-          "from": {
-            "data": {"name": "state_centres"},
-            "key": "state",
-            "fields": ["longitude", "latitude"]
-          }
-        }
-      ],
       "mark": {
-        "type": "circle",
-        "color": "#2171b5",
-        "opacity": 0.75,
-        "stroke": "#ffffff",
-        "strokeWidth": 1
+        "type": "point",
+        "shape": "circle",
+        "filled": true,
+        "color": "#007C83",
+        "opacity": 1
       },
       "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
         "size": {
           "field": "Potassium Intake (mg) - 19 and over",
           "type": "quantitative",
           "scale": {
             "type": "linear",
+            "domain": [
+              2847.6,
+              3083
+            ],
+            "range": [
+              120,
+              900
+            ],
             "zero": false,
-            "nice": false,
-            "domain": [2847.6, 3083],
-            "range": [300, 1200]
+            "nice": false
           },
           "legend": {
             "title": "Potassium intake (mg)",
             "orient": "bottom",
-            "values": [2847.6, 2965, 3083],
-            "format": ",.0f"
+            "values": [
+              2847.6,
+              2965,
+              3083
+            ],
+            "format": ",.0f",
+            "titleLimit": 450,
+            "symbolFill": "#007C83",
+            "symbolStroke": "transparent",
+            "symbolOpacity": 1
           }
         },
         "tooltip": [
-          {"field": "State/Territory", "type": "nominal", "title": "State / territory"},
+          {
+            "field": "State/Territory",
+            "type": "nominal",
+            "title": "State / territory"
+          },
           {
             "field": "Potassium Intake (mg) - 19 and over",
             "type": "quantitative",
-            "title": "Potassium intake (mg)",
-            "format": ",.1f"
+            "title": "Potassium intake (mg/day)",
+            "format": ",.0f"
+          },
+          {
+            "field": "Potassium MOE (mg)",
+            "type": "quantitative",
+            "title": "Could vary by (± mg)",
+            "format": ",.0f"
+          },
+          {
+            "field": "Potassium RSE (%)",
+            "type": "quantitative",
+            "title": "How uncertain this figure is (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "Formatted Data/Australian_Sodium_Potassium_19plus.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "labelDx": "number",
+            "labelDy": "number",
+            "longitude": "number",
+            "latitude": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.abbr + ' ' + format(datum['Potassium Intake (mg) - 19 and over'], ',.0f')",
+          "as": "StateValue"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 15,
+        "fontWeight": 600,
+        "dx": {
+          "expr": "datum.labelDx"
+        },
+        "dy": {
+          "expr": "datum.labelDy"
+        },
+        "align": {
+          "expr": "datum.labelAlign"
+        },
+        "stroke": "#ffffff",
+        "strokeWidth": 3,
+        "fill": "#ffffff"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "StateValue"
+        },
+        "tooltip": [
+          {
+            "field": "State/Territory",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "Potassium Intake (mg) - 19 and over",
+            "type": "quantitative",
+            "title": "Potassium intake (mg/day)",
+            "format": ",.0f"
+          },
+          {
+            "field": "Potassium MOE (mg)",
+            "type": "quantitative",
+            "title": "Could vary by (± mg)",
+            "format": ",.0f"
+          },
+          {
+            "field": "Potassium RSE (%)",
+            "type": "quantitative",
+            "title": "How uncertain this figure is (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "Formatted Data/Australian_Sodium_Potassium_19plus.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "labelDx": "number",
+            "labelDy": "number",
+            "longitude": "number",
+            "latitude": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.abbr + ' ' + format(datum['Potassium Intake (mg) - 19 and over'], ',.0f')",
+          "as": "StateValue"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 15,
+        "fontWeight": 600,
+        "color": "#20333b",
+        "dx": {
+          "expr": "datum.labelDx"
+        },
+        "dy": {
+          "expr": "datum.labelDy"
+        },
+        "align": {
+          "expr": "datum.labelAlign"
+        }
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "StateValue"
+        },
+        "tooltip": [
+          {
+            "field": "State/Territory",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "Potassium Intake (mg) - 19 and over",
+            "type": "quantitative",
+            "title": "Potassium intake (mg/day)",
+            "format": ",.0f"
+          },
+          {
+            "field": "Potassium MOE (mg)",
+            "type": "quantitative",
+            "title": "Could vary by (± mg)",
+            "format": ",.0f"
+          },
+          {
+            "field": "Potassium RSE (%)",
+            "type": "quantitative",
+            "title": "How uncertain this figure is (%)",
+            "format": ".1f"
           }
         ]
       }
     }
   ],
-  "config": {
-    "background": "#ffffff",
-    "font": "sans-serif",
-    "view": {"stroke": null},
-    "title": {"fontSize": 18, "subtitleFontSize": 12},
-    "legend": {"titleFontSize": 12, "labelFontSize": 11}
-  }
+  "description": "Potassium intake estimates, adults 19 and over, 2011–12. Restricted symbol sizes emphasise small differences; compare within this map only."
 }

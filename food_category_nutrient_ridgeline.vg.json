@@ -2,21 +2,22 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Ridgeline distributions of total sugars, dietary fibre and sodium per 100 grams across ten broad AUSNUT 2023 food groups.",
   "background": "#ffffff",
-  "padding": 20,
+  "padding": 0,
   "title": {
     "text": "Nutrient profiles vary widely across food categories",
     "subtitle": [
-      "Distribution of nutrient content among individual AUSNUT 2023 foods, measured per 100 g",
-      "Each ridge is normalised to its own peak; ridge width shows the range, not how often Australians eat the food.",
-      "Sodium uses a symlog scale to retain valid high-sodium foods without compressing the main distribution."
+      "AUSNUT 2023 foods: nutrient content per 100 g",
+      "Each ridge is scaled to its own peak; horizontal spread shows variation.",
+      "The sodium axis compresses large values; read its labelled ticks."
     ],
     "anchor": "start",
     "fontSize": 23,
-    "subtitleFontSize": 12,
+    "subtitleFontSize": 15,
     "subtitlePadding": 8,
     "offset": 20,
     "color": "#243746",
-    "subtitleColor": "#536471"
+    "subtitleColor": "#20333b",
+    "frame": "bounds"
   },
   "data": {
     "url": "Formatted Data/ausnut_ridgeline_nutrients.csv",
@@ -33,13 +34,13 @@
       "title": {
         "text": "Total sugars",
         "subtitle": "grams per 100 g",
-        "anchor": "middle",
+        "anchor": "start",
         "fontSize": 16,
-        "subtitleFontSize": 11,
-        "color": "#8E3B46",
-        "subtitleColor": "#6B7280",
-        "dx": 130,
-        "offset": 10
+        "subtitleFontSize": 15,
+        "color": "#B44578",
+        "subtitleColor": "#20333b",
+        "offset": 10,
+        "frame": "group"
       },
       "transform": [
         {
@@ -97,26 +98,26 @@
             "title": null,
             "labelAngle": 0,
             "labelAlign": "left",
-            "labelFontSize": 11,
+            "labelFontSize": 15,
             "labelFontWeight": "bold",
-            "labelColor": "#34495E",
-            "labelLimit": 250,
-            "labelExpr": "datum.value === 'Confectionery and cereal, nut, fruit and seed bars' ? 'Confectionery and cereal, nut,|fruit and seed bars' : datum.label",
-            "labelLineHeight": 12,
+            "labelColor": "#20333b",
+            "labelLimit": 240,
+            "labelExpr": "datum.value === 'Confectionery and cereal, nut, fruit and seed bars' ? 'Confectionery and bars' : datum.value === 'Meat, poultry and game products and dishes' ? 'Meat, poultry and game' : datum.value === 'Cereal based products and dishes' ? 'Cereal-based dishes' : datum.value === 'Savoury sauces and condiments' ? 'Sauces and condiments' : datum.label",
+            "labelLineHeight": 17,
             "labelPadding": 10
           }
         }
       },
       "spec": {
-        "width": 260,
-        "height": 34,
+        "width": 200,
+        "height": 40,
         "mark": {
           "type": "area",
           "interpolate": "monotone",
-          "fill": "#C95D6B",
-          "fillOpacity": 0.65,
-          "stroke": "#8E3B46",
-          "strokeWidth": 1.3,
+          "fill": "#B44578",
+          "fillOpacity": 0.25,
+          "stroke": "#B44578",
+          "strokeWidth": 1.8,
           "clip": false,
           "cursor": "crosshair"
         },
@@ -134,15 +135,14 @@
             },
             "axis": {
               "title": "Total sugars (g/100 g)",
-              "titleFontSize": 11,
+              "titleFontSize": 15,
               "titlePadding": 12,
-              "labelFontSize": 10,
+              "labelFontSize": 15,
               "values": [
                 0,
-                20,
-                40,
-                60,
-                80,
+                25,
+                50,
+                75,
                 100
               ],
               "grid": false,
@@ -192,12 +192,13 @@
       "title": {
         "text": "Dietary fibre",
         "subtitle": "grams per 100 g",
-        "anchor": "middle",
+        "anchor": "start",
         "fontSize": 16,
-        "subtitleFontSize": 11,
-        "color": "#2A7F62",
-        "subtitleColor": "#6B7280",
-        "offset": 10
+        "subtitleFontSize": 15,
+        "color": "#387C44",
+        "subtitleColor": "#20333b",
+        "offset": 10,
+        "frame": "group"
       },
       "transform": [
         {
@@ -253,20 +254,23 @@
           ],
           "header": {
             "title": null,
-            "labels": false
+            "labels": false,
+            "labelFontSize": 15,
+            "labelLimit": 240,
+            "labelLineHeight": 17
           }
         }
       },
       "spec": {
-        "width": 260,
-        "height": 34,
+        "width": 200,
+        "height": 40,
         "mark": {
           "type": "area",
           "interpolate": "monotone",
-          "fill": "#4AA785",
-          "fillOpacity": 0.65,
-          "stroke": "#237258",
-          "strokeWidth": 1.3,
+          "fill": "#387C44",
+          "fillOpacity": 0.25,
+          "stroke": "#387C44",
+          "strokeWidth": 1.8,
           "clip": false,
           "cursor": "crosshair"
         },
@@ -284,9 +288,9 @@
             },
             "axis": {
               "title": "Dietary fibre (g/100 g)",
-              "titleFontSize": 11,
+              "titleFontSize": 15,
               "titlePadding": 12,
-              "labelFontSize": 10,
+              "labelFontSize": 15,
               "values": [
                 0,
                 10,
@@ -340,13 +344,14 @@
     {
       "title": {
         "text": "Sodium",
-        "subtitle": "milligrams per 100 g · symlog scale",
-        "anchor": "middle",
+        "subtitle": "milligrams per 100 g · compressed axis",
+        "anchor": "start",
         "fontSize": 16,
-        "subtitleFontSize": 11,
-        "color": "#496D9B",
-        "subtitleColor": "#6B7280",
-        "offset": 10
+        "subtitleFontSize": 15,
+        "color": "#B54F22",
+        "subtitleColor": "#20333b",
+        "offset": 10,
+        "frame": "group"
       },
       "transform": [
         {
@@ -402,20 +407,23 @@
           ],
           "header": {
             "title": null,
-            "labels": false
+            "labels": false,
+            "labelFontSize": 15,
+            "labelLimit": 240,
+            "labelLineHeight": 17
           }
         }
       },
       "spec": {
-        "width": 290,
-        "height": 34,
+        "width": 230,
+        "height": 40,
         "mark": {
           "type": "area",
           "interpolate": "monotone",
-          "fill": "#6F93C2",
-          "fillOpacity": 0.65,
-          "stroke": "#3F628F",
-          "strokeWidth": 1.3,
+          "fill": "#B54F22",
+          "fillOpacity": 0.25,
+          "stroke": "#B54F22",
+          "strokeWidth": 1.8,
           "clip": false,
           "cursor": "crosshair"
         },
@@ -435,16 +443,13 @@
             },
             "axis": {
               "title": "Sodium (mg/100 g)",
-              "titleFontSize": 11,
+              "titleFontSize": 15,
               "titlePadding": 12,
-              "labelFontSize": 10,
+              "labelFontSize": 15,
               "values": [
                 0,
                 100,
-                500,
                 1000,
-                2000,
-                4000,
                 8000
               ],
               "labelExpr": "datum.value >= 1000 ? format(datum.value / 1000, '.0f') + 'k' : datum.label",
@@ -493,7 +498,7 @@
     }
   ],
   "config": {
-    "font": "sans-serif",
+    "font": "Inter",
     "style": {
       "guide-label": {
         "lineBreak": "|"
@@ -509,8 +514,37 @@
       "stroke": null
     },
     "axis": {
-      "labelColor": "#536471",
-      "titleColor": "#34495E"
+      "labelColor": "#20333b",
+      "titleColor": "#20333b",
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "gridColor": "#e5e9eb",
+      "domain": false,
+      "labelPadding": 8,
+      "titlePadding": 12
+    },
+    "background": "#ffffff",
+    "legend": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b"
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 20,
+      "subtitleFontSize": 15,
+      "subtitleLineHeight": 21,
+      "color": "#20333b",
+      "subtitleColor": "#414f57",
+      "frame": "bounds"
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15
+    },
+    "text": {
+      "fontSize": 15
     }
   }
 }

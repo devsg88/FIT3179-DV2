@@ -2,20 +2,22 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Faceted dumbbell chart comparing beverage consumption in 1995 and 2023 across Australian age groups.",
   "background": "#ffffff",
-  "padding": 20,
+  "padding": 0,
   "title": {
-    "text": "Beverage consumption has shifted across generations",
+    "text": "Children cut sugary drinks; adults drank more diet drinks",
     "subtitle": [
-      "Percentage of each age group consuming sugar-sweetened and intense-sweetened beverages, 1995 versus 2023",
-      "The connecting line shows the size and direction of change; hover for the percentage-point difference."
+      "Share consuming each beverage type: 1995 and 2023",
+      "Intense-sweetened = drinks with artificial sweeteners",
+      "Lines join the two years; labels give the percentages."
     ],
     "anchor": "start",
     "fontSize": 23,
-    "subtitleFontSize": 12,
+    "subtitleFontSize": 15,
     "subtitlePadding": 8,
     "offset": 18,
     "color": "#243746",
-    "subtitleColor": "#536471"
+    "subtitleColor": "#20333b",
+    "frame": "bounds"
   },
   "data": {
     "url": "Formatted Data/Beverage_Consumption_Dumbbell_Data.csv",
@@ -49,7 +51,7 @@
         "title": null,
         "labelFontSize": 16,
         "labelFontWeight": "bold",
-        "labelColor": "#243746",
+        "labelColor": "#20333b",
         "labelPadding": 12
       }
     }
@@ -57,7 +59,7 @@
   "spec": {
     "width": 360,
     "height": {
-      "step": 46
+      "step": 64
     },
     "encoding": {
       "y": {
@@ -75,12 +77,13 @@
         ],
         "axis": {
           "title": null,
-          "labelFontSize": 12,
+          "labelFontSize": 15,
           "labelFontWeight": "bold",
-          "labelColor": "#34495E",
+          "labelColor": "#20333b",
           "labelPadding": 10,
           "ticks": false,
-          "domain": false
+          "domain": false,
+          "labelExpr": "replace(datum.label, '-', '–')"
         }
       }
     },
@@ -105,9 +108,9 @@
             },
             "axis": {
               "title": "Age-group consumption (%)",
-              "titleFontSize": 12,
+              "titleFontSize": 15,
               "titlePadding": 14,
-              "labelFontSize": 11,
+              "labelFontSize": 15,
               "values": [
                 0,
                 10,
@@ -189,7 +192,8 @@
           "size": 150,
           "stroke": "#ffffff",
           "strokeWidth": 1.5,
-          "cursor": "pointer"
+          "cursor": "pointer",
+          "opacity": 1
         },
         "encoding": {
           "x": {
@@ -205,8 +209,8 @@
                 "2023"
               ],
               "range": [
-                "#E67E22",
-                "#167D9A"
+                "#8B9097",
+                "#30343B"
               ]
             },
             "legend": {
@@ -215,8 +219,8 @@
               "direction": "horizontal",
               "symbolType": "circle",
               "symbolSize": 130,
-              "labelFontSize": 12,
-              "titleFontSize": 12,
+              "labelFontSize": 15,
+              "titleFontSize": 15,
               "offset": 8
             }
           },
@@ -245,10 +249,28 @@
             {
               "field": "Change",
               "type": "quantitative",
-              "title": "1995–2023 change (pp)",
+              "title": "Change (percentage points)",
               "format": "+.1f"
             }
-          ]
+          ],
+          "shape": {
+            "field": "Year",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "1995",
+                "2023"
+              ],
+              "range": [
+                "circle",
+                "square"
+              ]
+            },
+            "legend": {
+              "title": "Survey year",
+              "orient": "top"
+            }
+          }
         }
       },
       {
@@ -260,10 +282,10 @@
         ],
         "mark": {
           "type": "text",
-          "dy": -12,
-          "fontSize": 10,
+          "dy": -16,
+          "fontSize": 15,
           "fontWeight": "bold",
-          "color": "#B85E0B"
+          "color": "#8B9097"
         },
         "encoding": {
           "x": {
@@ -285,10 +307,10 @@
         ],
         "mark": {
           "type": "text",
-          "dy": 13,
-          "fontSize": 10,
+          "dy": 23,
+          "fontSize": 15,
           "fontWeight": "bold",
-          "color": "#11677F"
+          "color": "#30343B"
         },
         "encoding": {
           "x": {
@@ -311,7 +333,7 @@
     }
   },
   "config": {
-    "font": "sans-serif",
+    "font": "Inter",
     "facet": {
       "spacing": 38
     },
@@ -319,8 +341,37 @@
       "stroke": null
     },
     "axis": {
-      "labelColor": "#536471",
-      "titleColor": "#34495E"
+      "labelColor": "#20333b",
+      "titleColor": "#20333b",
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "gridColor": "#e5e9eb",
+      "domain": false,
+      "labelPadding": 8,
+      "titlePadding": 12
+    },
+    "background": "#ffffff",
+    "legend": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b"
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 20,
+      "subtitleFontSize": 15,
+      "subtitleLineHeight": 21,
+      "color": "#20333b",
+      "subtitleColor": "#414f57",
+      "frame": "bounds"
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15
+    },
+    "text": {
+      "fontSize": 15
     }
   }
 }

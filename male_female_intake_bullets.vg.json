@@ -1,68 +1,428 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "2x2 bullet graph grid. Thick grey bars show recommended serves, coloured bars show actual intake, and red ticks mark the recommendation.",
+  "description": "Actual daily food serves compared with adult recommendations. Grey background bars show recommendations; slate bars show actual intake.",
   "spacing": 30,
   "vconcat": [
     {
       "hconcat": [
         {
-          "title": "Male (18-29)",
+          "title": "Male (18–29)",
           "width": 300,
-          "height": {"step": 44},
+          "height": {
+            "step": 52
+          },
           "layer": [
             {
-              "data": {"url": "Formatted Data/male_recommended_19_50.csv"},
-              "mark": {"type": "bar", "color": "#dedede", "size": 32},
+              "data": {
+                "url": "Formatted Data/male_recommended_19_50.csv"
+              },
+              "mark": {
+                "type": "bar",
+                "size": 32
+              },
               "encoding": {
-                "x": {"field": "recommended_daily_serves", "type": "quantitative", "title": "Serves per person per day"},
-                "y": {"field": "food_group", "type": "nominal", "title": null}
-              }
+                "x": {
+                  "field": "recommended_daily_serves",
+                  "type": "quantitative",
+                  "title": "Serves per person per day",
+                  "scale": {
+                    "domain": [
+                      0,
+                      7
+                    ],
+                    "zero": true,
+                    "nice": false
+                  }
+                },
+                "y": {
+                  "field": "food_group",
+                  "type": "nominal",
+                  "title": null,
+                  "axis": {
+                    "labelLimit": 190,
+                    "labelFontSize": 15,
+                    "labelExpr": "datum.label === 'Vegetables and legumes/beans' ? 'Vegetables / legumes' : datum.label === 'Milk, yoghurt, cheese and alternatives' ? 'Dairy / alternatives' : datum.label === 'Lean meats and alternatives' ? 'Meat / alternatives' : datum.label"
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "food_group",
+                    "type": "nominal",
+                    "title": "Food group"
+                  },
+                  {
+                    "field": "recommended_daily_serves",
+                    "type": "quantitative",
+                    "format": ".1f",
+                    "title": "Daily serves"
+                  }
+                ],
+                "color": {
+                  "field": "Measure",
+                  "type": "nominal",
+                  "scale": {
+                    "domain": [
+                      "Actual intake",
+                      "Recommended serves"
+                    ],
+                    "range": [
+                      "#344B5E",
+                      "#dedede"
+                    ]
+                  },
+                  "legend": {
+                    "title": null,
+                    "orient": "top",
+                    "direction": "horizontal",
+                    "symbolType": "square"
+                  }
+                }
+              },
+              "transform": [
+                {
+                  "calculate": "'Recommended serves'",
+                  "as": "Measure"
+                }
+              ]
             },
             {
-              "data": {"url": "Formatted Data/male_actual_18_29.csv"},
-              "mark": {"type": "bar", "color": "#2874a6", "size": 20},
+              "data": {
+                "url": "Formatted Data/male_actual_18_29.csv"
+              },
+              "mark": {
+                "type": "bar",
+                "size": 20
+              },
               "encoding": {
-                "x": {"field": "mean_daily_serves", "type": "quantitative", "title": "Serves per person per day"},
-                "y": {"field": "food_group", "type": "nominal", "title": null}
-              }
+                "x": {
+                  "field": "mean_daily_serves",
+                  "type": "quantitative",
+                  "title": "Serves per person per day",
+                  "scale": {
+                    "domain": [
+                      0,
+                      7
+                    ],
+                    "zero": true,
+                    "nice": false
+                  }
+                },
+                "y": {
+                  "field": "food_group",
+                  "type": "nominal",
+                  "title": null,
+                  "axis": {
+                    "labelLimit": 190,
+                    "labelFontSize": 15,
+                    "labelExpr": "datum.label === 'Vegetables and legumes/beans' ? 'Vegetables / legumes' : datum.label === 'Milk, yoghurt, cheese and alternatives' ? 'Dairy / alternatives' : datum.label === 'Lean meats and alternatives' ? 'Meat / alternatives' : datum.label"
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "food_group",
+                    "type": "nominal",
+                    "title": "Food group"
+                  },
+                  {
+                    "field": "mean_daily_serves",
+                    "type": "quantitative",
+                    "format": ".1f",
+                    "title": "Daily serves"
+                  }
+                ],
+                "color": {
+                  "field": "Measure",
+                  "type": "nominal",
+                  "scale": {
+                    "domain": [
+                      "Actual intake",
+                      "Recommended serves"
+                    ],
+                    "range": [
+                      "#344B5E",
+                      "#dedede"
+                    ]
+                  },
+                  "legend": {
+                    "title": null,
+                    "orient": "top",
+                    "direction": "horizontal",
+                    "symbolType": "square"
+                  }
+                }
+              },
+              "transform": [
+                {
+                  "calculate": "'Actual intake'",
+                  "as": "Measure"
+                }
+              ]
             },
             {
-              "data": {"url": "Formatted Data/male_recommended_19_50.csv"},
-              "mark": {"type": "tick", "color": "red", "thickness": 3, "size": 35},
+              "data": {
+                "url": "Formatted Data/male_actual_18_29.csv"
+              },
+              "mark": {
+                "type": "text",
+                "align": "right",
+                "dx": -6,
+                "fontSize": 15,
+                "fontWeight": "bold",
+                "color": "white"
+              },
               "encoding": {
-                "x": {"field": "recommended_daily_serves", "type": "quantitative"},
-                "y": {"field": "food_group", "type": "nominal", "title": null}
+                "x": {
+                  "field": "mean_daily_serves",
+                  "type": "quantitative",
+                  "title": "Serves per person per day",
+                  "scale": {
+                    "domain": [
+                      0,
+                      7
+                    ],
+                    "zero": true,
+                    "nice": false
+                  }
+                },
+                "y": {
+                  "field": "food_group",
+                  "type": "nominal",
+                  "title": null,
+                  "axis": {
+                    "labelLimit": 190,
+                    "labelFontSize": 15,
+                    "labelExpr": "datum.label === 'Vegetables and legumes/beans' ? 'Vegetables / legumes' : datum.label === 'Milk, yoghurt, cheese and alternatives' ? 'Dairy / alternatives' : datum.label === 'Lean meats and alternatives' ? 'Meat / alternatives' : datum.label"
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "food_group",
+                    "type": "nominal",
+                    "title": "Food group"
+                  },
+                  {
+                    "field": "mean_daily_serves",
+                    "type": "quantitative",
+                    "format": ".1f",
+                    "title": "Daily serves"
+                  }
+                ],
+                "text": {
+                  "field": "mean_daily_serves",
+                  "type": "quantitative",
+                  "format": ".1f"
+                }
               }
             }
           ]
         },
         {
-          "title": "Male (30-49)",
+          "title": "Male (30–49)",
           "width": 300,
-          "height": {"step": 44},
+          "height": {
+            "step": 52
+          },
           "layer": [
             {
-              "data": {"url": "Formatted Data/male_recommended_19_50.csv"},
-              "mark": {"type": "bar", "color": "#dedede", "size": 32},
+              "data": {
+                "url": "Formatted Data/male_recommended_19_50.csv"
+              },
+              "mark": {
+                "type": "bar",
+                "size": 32
+              },
               "encoding": {
-                "x": {"field": "recommended_daily_serves", "type": "quantitative", "title": "Serves per person per day"},
-                "y": {"field": "food_group", "type": "nominal", "title": null}
-              }
+                "x": {
+                  "field": "recommended_daily_serves",
+                  "type": "quantitative",
+                  "title": "Serves per person per day",
+                  "scale": {
+                    "domain": [
+                      0,
+                      7
+                    ],
+                    "zero": true,
+                    "nice": false
+                  }
+                },
+                "y": {
+                  "field": "food_group",
+                  "type": "nominal",
+                  "title": null,
+                  "axis": {
+                    "labelLimit": 190,
+                    "labelFontSize": 15,
+                    "labelExpr": "datum.label === 'Vegetables and legumes/beans' ? 'Vegetables / legumes' : datum.label === 'Milk, yoghurt, cheese and alternatives' ? 'Dairy / alternatives' : datum.label === 'Lean meats and alternatives' ? 'Meat / alternatives' : datum.label"
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "food_group",
+                    "type": "nominal",
+                    "title": "Food group"
+                  },
+                  {
+                    "field": "recommended_daily_serves",
+                    "type": "quantitative",
+                    "format": ".1f",
+                    "title": "Daily serves"
+                  }
+                ],
+                "color": {
+                  "field": "Measure",
+                  "type": "nominal",
+                  "scale": {
+                    "domain": [
+                      "Actual intake",
+                      "Recommended serves"
+                    ],
+                    "range": [
+                      "#344B5E",
+                      "#dedede"
+                    ]
+                  },
+                  "legend": {
+                    "title": null,
+                    "orient": "top",
+                    "direction": "horizontal",
+                    "symbolType": "square"
+                  }
+                }
+              },
+              "transform": [
+                {
+                  "calculate": "'Recommended serves'",
+                  "as": "Measure"
+                }
+              ]
             },
             {
-              "data": {"url": "Formatted Data/male_actual_30_49.csv"},
-              "mark": {"type": "bar", "color": "#2874a6", "size": 20},
+              "data": {
+                "url": "Formatted Data/male_actual_30_49.csv"
+              },
+              "mark": {
+                "type": "bar",
+                "size": 20
+              },
               "encoding": {
-                "x": {"field": "mean_daily_serves", "type": "quantitative", "title": "Serves per person per day"},
-                "y": {"field": "food_group", "type": "nominal", "title": null}
-              }
+                "x": {
+                  "field": "mean_daily_serves",
+                  "type": "quantitative",
+                  "title": "Serves per person per day",
+                  "scale": {
+                    "domain": [
+                      0,
+                      7
+                    ],
+                    "zero": true,
+                    "nice": false
+                  }
+                },
+                "y": {
+                  "field": "food_group",
+                  "type": "nominal",
+                  "title": null,
+                  "axis": {
+                    "labelLimit": 190,
+                    "labelFontSize": 15,
+                    "labelExpr": "datum.label === 'Vegetables and legumes/beans' ? 'Vegetables / legumes' : datum.label === 'Milk, yoghurt, cheese and alternatives' ? 'Dairy / alternatives' : datum.label === 'Lean meats and alternatives' ? 'Meat / alternatives' : datum.label"
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "food_group",
+                    "type": "nominal",
+                    "title": "Food group"
+                  },
+                  {
+                    "field": "mean_daily_serves",
+                    "type": "quantitative",
+                    "format": ".1f",
+                    "title": "Daily serves"
+                  }
+                ],
+                "color": {
+                  "field": "Measure",
+                  "type": "nominal",
+                  "scale": {
+                    "domain": [
+                      "Actual intake",
+                      "Recommended serves"
+                    ],
+                    "range": [
+                      "#344B5E",
+                      "#dedede"
+                    ]
+                  },
+                  "legend": {
+                    "title": null,
+                    "orient": "top",
+                    "direction": "horizontal",
+                    "symbolType": "square"
+                  }
+                }
+              },
+              "transform": [
+                {
+                  "calculate": "'Actual intake'",
+                  "as": "Measure"
+                }
+              ]
             },
             {
-              "data": {"url": "Formatted Data/male_recommended_19_50.csv"},
-              "mark": {"type": "tick", "color": "red", "thickness": 3, "size": 35},
+              "data": {
+                "url": "Formatted Data/male_actual_30_49.csv"
+              },
+              "mark": {
+                "type": "text",
+                "align": "right",
+                "dx": -6,
+                "fontSize": 15,
+                "fontWeight": "bold",
+                "color": "white"
+              },
               "encoding": {
-                "x": {"field": "recommended_daily_serves", "type": "quantitative"},
-                "y": {"field": "food_group", "type": "nominal", "title": null}
+                "x": {
+                  "field": "mean_daily_serves",
+                  "type": "quantitative",
+                  "title": "Serves per person per day",
+                  "scale": {
+                    "domain": [
+                      0,
+                      7
+                    ],
+                    "zero": true,
+                    "nice": false
+                  }
+                },
+                "y": {
+                  "field": "food_group",
+                  "type": "nominal",
+                  "title": null,
+                  "axis": {
+                    "labelLimit": 190,
+                    "labelFontSize": 15,
+                    "labelExpr": "datum.label === 'Vegetables and legumes/beans' ? 'Vegetables / legumes' : datum.label === 'Milk, yoghurt, cheese and alternatives' ? 'Dairy / alternatives' : datum.label === 'Lean meats and alternatives' ? 'Meat / alternatives' : datum.label"
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "food_group",
+                    "type": "nominal",
+                    "title": "Food group"
+                  },
+                  {
+                    "field": "mean_daily_serves",
+                    "type": "quantitative",
+                    "format": ".1f",
+                    "title": "Daily serves"
+                  }
+                ],
+                "text": {
+                  "field": "mean_daily_serves",
+                  "type": "quantitative",
+                  "format": ".1f"
+                }
               }
             }
           ]
@@ -72,68 +432,482 @@
     {
       "hconcat": [
         {
-          "title": "Female (18-29)",
+          "title": "Female (18–29)",
           "width": 300,
-          "height": {"step": 44},
+          "height": {
+            "step": 52
+          },
           "layer": [
             {
-              "data": {"url": "Formatted Data/female_recommended_19_50.csv"},
-              "mark": {"type": "bar", "color": "#dedede", "size": 32},
+              "data": {
+                "url": "Formatted Data/female_recommended_19_50.csv"
+              },
+              "mark": {
+                "type": "bar",
+                "size": 32
+              },
               "encoding": {
-                "x": {"field": "recommended_daily_serves", "type": "quantitative", "title": "Serves per person per day"},
-                "y": {"field": "food_group", "type": "nominal", "title": null}
-              }
+                "x": {
+                  "field": "recommended_daily_serves",
+                  "type": "quantitative",
+                  "title": "Serves per person per day",
+                  "scale": {
+                    "domain": [
+                      0,
+                      7
+                    ],
+                    "zero": true,
+                    "nice": false
+                  }
+                },
+                "y": {
+                  "field": "food_group",
+                  "type": "nominal",
+                  "title": null,
+                  "axis": {
+                    "labelLimit": 190,
+                    "labelFontSize": 15,
+                    "labelExpr": "datum.label === 'Vegetables and legumes/beans' ? 'Vegetables / legumes' : datum.label === 'Milk, yoghurt, cheese and alternatives' ? 'Dairy / alternatives' : datum.label === 'Lean meats and alternatives' ? 'Meat / alternatives' : datum.label"
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "food_group",
+                    "type": "nominal",
+                    "title": "Food group"
+                  },
+                  {
+                    "field": "recommended_daily_serves",
+                    "type": "quantitative",
+                    "format": ".1f",
+                    "title": "Daily serves"
+                  }
+                ],
+                "color": {
+                  "field": "Measure",
+                  "type": "nominal",
+                  "scale": {
+                    "domain": [
+                      "Actual intake",
+                      "Recommended serves"
+                    ],
+                    "range": [
+                      "#344B5E",
+                      "#dedede"
+                    ]
+                  },
+                  "legend": {
+                    "title": null,
+                    "orient": "top",
+                    "direction": "horizontal",
+                    "symbolType": "square"
+                  }
+                }
+              },
+              "transform": [
+                {
+                  "calculate": "'Recommended serves'",
+                  "as": "Measure"
+                }
+              ]
             },
             {
-              "data": {"url": "Formatted Data/female_actual_18_29.csv"},
-              "mark": {"type": "bar", "color": "#884ea0", "size": 20},
+              "data": {
+                "url": "Formatted Data/female_actual_18_29.csv"
+              },
+              "mark": {
+                "type": "bar",
+                "size": 20
+              },
               "encoding": {
-                "x": {"field": "mean_daily_serves", "type": "quantitative", "title": "Serves per person per day"},
-                "y": {"field": "food_group", "type": "nominal", "title": null}
-              }
+                "x": {
+                  "field": "mean_daily_serves",
+                  "type": "quantitative",
+                  "title": "Serves per person per day",
+                  "scale": {
+                    "domain": [
+                      0,
+                      7
+                    ],
+                    "zero": true,
+                    "nice": false
+                  }
+                },
+                "y": {
+                  "field": "food_group",
+                  "type": "nominal",
+                  "title": null,
+                  "axis": {
+                    "labelLimit": 190,
+                    "labelFontSize": 15,
+                    "labelExpr": "datum.label === 'Vegetables and legumes/beans' ? 'Vegetables / legumes' : datum.label === 'Milk, yoghurt, cheese and alternatives' ? 'Dairy / alternatives' : datum.label === 'Lean meats and alternatives' ? 'Meat / alternatives' : datum.label"
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "food_group",
+                    "type": "nominal",
+                    "title": "Food group"
+                  },
+                  {
+                    "field": "mean_daily_serves",
+                    "type": "quantitative",
+                    "format": ".1f",
+                    "title": "Daily serves"
+                  }
+                ],
+                "color": {
+                  "field": "Measure",
+                  "type": "nominal",
+                  "scale": {
+                    "domain": [
+                      "Actual intake",
+                      "Recommended serves"
+                    ],
+                    "range": [
+                      "#344B5E",
+                      "#dedede"
+                    ]
+                  },
+                  "legend": {
+                    "title": null,
+                    "orient": "top",
+                    "direction": "horizontal",
+                    "symbolType": "square"
+                  }
+                }
+              },
+              "transform": [
+                {
+                  "calculate": "'Actual intake'",
+                  "as": "Measure"
+                }
+              ]
             },
             {
-              "data": {"url": "Formatted Data/female_recommended_19_50.csv"},
-              "mark": {"type": "tick", "color": "red", "thickness": 3, "size": 35},
+              "data": {
+                "url": "Formatted Data/female_actual_18_29.csv"
+              },
+              "mark": {
+                "type": "text",
+                "align": "right",
+                "dx": -6,
+                "fontSize": 15,
+                "fontWeight": "bold",
+                "color": "white"
+              },
               "encoding": {
-                "x": {"field": "recommended_daily_serves", "type": "quantitative"},
-                "y": {"field": "food_group", "type": "nominal", "title": null}
+                "x": {
+                  "field": "mean_daily_serves",
+                  "type": "quantitative",
+                  "title": "Serves per person per day",
+                  "scale": {
+                    "domain": [
+                      0,
+                      7
+                    ],
+                    "zero": true,
+                    "nice": false
+                  }
+                },
+                "y": {
+                  "field": "food_group",
+                  "type": "nominal",
+                  "title": null,
+                  "axis": {
+                    "labelLimit": 190,
+                    "labelFontSize": 15,
+                    "labelExpr": "datum.label === 'Vegetables and legumes/beans' ? 'Vegetables / legumes' : datum.label === 'Milk, yoghurt, cheese and alternatives' ? 'Dairy / alternatives' : datum.label === 'Lean meats and alternatives' ? 'Meat / alternatives' : datum.label"
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "food_group",
+                    "type": "nominal",
+                    "title": "Food group"
+                  },
+                  {
+                    "field": "mean_daily_serves",
+                    "type": "quantitative",
+                    "format": ".1f",
+                    "title": "Daily serves"
+                  }
+                ],
+                "text": {
+                  "field": "mean_daily_serves",
+                  "type": "quantitative",
+                  "format": ".1f"
+                }
               }
             }
           ]
         },
         {
-          "title": "Female (30-49)",
+          "title": "Female (30–49)",
           "width": 300,
-          "height": {"step": 44},
+          "height": {
+            "step": 52
+          },
           "layer": [
             {
-              "data": {"url": "Formatted Data/female_recommended_19_50.csv"},
-              "mark": {"type": "bar", "color": "#dedede", "size": 32},
+              "data": {
+                "url": "Formatted Data/female_recommended_19_50.csv"
+              },
+              "mark": {
+                "type": "bar",
+                "size": 32
+              },
               "encoding": {
-                "x": {"field": "recommended_daily_serves", "type": "quantitative", "title": "Serves per person per day"},
-                "y": {"field": "food_group", "type": "nominal", "title": null}
-              }
+                "x": {
+                  "field": "recommended_daily_serves",
+                  "type": "quantitative",
+                  "title": "Serves per person per day",
+                  "scale": {
+                    "domain": [
+                      0,
+                      7
+                    ],
+                    "zero": true,
+                    "nice": false
+                  }
+                },
+                "y": {
+                  "field": "food_group",
+                  "type": "nominal",
+                  "title": null,
+                  "axis": {
+                    "labelLimit": 190,
+                    "labelFontSize": 15,
+                    "labelExpr": "datum.label === 'Vegetables and legumes/beans' ? 'Vegetables / legumes' : datum.label === 'Milk, yoghurt, cheese and alternatives' ? 'Dairy / alternatives' : datum.label === 'Lean meats and alternatives' ? 'Meat / alternatives' : datum.label"
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "food_group",
+                    "type": "nominal",
+                    "title": "Food group"
+                  },
+                  {
+                    "field": "recommended_daily_serves",
+                    "type": "quantitative",
+                    "format": ".1f",
+                    "title": "Daily serves"
+                  }
+                ],
+                "color": {
+                  "field": "Measure",
+                  "type": "nominal",
+                  "scale": {
+                    "domain": [
+                      "Actual intake",
+                      "Recommended serves"
+                    ],
+                    "range": [
+                      "#344B5E",
+                      "#dedede"
+                    ]
+                  },
+                  "legend": {
+                    "title": null,
+                    "orient": "top",
+                    "direction": "horizontal",
+                    "symbolType": "square"
+                  }
+                }
+              },
+              "transform": [
+                {
+                  "calculate": "'Recommended serves'",
+                  "as": "Measure"
+                }
+              ]
             },
             {
-              "data": {"url": "Formatted Data/female_actual_30_49.csv"},
-              "mark": {"type": "bar", "color": "#884ea0", "size": 20},
+              "data": {
+                "url": "Formatted Data/female_actual_30_49.csv"
+              },
+              "mark": {
+                "type": "bar",
+                "size": 20
+              },
               "encoding": {
-                "x": {"field": "mean_daily_serves", "type": "quantitative", "title": "Serves per person per day"},
-                "y": {"field": "food_group", "type": "nominal", "title": null}
-              }
+                "x": {
+                  "field": "mean_daily_serves",
+                  "type": "quantitative",
+                  "title": "Serves per person per day",
+                  "scale": {
+                    "domain": [
+                      0,
+                      7
+                    ],
+                    "zero": true,
+                    "nice": false
+                  }
+                },
+                "y": {
+                  "field": "food_group",
+                  "type": "nominal",
+                  "title": null,
+                  "axis": {
+                    "labelLimit": 190,
+                    "labelFontSize": 15,
+                    "labelExpr": "datum.label === 'Vegetables and legumes/beans' ? 'Vegetables / legumes' : datum.label === 'Milk, yoghurt, cheese and alternatives' ? 'Dairy / alternatives' : datum.label === 'Lean meats and alternatives' ? 'Meat / alternatives' : datum.label"
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "food_group",
+                    "type": "nominal",
+                    "title": "Food group"
+                  },
+                  {
+                    "field": "mean_daily_serves",
+                    "type": "quantitative",
+                    "format": ".1f",
+                    "title": "Daily serves"
+                  }
+                ],
+                "color": {
+                  "field": "Measure",
+                  "type": "nominal",
+                  "scale": {
+                    "domain": [
+                      "Actual intake",
+                      "Recommended serves"
+                    ],
+                    "range": [
+                      "#344B5E",
+                      "#dedede"
+                    ]
+                  },
+                  "legend": {
+                    "title": null,
+                    "orient": "top",
+                    "direction": "horizontal",
+                    "symbolType": "square"
+                  }
+                }
+              },
+              "transform": [
+                {
+                  "calculate": "'Actual intake'",
+                  "as": "Measure"
+                }
+              ]
             },
             {
-              "data": {"url": "Formatted Data/female_recommended_19_50.csv"},
-              "mark": {"type": "tick", "color": "red", "thickness": 3, "size": 35},
+              "data": {
+                "url": "Formatted Data/female_actual_30_49.csv"
+              },
+              "mark": {
+                "type": "text",
+                "align": "right",
+                "dx": -6,
+                "fontSize": 15,
+                "fontWeight": "bold",
+                "color": "white"
+              },
               "encoding": {
-                "x": {"field": "recommended_daily_serves", "type": "quantitative"},
-                "y": {"field": "food_group", "type": "nominal", "title": null}
+                "x": {
+                  "field": "mean_daily_serves",
+                  "type": "quantitative",
+                  "title": "Serves per person per day",
+                  "scale": {
+                    "domain": [
+                      0,
+                      7
+                    ],
+                    "zero": true,
+                    "nice": false
+                  }
+                },
+                "y": {
+                  "field": "food_group",
+                  "type": "nominal",
+                  "title": null,
+                  "axis": {
+                    "labelLimit": 190,
+                    "labelFontSize": 15,
+                    "labelExpr": "datum.label === 'Vegetables and legumes/beans' ? 'Vegetables / legumes' : datum.label === 'Milk, yoghurt, cheese and alternatives' ? 'Dairy / alternatives' : datum.label === 'Lean meats and alternatives' ? 'Meat / alternatives' : datum.label"
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "food_group",
+                    "type": "nominal",
+                    "title": "Food group"
+                  },
+                  {
+                    "field": "mean_daily_serves",
+                    "type": "quantitative",
+                    "format": ".1f",
+                    "title": "Daily serves"
+                  }
+                ],
+                "text": {
+                  "field": "mean_daily_serves",
+                  "type": "quantitative",
+                  "format": ".1f"
+                }
               }
             }
           ]
         }
       ]
     }
-  ]
+  ],
+  "config": {
+    "font": "Inter",
+    "background": "#ffffff",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b",
+      "gridColor": "#e5e9eb",
+      "domain": false,
+      "labelPadding": 8,
+      "titlePadding": 12
+    },
+    "legend": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b"
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 20,
+      "subtitleFontSize": 15,
+      "subtitleLineHeight": 21,
+      "color": "#20333b",
+      "subtitleColor": "#414f57",
+      "frame": "bounds"
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15
+    },
+    "text": {
+      "fontSize": 15
+    }
+  },
+  "padding": 0,
+  "title": {
+    "text": "Fruit intake reaches only half the recommendation",
+    "subtitle": [
+      "Mean daily serves, 2023; recommendations for adults aged 19–50.",
+      "Actual intake is shown separately for men and women."
+    ],
+    "anchor": "start",
+    "frame": "bounds"
+  },
+  "resolve": {
+    "scale": {
+      "color": "shared"
+    }
+  }
 }

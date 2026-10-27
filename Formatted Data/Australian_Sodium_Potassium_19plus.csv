@@ -1,9 +1,9 @@
-State/Territory,Sodium Intake (mg) - 19 and over,Potassium Intake (mg) - 19 and over
-New South Wales,2417.1,2935.0
-Victoria,2496.3,2872.2
-Queensland,2380.6,2932.0
-South Australia,2396.7,2847.6
-Western Australia,2414.1,2910.5
-Tasmania,2488.2,3083.0
-Northern Territory,2423.3,2869.6
-Australian Capital Territory,2467.6,2940.9
+State/Territory,Sodium Intake (mg) - 19 and over,Sodium RSE (%),Sodium MOE (mg),Potassium Intake (mg) - 19 and over,Potassium RSE (%),Potassium MOE (mg),longitude,latitude,abbr,labelDx,labelDy,labelAlign,source_workbook
+New South Wales,2417.1,1.2,56.850192,2935.0,1.3,74.7838,147.0044,-32.2376,NSW,22,-16,left,NSW_4364055009_1_201112.xls
+Victoria,2496.3,1.7,83.176716,2872.2,1.7,95.701704,144.3155,-36.8714,Vic,-22,11,right,VIC_4364055009_2_201112.xls
+Queensland,2380.6,2.0,93.31952,2932.0,1.4,80.45408,144.5888,-22.7383,Qld,22,0,left,QLD_4364055009_3_201112.xls
+South Australia,2396.7,1.7,79.858044,2847.6,1.4,78.138144,135.8687,-30.2214,SA,22,0,left,South_Aus_4364055009_4_201112.xls
+Western Australia,2414.1,1.9,89.901084,2910.5,1.5,85.5687,122.1319,-25.7636,WA,22,0,left,Western_Aus_4364055009_5_201112.xls
+Tasmania,2488.2,1.7,82.906824,3083.0,1.9,114.81092,146.5961,-41.9517,Tas,22,10,left,Tasmania_4364055009_6_201112.xls
+Northern Territory,2423.3,3.1,147.239708,2869.6,2.6,146.234816,133.3686,-19.5556,NT,22,0,left,Northenr_Territory_4364055009_7_201112.xls
+Australian Capital Territory,2467.6,3.2,154.767872,2940.9,2.2,126.811608,149.0024,-35.4894,ACT,22,15,left,ACT_4364055009_8_201112.xls

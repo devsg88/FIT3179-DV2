@@ -1,0 +1,584 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "padding": 0,
+  "config": {
+    "background": "#ffffff",
+    "font": "Inter",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "fontSize": 20,
+      "subtitleFontSize": 15,
+      "anchor": "start",
+      "subtitleLineHeight": 21,
+      "color": "#20333b",
+      "subtitleColor": "#414f57",
+      "frame": "bounds"
+    },
+    "legend": {
+      "titleFontSize": 15,
+      "labelFontSize": 15,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b",
+      "padding": 0
+    },
+    "axis": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b",
+      "gridColor": "#e5e9eb",
+      "domain": false,
+      "labelPadding": 8,
+      "titlePadding": 12
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15
+    },
+    "text": {
+      "fontSize": 15
+    }
+  },
+  "description": "Fresh-food outlets highlighted over neighbourhood grocery-to-ready-meal ratios. Fresh food combines supermarkets/groceries and fruit/vegetable shops. Ready-to-eat combines cafes/restaurants and takeaway. Other specialised shops remain faint context and are excluded from the ratio.",
+  "title": {
+    "text": "Fresh-food shops make up just 4.6% of mapped outlets",
+    "subtitle": [
+      "City of Melbourne municipality, 2024 · 119 of 2,592 outlets",
+      "Darker areas have more fresh-food outlets per 10 ready-to-eat outlets.",
+      "Large dark marks = fresh food; diamonds = fruit and vegetable shops."
+    ],
+    "anchor": "start"
+  },
+  "width": 466,
+  "height": 470,
+  "projection": {
+    "type": "mercator",
+    "scale": 273228.74281372153,
+    "translate": [
+      -690968.1082627963,
+      -194810.12824226567
+    ]
+  },
+  "params": [
+    {
+      "name": "showContext",
+      "value": true,
+      "bind": {
+        "input": "checkbox",
+        "name": "Show cafes, takeaway and other shops as faint context "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "topojson files/Melbourne_CLUE_small_areas.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.featurenam",
+          "from": {
+            "data": {
+              "url": "Formatted Data/melbourne_food_access_by_neighbourhood.csv",
+              "format": {
+                "type": "csv",
+                "parse": {
+                  "fresh_food_outlets": "number",
+                  "ready_to_eat_outlets": "number",
+                  "takeaway_outlets": "number",
+                  "cafe_restaurant_outlets": "number",
+                  "other_specialised_outlets": "number",
+                  "total_outlets": "number",
+                  "fresh_per_10_ready_to_eat": "number"
+                }
+              }
+            },
+            "key": "neighbourhood",
+            "fields": [
+              "fresh_food_outlets",
+              "ready_to_eat_outlets",
+              "takeaway_outlets",
+              "cafe_restaurant_outlets",
+              "other_specialised_outlets",
+              "total_outlets",
+              "fresh_per_10_ready_to_eat"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e5e5e5",
+        "stroke": "#7a8993",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "properties.featurenam",
+            "type": "nominal",
+            "title": "Neighbourhood"
+          },
+          {
+            "field": "fresh_per_10_ready_to_eat",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Fresh-food outlets per 10 ready-to-eat"
+          },
+          {
+            "field": "fresh_food_outlets",
+            "type": "quantitative",
+            "title": "Fresh food and groceries"
+          },
+          {
+            "field": "ready_to_eat_outlets",
+            "type": "quantitative",
+            "title": "Ready-to-eat outlets (denominator)"
+          },
+          {
+            "field": "cafe_restaurant_outlets",
+            "type": "quantitative",
+            "title": "Cafes and restaurants"
+          },
+          {
+            "field": "takeaway_outlets",
+            "type": "quantitative",
+            "title": "Takeaway"
+          },
+          {
+            "field": "total_outlets",
+            "type": "quantitative",
+            "title": "All mapped outlets"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "topojson files/Melbourne_CLUE_small_areas.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.featurenam",
+          "from": {
+            "data": {
+              "url": "Formatted Data/melbourne_food_access_by_neighbourhood.csv",
+              "format": {
+                "type": "csv",
+                "parse": {
+                  "fresh_food_outlets": "number",
+                  "ready_to_eat_outlets": "number",
+                  "takeaway_outlets": "number",
+                  "cafe_restaurant_outlets": "number",
+                  "other_specialised_outlets": "number",
+                  "total_outlets": "number",
+                  "fresh_per_10_ready_to_eat": "number"
+                }
+              }
+            },
+            "key": "neighbourhood",
+            "fields": [
+              "fresh_food_outlets",
+              "ready_to_eat_outlets",
+              "takeaway_outlets",
+              "cafe_restaurant_outlets",
+              "other_specialised_outlets",
+              "total_outlets",
+              "fresh_per_10_ready_to_eat"
+            ]
+          }
+        },
+        {
+          "filter": "datum.ready_to_eat_outlets > 0"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#7a8993",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "fill": {
+          "field": "fresh_per_10_ready_to_eat",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              1.2
+            ],
+            "range": [
+              "#f2f5f9",
+              "#6c8ca8"
+            ],
+            "nice": false,
+            "zero": true
+          },
+          "legend": {
+            "title": [
+              "Fresh-food outlets",
+              "per 10 ready-to-eat outlets",
+              "Darker = more"
+            ],
+            "orient": "right",
+            "direction": "horizontal",
+            "gradientLength": 210,
+            "gradientThickness": 12,
+            "values": [
+              0,
+              0.4,
+              0.8,
+              1.2
+            ],
+            "format": ".1f",
+            "titleLimit": 280,
+            "titleLineHeight": 20,
+            "offset": 18,
+            "padding": 0
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.featurenam",
+            "type": "nominal",
+            "title": "Neighbourhood"
+          },
+          {
+            "field": "fresh_per_10_ready_to_eat",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Fresh-food outlets per 10 ready-to-eat"
+          },
+          {
+            "field": "fresh_food_outlets",
+            "type": "quantitative",
+            "title": "Fresh food and groceries"
+          },
+          {
+            "field": "ready_to_eat_outlets",
+            "type": "quantitative",
+            "title": "Ready-to-eat outlets (denominator)"
+          },
+          {
+            "field": "cafe_restaurant_outlets",
+            "type": "quantitative",
+            "title": "Cafes and restaurants"
+          },
+          {
+            "field": "takeaway_outlets",
+            "type": "quantitative",
+            "title": "Takeaway"
+          },
+          {
+            "field": "total_outlets",
+            "type": "quantitative",
+            "title": "All mapped outlets"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "Formatted Data/melbourne_food_outlets_2024.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.category === 'Supermarkets and groceries' || datum.category === 'Fruit and vegetable shops' ? 'Fresh food and groceries' : datum.category === 'Takeaway food' ? 'Takeaway' : datum.category",
+          "as": "outlet_group"
+        },
+        {
+          "filter": "showContext && datum.outlet_group === 'Other specialised food shops'"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 12,
+        "opacity": 0.25
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "outlet_group",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Fresh food and groceries",
+              "Takeaway",
+              "Cafes and restaurants",
+              "Other specialised food shops"
+            ],
+            "range": [
+              "#173F36",
+              "#BBA57E",
+              "#9DAAB7",
+              "#C9CDD1"
+            ]
+          },
+          "legend": {
+            "title": "Outlet groups",
+            "orient": "right",
+            "direction": "vertical",
+            "symbolType": "circle",
+            "symbolSize": 100,
+            "symbolOpacity": 1,
+            "labelLimit": 260,
+            "rowPadding": 9,
+            "offset": 18
+          }
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Establishment"
+          },
+          {
+            "field": "outlet_group",
+            "type": "nominal",
+            "title": "Group"
+          },
+          {
+            "field": "category",
+            "type": "nominal",
+            "title": "Recorded outlet type"
+          },
+          {
+            "field": "neighbourhood",
+            "type": "nominal",
+            "title": "Neighbourhood"
+          },
+          {
+            "field": "address",
+            "type": "nominal",
+            "title": "Address"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "Formatted Data/melbourne_food_outlets_2024.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.category === 'Supermarkets and groceries' || datum.category === 'Fruit and vegetable shops' ? 'Fresh food and groceries' : datum.category === 'Takeaway food' ? 'Takeaway' : datum.category",
+          "as": "outlet_group"
+        },
+        {
+          "filter": "showContext && (datum.outlet_group === 'Takeaway' || datum.outlet_group === 'Cafes and restaurants')"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 14,
+        "opacity": 0.28
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "outlet_group",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Fresh food and groceries",
+              "Takeaway",
+              "Cafes and restaurants",
+              "Other specialised food shops"
+            ],
+            "range": [
+              "#173F36",
+              "#BBA57E",
+              "#9DAAB7",
+              "#C9CDD1"
+            ]
+          },
+          "legend": {
+            "title": "Outlet groups",
+            "orient": "right",
+            "direction": "vertical",
+            "symbolType": "circle",
+            "symbolSize": 100,
+            "symbolOpacity": 1,
+            "labelLimit": 260,
+            "rowPadding": 9,
+            "offset": 18
+          }
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Establishment"
+          },
+          {
+            "field": "outlet_group",
+            "type": "nominal",
+            "title": "Group"
+          },
+          {
+            "field": "category",
+            "type": "nominal",
+            "title": "Recorded outlet type"
+          },
+          {
+            "field": "neighbourhood",
+            "type": "nominal",
+            "title": "Neighbourhood"
+          },
+          {
+            "field": "address",
+            "type": "nominal",
+            "title": "Address"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "Formatted Data/melbourne_food_outlets_2024.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.category === 'Supermarkets and groceries' || datum.category === 'Fruit and vegetable shops' ? 'Fresh food and groceries' : datum.category === 'Takeaway food' ? 'Takeaway' : datum.category",
+          "as": "outlet_group"
+        },
+        {
+          "filter": "datum.outlet_group === 'Fresh food and groceries'"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "opacity": 1,
+        "stroke": "#ffffff",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "outlet_group",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Fresh food and groceries",
+              "Takeaway",
+              "Cafes and restaurants",
+              "Other specialised food shops"
+            ],
+            "range": [
+              "#173F36",
+              "#BBA57E",
+              "#9DAAB7",
+              "#C9CDD1"
+            ]
+          },
+          "legend": {
+            "title": "Outlet groups",
+            "orient": "right",
+            "direction": "vertical",
+            "symbolType": "circle",
+            "symbolSize": 100,
+            "symbolOpacity": 1,
+            "labelLimit": 260,
+            "rowPadding": 9,
+            "offset": 18
+          }
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Establishment"
+          },
+          {
+            "field": "outlet_group",
+            "type": "nominal",
+            "title": "Group"
+          },
+          {
+            "field": "category",
+            "type": "nominal",
+            "title": "Recorded outlet type"
+          },
+          {
+            "field": "neighbourhood",
+            "type": "nominal",
+            "title": "Neighbourhood"
+          },
+          {
+            "field": "address",
+            "type": "nominal",
+            "title": "Address"
+          }
+        ],
+        "shape": {
+          "condition": {
+            "test": "datum.category === 'Fruit and vegetable shops'",
+            "value": "diamond"
+          },
+          "value": "circle"
+        },
+        "size": {
+          "condition": {
+            "test": "datum.category === 'Fruit and vegetable shops'",
+            "value": 180
+          },
+          "value": 110
+        }
+      }
+    }
+  ]
+}

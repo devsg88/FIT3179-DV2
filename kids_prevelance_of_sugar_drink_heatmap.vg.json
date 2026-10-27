@@ -1,54 +1,220 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": { "text": "Prevalence of sugar-sweetened drink consumption in children" },
-    "data": {
-        "url": "Formatted Data/kids_data_no_ci.csv"
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Children: sugar-sweetened drinks",
+    "subtitle": "Share within each age group (%), 2017–18",
+    "anchor": "start",
+    "frame": "bounds"
+  },
+  "data": {
+    "url": "Formatted Data/kids_data_no_ci.csv"
+  },
+  "width": 360,
+  "height": 300,
+  "transform": [
+    {
+      "fold": [
+        "Did not consume (%)",
+        "Daily (%)",
+        "1-3 days (%)",
+        "4-6 days (%)"
+      ],
+      "as": [
+        "Consumption Frequency",
+        "Percentage"
+      ]
     },
-    "width":400,
-    "height":300,
-    "transform": [
-        {
-            "fold": [
-                "Did not consume (%)",
-                "Daily (%)",
-                "1-3 days (%)",
-                "4-6 days (%)"
-            ],
-            "as": ["Consumption Frequency", "Percentage"]
-        }, 
-        {
-            "calculate": "replace(datum['Consumption Frequency'], ' (%)', '')",
-            "as": "Cleaned Frequency"
-        }
-    ],
-
-    "mark": {
-        "type": "rect",
-        "tooltip": true,
-        "stroke":"white"
+    {
+      "calculate": "replace(datum['Consumption Frequency'], ' (%)', '')",
+      "as": "Cleaned Frequency"
     },
-    "encoding": {
-        "y": {
-            "field": "Age group (years)",
-            "type": "ordinal",
-            "title": null
-        },
-        "x": {
-            "field": "Cleaned Frequency",
-            "type": "ordinal",
-            "title": "Consumption Frequency",
-            "sort": ["Did not consume", "1-3 days", "4-6 days", "Daily"],
-            "axis": {"labelAngle": -45}
-        },
-        "color":{
-            "field": "Percentage",
-            "type": "quantitative",
-            "scale":{
-                "scheme": "tealblues",
-                "type": "symlog",
-                "constant":10
-            }
-        }
+    {
+      "calculate": "format(datum.Percentage, '.1f') + '%'",
+      "as": "CellLabel"
     }
+  ],
+  "config": {
+    "font": "Inter",
+    "background": "#ffffff",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b",
+      "gridColor": "#e5e9eb",
+      "domain": false,
+      "labelPadding": 8,
+      "titlePadding": 12,
+      "tickSize": 0
+    },
+    "legend": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b"
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 20,
+      "subtitleFontSize": 15,
+      "subtitleLineHeight": 21,
+      "color": "#20333b",
+      "subtitleColor": "#414f57",
+      "frame": "bounds"
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15
+    },
+    "text": {
+      "fontSize": 15
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "Cleaned Frequency",
+      "type": "ordinal",
+      "title": null,
+      "sort": [
+        "Did not consume",
+        "1-3 days",
+        "4-6 days",
+        "Daily"
+      ],
+      "axis": {
+        "labelAngle": 0,
+        "labelFontSize": 15,
+        "labelExpr": "datum.label === 'Did not consume' ? 'None' : replace(datum.label, '-', '–')",
+        "tickSize": 0,
+        "labelPadding": 9
+      }
+    },
+    "y": {
+      "field": "Age group (years)",
+      "type": "ordinal",
+      "title": "Age (years)",
+      "sort": [
+        "2-3",
+        "4-8",
+        "9-11",
+        "12-13",
+        "14-17"
+      ],
+      "axis": {
+        "labelExpr": "replace(datum.label, '-', '–')",
+        "labelFontSize": 15,
+        "tickSize": 0,
+        "labelPadding": 9
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "white",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "color": {
+          "field": "Percentage",
+          "type": "quantitative",
+          "scale": {
+            "type": "linear",
+            "domain": [
+              0,
+              100
+            ],
+            "range": [
+              "#f4f7fa",
+              "#063751"
+            ]
+          },
+          "legend": {
+            "title": "Share of age group (%)",
+            "orient": "bottom",
+            "values": [
+              0,
+              25,
+              50,
+              75,
+              100
+            ],
+            "gradientLength": 280
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Age group (years)",
+            "title": "Age group",
+            "type": "ordinal"
+          },
+          {
+            "field": "Cleaned Frequency",
+            "title": "Frequency",
+            "type": "nominal"
+          },
+          {
+            "field": "Percentage",
+            "title": "Share (%)",
+            "type": "quantitative",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum['Cleaned Frequency'] === 'Daily' && (datum['Age group (years)'] === '2-3' || datum['Age group (years)'] === '14-17')"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "fillOpacity": 0,
+        "stroke": "#20333b",
+        "strokeWidth": 3
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 15
+      },
+      "encoding": {
+        "text": {
+          "field": "CellLabel"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.Percentage >= 65",
+            "value": "#ffffff"
+          },
+          "value": "#000000"
+        },
+        "tooltip": [
+          {
+            "field": "Age group (years)",
+            "title": "Age group",
+            "type": "ordinal"
+          },
+          {
+            "field": "Cleaned Frequency",
+            "title": "Frequency",
+            "type": "nominal"
+          },
+          {
+            "field": "Percentage",
+            "title": "Share (%)",
+            "type": "quantitative",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ],
+  "padding": 0
 }
-

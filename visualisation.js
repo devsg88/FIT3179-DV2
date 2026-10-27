@@ -13,15 +13,14 @@ const visualisations = [
   { container: "#discretionary-map", specification: "discret_vs_nondiscret.vg.json" },
   { container: "#sodium-map", specification: "sodium_graduated_symbol.vg.json" },
   { container: "#potassium-map", specification: "potassium_graduated_symbol.vg.json" },
-  { container: "#health-cartograms", specification: "health_risk_condition_contiguous_cartograms.vg.json" },
-  { container: "#fruit-dot-map", specification: "fruit_intake_dot_map.vg.json" }
+  { container: "#melbourne-food-outlets", specification: "melbourne_food_outlets_dot_map.vg.json" }
 ];
 
 //a  set to keep track of already loaded charts so that the browser doesnt load them multiple times
 const loadedVisualisations = new Set();
 
 /**
- * 
+ *
  * Helper function that updates the outer <div class="chart-frame" wrapper
  * once a chart finishes loading or fails
  */
@@ -34,7 +33,7 @@ function setFrameState(container, state) {
 
   //tells css its done loading
   frame.setAttribute("aria-busy", "false");
-  //add css class to the outer box, essentially giving CSS green light to 
+  //add css class to the outer box, essentially giving CSS green light to
   // display it once its done loading
   frame.classList.add(state);
 }
@@ -55,10 +54,32 @@ function showChartError(container, specification, error) {
   console.error(`Unable to embed ${specification}`, error);
 }
 
+// Keep figure metadata on the page's shared left edge. Vega facet headers can
+// otherwise shift the top-level title by the width of their axis labels.
+// Downloadable specifications retain their own title for standalone use.
+function mountChartTitle(container, title) {
+  if (!title) return;
+  const metadata = document.createElement("header");
+  metadata.className = "chart-metadata";
+  const titleSpec = typeof title === "string" ? { text: title } : title;
+  const heading = document.createElement("h4");
+  heading.className = "chart-title";
+  heading.textContent = Array.isArray(titleSpec.text) ? titleSpec.text.join(" ") : titleSpec.text;
+  metadata.append(heading);
+  const subtitles = Array.isArray(titleSpec.subtitle) ? titleSpec.subtitle : [titleSpec.subtitle];
+  subtitles.filter(Boolean).forEach((text) => {
+    const line = document.createElement("p");
+    line.className = "chart-subtitle";
+    line.textContent = text;
+    metadata.append(line);
+  });
+  container.before(metadata);
+}
+
 /**
  * the chart builder function
  * @param {*} visualisation to be built
- * @returns 
+ * @returns
  */
 function embedVisualisation(visualisation) {
   //checks and stops if chart has already been loaded
@@ -82,12 +103,22 @@ function embedVisualisation(visualisation) {
     return;
   }
 
-  //tells vega  to put the chart inside visu.container using the vis.specification 
+  //tells vega  to put the chart inside visu.container using the vis.specification
   // file with a few visual settings
-  window.vegaEmbed(visualisation.container, visualisation.specification, {
+  Promise.all([
+    document.fonts.ready,
+    fetch(visualisation.specification).then((response) => {
+      if (!response.ok) throw new Error(`Could not load ${visualisation.specification}: ${response.status}`);
+      return response.json();
+    })
+  ]).then(([_fonts, specification]) => {
+    mountChartTitle(container, specification.title);
+    delete specification.title;
+    return window.vegaEmbed(visualisation.container, specification, {
     actions: false, // hides the "..." button vega puts in the corner
     renderer: "svg", //draw it using svg fr better clarity
     tooltip: { theme: "light" } //light coloured pop up box
+    });
   })
     //marks the state as is ready for the CSS to do its thing
     .then(() => setFrameState(container, "is-ready"))

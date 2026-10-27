@@ -3,45 +3,127 @@
   "description": "Dot density map of estimated adequate-fruit consumers using supplied dot coordinates and 2021 Population Health Area boundaries.",
   "title": {
     "text": "Adequate fruit intake across Australia",
-    "subtitle": ["PHIDU health status estimates, 2022", "Each dot represents approximately 2,500 people"],
-    "anchor": "start"
+    "subtitle": [
+      "PHIDU health status estimates, 2022",
+      "Each dot represents approximately 2,500 people"
+    ],
+    "anchor": "start",
+    "frame": "bounds"
   },
   "width": 700,
   "height": 520,
-  "projection": {"type": "mercator"},
+  "projection": {
+    "type": "mercator"
+  },
   "layer": [
     {
       "data": {
         "url": "topojson files/PHA_2021_Aust_GDA2020_Gen50.json",
-        "format": {"type": "topojson", "feature": "PHA_2021_Aust_GDA2020_Gen50"}
+        "format": {
+          "type": "topojson",
+          "feature": "PHA_2021_Aust_GDA2020_Gen50"
+        }
       },
-      "mark": {"type": "geoshape", "fill": "#f0f0f0", "stroke": "#c9c9c9", "strokeWidth": 0.3}
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f0f0f0",
+        "stroke": "#c9c9c9",
+        "strokeWidth": 0.3
+      }
     },
     {
       "data": {
         "url": "Formatted Data/adequate_fruit_consumers_dot_density.csv",
         "format": {
           "type": "csv",
-          "parse": {"longitude": "number", "latitude": "number", "fruit_number": "number", "fruit_asr_per_100": "number"}
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "fruit_number": "number",
+            "fruit_asr_per_100": "number"
+          }
         }
       },
-      "mark": {"type": "circle", "size": 7, "color": "#27804a", "opacity": 0.65},
+      "mark": {
+        "type": "circle",
+        "size": 7,
+        "color": "#27804a",
+        "opacity": 0.65
+      },
       "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
         "tooltip": [
-          {"field": "pha_name", "type": "nominal", "title": "Population Health Area"},
-          {"field": "state", "type": "nominal", "title": "State / territory"},
-          {"field": "fruit_number", "type": "quantitative", "title": "Estimated adequate-fruit consumers in PHA", "format": ",.0f"},
-          {"field": "fruit_asr_per_100", "type": "quantitative", "title": "Age-standardised rate per 100", "format": ".1f"}
+          {
+            "field": "pha_name",
+            "type": "nominal",
+            "title": "Population Health Area"
+          },
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / territory"
+          },
+          {
+            "field": "fruit_number",
+            "type": "quantitative",
+            "title": "Estimated adequate-fruit consumers in PHA",
+            "format": ",.0f"
+          },
+          {
+            "field": "fruit_asr_per_100",
+            "type": "quantitative",
+            "title": "Age-standardised rate per 100",
+            "format": ".1f"
+          }
         ]
       }
     }
   ],
   "config": {
     "background": "#ffffff",
-    "font": "sans-serif",
-    "view": {"stroke": null},
-    "title": {"fontSize": 18, "subtitleFontSize": 12}
-  }
+    "font": "Inter",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "fontSize": 20,
+      "subtitleFontSize": 15,
+      "anchor": "start",
+      "frame": "bounds",
+      "subtitleLineHeight": 21,
+      "color": "#20333b",
+      "subtitleColor": "#414f57"
+    },
+    "axis": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelPadding": 8,
+      "titlePadding": 12,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b",
+      "gridColor": "#e5e9eb",
+      "domain": false
+    },
+    "legend": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b"
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15
+    },
+    "text": {
+      "fontSize": 15
+    }
+  },
+  "padding": 0
 }

@@ -2,20 +2,17 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Faceted deviation charts showing how each nutrient's contribution to energy changes from the ages 2–4 baseline.",
   "background": "#ffffff",
-  "padding": 20,
+  "padding": 0,
   "title": {
-    "text": "How nutrient contributions shift with age",
-    "subtitle": [
-      "Percentage-point change from ages 2–4; panels use the same scale.",
-      "Values above zero increased from the baseline; values below zero decreased."
-    ],
+    "text": "How nutrient contributions shift with age","subtitle": ["Change in energy share compared with ages 2–4.", "Units: percentage points, the gap between two percentages.", "The same scale is used in every panel."],
     "anchor": "start",
     "fontSize": 23,
-    "subtitleFontSize": 12,
+    "subtitleFontSize": 15,
     "subtitlePadding": 8,
     "offset": 18,
     "color": "#243746",
-    "subtitleColor": "#536471"
+    "subtitleColor": "#20333b",
+    "frame": "bounds"
   },
   "data": {
     "url": "Formatted Data/macronutrient_parallel_coordinates.csv",
@@ -48,11 +45,11 @@
       "as": "PercentagePointChange"
     },
     {
-      "calculate": "datum.Nutrient === 'Protein' && datum.Age_Group === '30–49' ? 'Peak: +3.8 pp' : datum.Nutrient === 'Total fat' && datum.Age_Group === '12–17' ? 'Small peak: +1.5 pp' : datum.Nutrient === 'Carbohydrate' && datum.Age_Group === '65–74' ? 'Lowest point: −8.1 pp' : datum.Nutrient === 'Total sugars' && datum.Age_Group === '30–49' ? 'Largest drop: −5.3 pp' : datum.Nutrient === 'Dietary fibre' && datum.Age_Group === '12–17' ? 'Nearly flat: −0.3 to +0.1 pp' : null",
+      "calculate": "datum.Nutrient === 'Protein' && datum.Age_Group === '30–49' ? 'Peak: +3.8 percentage points' : datum.Nutrient === 'Total fat' && datum.Age_Group === '12–17' ? 'Small peak: +1.5 percentage points' : datum.Nutrient === 'Carbohydrate' && datum.Age_Group === '65–74' ? 'Lowest point: −8.1 percentage points' : datum.Nutrient === 'Total sugars' && datum.Age_Group === '30–49' ? 'Largest drop: −5.3 percentage points' : datum.Nutrient === 'Dietary fibre' && datum.Age_Group === '12–17' ? 'Nearly flat: −0.3 to +0.1 percentage points' : null",
       "as": "AnnotationText"
     },
     {
-      "calculate": "datum.Nutrient === 'Protein' ? 2.6 : datum.Nutrient === 'Total fat' ? 2.8 : datum.Nutrient === 'Carbohydrate' ? -6.8 : datum.Nutrient === 'Total sugars' ? -3.9 : datum.Nutrient === 'Dietary fibre' ? 1.2 : 0",
+      "calculate": "datum.Nutrient === 'Protein' ? 5.1 : datum.Nutrient === 'Total fat' ? 3.0 : datum.Nutrient === 'Carbohydrate' ? -6.1 : datum.Nutrient === 'Total sugars' ? -2.7 : datum.Nutrient === 'Dietary fibre' ? 1.5 : 0",
       "as": "AnnotationY"
     }
   ],
@@ -69,15 +66,15 @@
     "header": {
       "title": null,
       "labelAnchor": "start",
-      "labelColor": "#243746",
+      "labelColor": "#20333b",
       "labelFontSize": 15,
       "labelFontWeight": "bold",
       "labelPadding": 8
     }
   },
-  "columns": 3,
+  "columns": 2,
   "spec": {
-    "width": 330,
+    "width": 380,
     "height": 260,
     "layer": [
       {
@@ -95,7 +92,6 @@
       {
         "mark": {
           "type": "line",
-          "color": "#315F72",
           "strokeWidth": 3.5
         },
         "encoding": {
@@ -115,9 +111,9 @@
             "axis": {
               "title": "Age group",
               "labelAngle": -35,
-              "labelFontSize": 11,
+              "labelFontSize": 15,
               "labelLimit": 55,
-              "titleFontSize": 13,
+              "titleFontSize": 15,
               "titlePadding": 8
             }
           },
@@ -125,15 +121,44 @@
             "field": "PercentagePointChange",
             "type": "quantitative",
             "scale": {
-              "domain": [-9, 4]
+              "domain": [
+                -9,
+                6
+              ]
             },
             "axis": {
-              "title": "Change (pp)",
-              "values": [-8, -4, 0, 4],
-              "labelFontSize": 11,
-              "titleFontSize": 13,
+              "title": "Change (percentage points)",
+              "values": [
+                -8,
+                -4,
+                0,
+                4
+              ],
+              "labelFontSize": 15,
+              "titleFontSize": 15,
               "grid": true
             }
+          },
+          "color": {
+            "field": "Nutrient",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "Protein",
+                "Total fat",
+                "Carbohydrate",
+                "Dietary fibre",
+                "Total sugars"
+              ],
+              "range": [
+                "#2166AC",
+                "#A66100",
+                "#5B4B9A",
+                "#387C44",
+                "#B44578"
+              ]
+            },
+            "legend": null
           }
         }
       },
@@ -143,7 +168,8 @@
           "filled": true,
           "size": 105,
           "stroke": "#ffffff",
-          "strokeWidth": 1
+          "strokeWidth": 1,
+          "opacity": 1
         },
         "encoding": {
           "x": {
@@ -165,11 +191,25 @@
             "type": "quantitative"
           },
           "color": {
-            "condition": {
-              "test": "datum.PercentagePointChange >= 0",
-              "value": "#168C88"
+            "field": "Nutrient",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "Protein",
+                "Total fat",
+                "Carbohydrate",
+                "Dietary fibre",
+                "Total sugars"
+              ],
+              "range": [
+                "#2166AC",
+                "#A66100",
+                "#5B4B9A",
+                "#387C44",
+                "#B44578"
+              ]
             },
-            "value": "#D95F45"
+            "legend": null
           },
           "tooltip": [
             {
@@ -213,7 +253,10 @@
           "type": "rule",
           "color": "#6B7280",
           "strokeWidth": 1.2,
-          "strokeDash": [3, 3]
+          "strokeDash": [
+            3,
+            3
+          ]
         },
         "encoding": {
           "x": {
@@ -247,13 +290,14 @@
         ],
         "mark": {
           "type": "text",
-          "fontSize": 11,
+          "fontSize": 15,
           "fontWeight": "bold",
-          "align": "center",
+          "align": "right",
           "baseline": "middle",
           "fill": "#ffffff",
           "stroke": "#ffffff",
-          "strokeWidth": 4
+          "strokeWidth": 4,
+          "dx": -4
         },
         "encoding": {
           "x": {
@@ -288,11 +332,12 @@
         ],
         "mark": {
           "type": "text",
-          "fontSize": 11,
+          "fontSize": 15,
           "fontWeight": "bold",
-          "align": "center",
+          "align": "right",
           "baseline": "middle",
-          "color": "#34495E"
+          "color": "#34495E",
+          "dx": -4
         },
         "encoding": {
           "x": {
@@ -328,22 +373,49 @@
     }
   },
   "config": {
-    "font": "sans-serif",
+    "font": "Inter",
     "view": {
       "stroke": null
     },
     "axis": {
       "domain": false,
       "tickColor": "#CAD2D8",
-      "gridColor": "#E6EAED",
-      "labelColor": "#536471",
-      "titleColor": "#243746"
+      "gridColor": "#e5e9eb",
+      "labelColor": "#20333b",
+      "titleColor": "#20333b",
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelPadding": 8,
+      "titlePadding": 12
     },
     "facet": {
       "spacing": {
         "row": 55,
         "column": 28
       }
+    },
+    "background": "#ffffff",
+    "legend": {
+      "labelFontSize": 15,
+      "titleFontSize": 15,
+      "labelColor": "#20333b",
+      "titleColor": "#20333b"
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 20,
+      "subtitleFontSize": 15,
+      "subtitleLineHeight": 21,
+      "color": "#20333b",
+      "subtitleColor": "#414f57",
+      "frame": "bounds"
+    },
+    "header": {
+      "labelFontSize": 15,
+      "titleFontSize": 15
+    },
+    "text": {
+      "fontSize": 15
     }
   }
 }
